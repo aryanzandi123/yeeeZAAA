@@ -2806,4 +2806,8 @@ def repair_pathways(protein):
 
 
 if __name__ == '__main__':
-    app.run(host='127.0.0.1', port=5006, debug=False, threaded=True, use_reloader=True)
+    # Use the port Render provides, or default to 5006 for local testing
+    import os
+    port = int(os.environ.get("PORT", 5006))
+    
+    app.run(host='0.0.0.0', port=port, debug=False, threaded=True)
