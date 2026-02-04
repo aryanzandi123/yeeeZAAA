@@ -20,6 +20,9 @@ HTML = """<!DOCTYPE html>
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- React Force Graph -->
+    <script src="//unpkg.com/react-force-graph-2d"></script>
+
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
 
