@@ -234,9 +234,16 @@ const Dashboard = () => {
             const rawData = window.SNAP;
             let processed = {
                 main: rawData.main || rawData.snapshot_json?.main || 'Unknown',
-                interactions: rawData.interactions || rawData.snapshot_json?.interactions || [],
+                interactions: rawData.interactions || rawData.snapshot_json?.interactions || rawData.interactors || rawData.snapshot_json?.interactors || [],
                 pathwayTree: [] // Need to build this
             };
+
+            // Normalize interactions (backwards compatibility for 'interactors' vs 'interactions')
+            processed.interactions = processed.interactions.map(ix => ({
+                ...ix,
+                target: ix.target || ix.primary || 'Unknown',
+                type: ix.type || ix.interaction_type || 'direct'
+            }));
 
             // Build Pathway Tree from interactions if explicit hierarchy is missing
             // V2 pipeline usually stamps 'step3_finalized_pathway' on interactions
@@ -444,7 +451,17 @@ const Dashboard = () => {
                                 {modalInteraction.evidence && modalInteraction.evidence.length > 0 ? (
                                     modalInteraction.evidence.map((ev, i) => (
                                         <div key={i} className="bg-slate-800/50 p-4 rounded-lg border-l-4 border-purple-500 text-slate-300 text-sm leading-relaxed">
-                                            "{ev}"
+                                            {typeof ev === 'object' ? (
+                                                <React.Fragment>
+                                                    <div className="font-bold text-slate-200 mb-1">{ev.paper_title}</div>
+                                                    <div className="text-xs text-slate-400 mb-2 uppercase tracking-wide">
+                                                        {ev.journal || 'Unknown Journal'} &middot; {ev.year || 'Unknown Year'}
+                                                    </div>
+                                                    <div className="italic text-slate-300">"{ev.relevant_quote}"</div>
+                                                </React.Fragment>
+                                            ) : (
+                                                `"${ev}"`
+                                            )}
                                         </div>
                                     ))
                                 ) : (
