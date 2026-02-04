@@ -1,0 +1,300 @@
+            if msg["role"] not in ["user", "assistant"]:
+                return jsonify({"error": f"Invalid message role: {msg['role']}"}), 400
+
+        # Extract last user message must exist
+        last_msg = messages[-1]
+        if last_msg.get("role") != "user":
+            return jsonify({"error": "Last message must be from user"}), 400
+
+        state_data = data.get("state", {})
+        if not isinstance(state_data, dict):
+            return jsonify({"error": "Invalid state format"}), 400
+
+        max_history = data.get("max_history", 10)
+        if not isinstance(max_history, int) or max_history < 1 or max_history > 50:
+            max_history = 10  # Safe default
+
+        # Extract and validate state (now expects parent + visible_proteins)
+        compact_state = _build_compact_state_from_request(state_data)
+        state_parent = compact_state.get("parent", "")
+        visible_proteins = compact_state.get("visible_proteins", [])
+
+        # Use state_parent if provided, otherwise fall back to parent from root
+        final_parent = state_parent if state_parent else parent
+
+        # Validate we have a valid parent
+        if not final_parent or not PROTEIN_RE.match(final_parent):
+            return jsonify({"error": "Invalid parent protein in state"}), 400
+
+        # Build rich context by reading from cache JSON
+        rich_context = _build_compact_rich_context(final_parent, visible_proteins)
+        print(f"Chat: Built context with {len(rich_context.get('interactions', []))} interactions", file=sys.stderr)
+
+        # Build system prompt with rich context
+        system_prompt = _build_chat_system_prompt(final_parent, rich_context)
+        print(f"Chat: System prompt length: {len(system_prompt)} chars", file=sys.stderr)
+
+        # Call LLM
+        response_text = _call_chat_llm(messages, system_prompt, max_history=max_history)
+        print(f"Chat: Got response: {len(response_text) if response_text else 0} chars", file=sys.stderr)
+
+        if not response_text or not response_text.strip():
+            print(f"Chat ERROR: Response text is empty after LLM call", file=sys.stderr)
+            return jsonify({"error": "LLM returned empty response"}), 500
+
+        return jsonify({"reply": response_text}), 200
+
+    except RuntimeError as e:
+        # LLM-specific errors
+        return jsonify({"error": f"LLM error: {str(e)}"}), 500
+    except Exception as e:
+        # Unexpected errors
+        return jsonify({"error": f"Internal server error: {str(e)}"}), 500
+
+
+# =============================================================================
+# PIPELINE CONTROL API
+# =============================================================================
+
+def run_pipeline_task(mode, start_step, query_filter=None):
+    """Background task to run pipeline steps."""
+    global PIPELINE_STATUS
+
+    # Get interaction IDs if filtering by query
+    interaction_ids = None
+    if query_filter:
+        with app.app_context():
+            from models import Interaction
+            interactions = Interaction.query.filter_by(
+                discovered_in_query=query_filter
+            ).all()
+            interaction_ids = [i.id for i in interactions]
+            logging.info(f"Pipeline filtering to {len(interaction_ids)} interactions from query: {query_filter}")
+
+    steps = [
+        (1, "Initialize Roots", lambda: init_roots()),
+        (2, "Assign Initial Terms", lambda: assign_initial_terms(interaction_ids=interaction_ids)),
+        (3, "Refine Pathways", lambda: refine_pathways(interaction_ids=interaction_ids)),
+        (4, "Build Hierarchy", lambda: build_hierarchy(interaction_ids=interaction_ids)),
+        (5, "Discover Siblings", lambda: discover_siblings()),
+        (6, "Reorganize & Cleanup", lambda: reorganize_pathways()),
+        (7, "Verify Results", lambda: verify())
+    ]
+
+    with app.app_context():
+        try:
+            with PIPELINE_LOCK:
+                PIPELINE_STATUS["is_running"] = True
+                PIPELINE_STATUS["error"] = None
+                PIPELINE_STATUS["logs"] = []
+                PIPELINE_STATUS["query_filter"] = query_filter
+                query_info = f" for query '{query_filter}'" if query_filter else ""
+                PIPELINE_STATUS["logs"].append(f"Starting pipeline (Mode: {mode}, Start: {start_step}){query_info}...")
+
+            for step_num, step_name, step_func in steps:
+                # Logic for skipping based on mode
+                should_run = False
+                if mode == "full":
+                    should_run = True
+                elif mode == "single":
+                    if step_num == start_step:
+                        should_run = True
+                elif mode == "downstream":
+                    if step_num >= start_step:
+                        should_run = True
+
+                if should_run:
+                    with PIPELINE_LOCK:
+                        PIPELINE_STATUS["current_step"] = f"Step {step_num}: {step_name}"
+                        PIPELINE_STATUS["logs"].append(f"Running Step {step_num}: {step_name}...")
+
+                    # Execute Step
+                    step_func()
+
+                    with PIPELINE_LOCK:
+                         PIPELINE_STATUS["logs"].append(f"Step {step_num} Completed.")
+
+            with PIPELINE_LOCK:
+                PIPELINE_STATUS["is_running"] = False
+                PIPELINE_STATUS["current_step"] = "Complete"
+                PIPELINE_STATUS["query_filter"] = None
+                PIPELINE_STATUS["logs"].append("Pipeline execution finished successfully.")
+
+        except Exception as e:
+            logging.error(f"Pipeline failed: {e}")
+            with PIPELINE_LOCK:
+                PIPELINE_STATUS["is_running"] = False
+                PIPELINE_STATUS["error"] = str(e)
+                PIPELINE_STATUS["query_filter"] = None
+                PIPELINE_STATUS["logs"].append(f"Error: {str(e)}")
+
+
+@app.route('/api/queries', methods=['GET'])
+def get_queries():
+    """Return list of unique queries with interaction counts."""
+    from sqlalchemy import func
+
+    results = db.session.query(
+        Interaction.discovered_in_query,
+        func.count(Interaction.id).label('count')
+    ).filter(
+        Interaction.discovered_in_query.isnot(None)
+    ).group_by(
+        Interaction.discovered_in_query
+    ).order_by(
+        func.count(Interaction.id).desc()
+    ).all()
+
+    return jsonify({
+        "queries": [
+            {"name": q, "interaction_count": c}
+            for q, c in results
+        ]
+    })
+
+
+@app.route('/api/pipeline/run', methods=['POST'])
+def run_pipeline():
+    """Start the V2 pipeline."""
+    data = request.json or {}
+    mode = data.get('mode', 'full')  # full, single, downstream
+    query_filter = data.get('query', None)  # NEW: filter by query name
+    try:
+        start_step = int(data.get('step', 1))
+    except:
+        start_step = 1
+
+    with PIPELINE_LOCK:
+        if PIPELINE_STATUS["is_running"]:
+            return jsonify({"error": "Pipeline is already running"}), 409
+
+    # Start background thread with query filter
+    thread = threading.Thread(
+        target=run_pipeline_task,
+        args=(mode, start_step, query_filter)
+    )
+    thread.daemon = True
+    thread.start()
+
+    return jsonify({
+        "message": "Pipeline started",
+        "mode": mode,
+        "step": start_step,
+        "query": query_filter or "all"
+    })
+
+
+@app.route('/api/pipeline/clear', methods=['POST'])
+def clear_pathway_data():
+    """Clear pathway tables for fresh rebuild.
+
+    Options via JSON body:
+        keep_assignments: bool - If true, keep step2/step3 data in interactions (default: false)
+        dry_run: bool - If true, only preview what would be deleted (default: false)
+    """
+    from models import Pathway, PathwayParent, PathwayInteraction, Interaction
+
+    data = request.json or {}
+    keep_assignments = data.get('keep_assignments', False)
+    dry_run = data.get('dry_run', False)
+
+    with PIPELINE_LOCK:
+        if PIPELINE_STATUS["is_running"]:
+            return jsonify({"error": "Cannot clear while pipeline is running"}), 409
+
+    try:
+        # Count before clearing
+        parents_count = db.session.query(PathwayParent).count()
+        pi_count = db.session.query(PathwayInteraction).count()
+        pathways_count = db.session.query(Pathway).count()
+
+        interactions_with_data = db.session.query(Interaction).filter(
+            db.or_(
+                Interaction.data.has_key('step2_proposal'),
+                Interaction.data.has_key('step3_finalized_pathway')
+            )
+        ).count()
+
+        if dry_run:
+            return jsonify({
+                "dry_run": True,
+                "would_delete": {
+                    "pathway_parents": parents_count,
+                    "pathway_interactions": pi_count,
+                    "pathways": pathways_count,
+                    "interactions_with_pathway_data": interactions_with_data if not keep_assignments else 0
+                }
+            })
+
+        # Actually delete
+        deleted_parents = db.session.query(PathwayParent).delete()
+        deleted_pi = db.session.query(PathwayInteraction).delete()
+        deleted_pathways = db.session.query(Pathway).delete()
+
+        cleared_interactions = 0
+        if not keep_assignments:
+            interactions = db.session.query(Interaction).filter(
+                db.or_(
+                    Interaction.data.has_key('step2_proposal'),
+                    Interaction.data.has_key('step3_finalized_pathway')
+                )
+            ).all()
+
+            for ix in interactions:
+                if ix.data:
+                    new_data = {k: v for k, v in ix.data.items()
+                               if k not in ['step2_proposal', 'step3_finalized_pathway']}
+                    ix.data = new_data
+                    cleared_interactions += 1
+
+        db.session.commit()
+
+        return jsonify({
+            "success": True,
+            "deleted": {
+                "pathway_parents": deleted_parents,
+                "pathway_interactions": deleted_pi,
+                "pathways": deleted_pathways,
+                "interactions_cleared": cleared_interactions
+            },
+            "message": "Pathway data cleared. Run pipeline to rebuild."
+        })
+
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route('/api/pipeline/status', methods=['GET'])
+def get_pipeline_status():
+    """Get current pipeline status."""
+    with PIPELINE_LOCK:
+        return jsonify(PIPELINE_STATUS)
+
+
+@app.route('/api/repair-pathways/<protein>', methods=['POST'])
+def repair_pathways(protein):
+    """
+    Re-run pathway assignment for an existing protein's interactions.
+    This fixes pathway assignments without re-running the full query pipeline.
+
+    POST /api/repair-pathways/ATXN3
+    Optional JSON body:
+        {
+            "clear_existing": false,  // If true, clears step2/step3 data first
+            "skip_hierarchy": false   // If true, only runs steps 1-3 (faster)
+        }
+
+    Returns summary of assignments made.
+    """
+    try:
+        from models import Protein, Interaction, PathwayInteraction
+
+        data = request.json or {}
+        clear_existing = data.get('clear_existing', False)
+        skip_hierarchy = data.get('skip_hierarchy', False)
+
+        # Find the protein
+        protein_obj = Protein.query.filter_by(symbol=protein.upper()).first()
+        if not protein_obj:
+            return jsonify({

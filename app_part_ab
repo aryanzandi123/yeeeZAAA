@@ -1,0 +1,300 @@
+                cancel_event_check = current_job.get("cancel_event")
+                if cancel_event_check and cancel_event_check.is_set():
+                    # Job is being cancelled, allow restart
+                    pass
+                else:
+                    # Job is actively running
+                    return jsonify({"status": "processing", "message": "Job already in progress."})
+
+        # 4. Start a new job with configuration and cancellation event
+        cancel_event = threading.Event()
+        jobs[protein_name] = {
+            "status": "processing",
+            "progress": "Initializing pipeline...",
+            "cancel_event": cancel_event
+        }
+        thread = threading.Thread(
+            target=run_full_job,
+            args=(protein_name, jobs, jobs_lock, interactor_rounds, function_rounds, max_depth, skip_validation, skip_deduplicator, skip_arrow_determination, skip_fact_checking, app)
+        )
+        thread.daemon = True
+        thread.start()
+
+    return jsonify({"status": "processing", "protein": protein_name})
+
+
+@app.route('/api/requery', methods=['POST'])
+def start_requery():
+    """
+    DEPRECATED: Use /api/query instead (which now handles both new and existing proteins).
+    This endpoint is kept for backward compatibility only.
+
+    Re-queries a protein with context from previous results to find NEW interactors/functions.
+    """
+    print("⚠️  DEPRECATED: /api/requery called. Use /api/query instead.", file=sys.stderr)
+
+    data = request.json
+    protein_name = data.get('protein')
+    if not protein_name:
+        return jsonify({"error": "Protein name is required"}), 400
+
+    if not re.match(r'^[a-zA-Z0-9_-]+$', protein_name):
+        return jsonify({
+            "error": "Invalid protein name format. Please use only letters, numbers, hyphens, and underscores."
+        }), 400
+
+    # Extract configuration (with defaults and validation)
+    # RE-QUERIES allow minimum 1 round (quick searches for missed items)
+    try:
+        interactor_rounds = int(data.get('interactor_rounds', 1))
+        function_rounds = int(data.get('function_rounds', 1))
+        max_depth = int(data.get('max_depth', 3))
+
+        # Clamp to valid range (1-8 for re-queries)
+        interactor_rounds = max(1, min(8, interactor_rounds))
+        function_rounds = max(1, min(8, function_rounds))
+        max_depth = max(1, max_depth)
+    except (TypeError, ValueError):
+        # If invalid, use defaults (1 for quick re-query)
+        interactor_rounds = 1
+        function_rounds = 1
+        max_depth = 3
+
+    # Extract skip options
+    skip_deduplicator = bool(data.get('skip_deduplicator', False))
+    skip_fact_checking = bool(data.get('skip_fact_checking', False))
+
+    # Check if cached result exists (required for re-query)
+    cache_path = os.path.join(CACHE_DIR, f"{protein_name}.json")
+    if not os.path.exists(cache_path):
+        return jsonify({"error": "No cached results found. Use /api/query for initial query."}), 404
+
+    with jobs_lock:
+        # Check if a job for this protein is already running
+        current_job = jobs.get(protein_name)
+        if current_job:
+            current_status = current_job.get("status")
+            if current_status == "processing":
+                cancel_event_check = current_job.get("cancel_event")
+                if cancel_event_check and cancel_event_check.is_set():
+                    pass  # Job is being cancelled, allow restart
+                else:
+                    return jsonify({"status": "processing", "message": "Job already in progress."}), 409
+
+        # Start a re-query job with context
+        cancel_event = threading.Event()
+        jobs[protein_name] = {
+            "status": "processing",
+            "progress": "Re-querying with context...",
+            "cancel_event": cancel_event
+        }
+        thread = threading.Thread(
+            target=run_requery_job,
+            args=(protein_name, jobs, jobs_lock, interactor_rounds, function_rounds, max_depth, skip_deduplicator, skip_fact_checking, app)
+        )
+        thread.daemon = True
+        thread.start()
+
+    return jsonify({"status": "processing", "protein": protein_name})
+
+
+@app.route('/api/status/<protein>')
+def get_status(protein):
+    """Checks the status of a running job."""
+    # Evict stale completed/errored jobs on each status check
+    _evict_stale_jobs()
+
+    # IMPORTANT: Check jobs dict FIRST before checking cache
+    # This allows re-queries to run even when cache exists
+    with jobs_lock:
+        job_status = jobs.get(protein)
+
+    # If there's an active job, return its status
+    if job_status:
+        # Filter out non-serializable fields (like threading.Event)
+        serializable_status = {k: v for k, v in job_status.items() if k != "cancel_event"}
+        return jsonify(serializable_status)
+
+    # If no active job, check if cached result exists
+    cache_path = os.path.join(CACHE_DIR, f"{protein}.json")
+    if os.path.exists(cache_path):
+        return jsonify({"status": "complete"})
+
+    # No job and no cache
+    return jsonify({"status": "not_found"})
+
+
+# ============================================================================
+# Helper Functions for Database Queries
+# ============================================================================
+
+def build_full_json_from_db(protein_symbol: str) -> dict:
+    """
+    Reconstruct complete JSON from PostgreSQL database.
+
+    NEW: Returns restructured format with proteins array and interactions array.
+    This enables cleaner graph rendering without function nodes cluttering the view.
+
+    Args:
+        protein_symbol: Protein to query (e.g., "ATXN3")
+
+    Returns:
+        Dict with snapshot_json and ctx_json, or None if protein not found
+        Format: {
+            "snapshot_json": {
+                "main": "PROTEIN",
+                "proteins": ["PROTEIN", "INTERACTOR1", ...],
+                "interactions": [
+                    {
+                        "type": "direct",
+                        "source": "PROTEIN",
+                        "target": "INTERACTOR1",
+                        "direction": "bidirectional",
+                        "arrow": "binds",
+                        "confidence": 0.85,
+                        "functions": [...],
+                        "evidence": [...],
+                        ...
+                    },
+                    {
+                        "type": "shared",
+                        "source": "INTERACTOR1",
+                        "target": "INTERACTOR2",
+                        ...
+                    }
+                ]
+            },
+            "ctx_json": {...}
+        }
+
+    Side effects:
+        Queries database via SQLAlchemy
+    """
+    from models import Protein, Interaction
+
+    # Query main protein
+    main_protein = Protein.query.filter_by(symbol=protein_symbol).first()
+    if not main_protein:
+        return None
+
+    # Query all interactions using CANONICAL ORDERING
+    # Since we enforce protein_a_id < protein_b_id, we only need to check both positions
+    db_interactions = db.session.query(Interaction).filter(
+        (Interaction.protein_a_id == main_protein.id) |
+        (Interaction.protein_b_id == main_protein.id)
+    ).all()
+
+    # Build interactions list with explicit source/target/type
+    interactions_list = []
+    protein_set = {protein_symbol}  # Track all unique proteins
+    interactor_proteins = []  # Track interactor Protein objects for shared link query
+
+    # Process direct interactions (main protein ↔ interactor)
+    for interaction in db_interactions:
+        # Determine partner protein and perspective
+        if interaction.protein_a_id == main_protein.id:
+            # Main protein is stored as protein_a
+            partner = interaction.protein_b
+            needs_flip = False
+        else:
+            # Main protein is stored as protein_b (reversed in storage)
+            partner = interaction.protein_a
+            needs_flip = True
+
+        # Track partner for shared link detection
+        interactor_proteins.append(partner)
+        protein_set.add(partner.symbol)
+
+        # Extract FULL data from JSONB (preserves all fields: functions, evidence, PMIDs, etc.)
+        interaction_data = interaction.data.copy()
+
+        # Add explicit source/target/type fields for frontend clarity
+        # CRITICAL: Set source/target based on DIRECTION (who affects whom), NOT canonical ordering
+
+        # Step 1: Convert absolute direction to query-relative direction
+        # Database stores absolute directions: "a_to_b", "b_to_a", "bidirectional"
+        # Frontend expects query-relative: "main_to_primary", "primary_to_main", "bidirectional"
+        stored_direction = interaction.direction
+
+        if needs_flip:
+            # Query protein is protein_b (reversed in storage)
+            # Convert absolute → query-relative from protein_b's perspective
+            if stored_direction == "a_to_b":
+                # protein_a → protein_b means partner → query
+                final_direction = "primary_to_main"
+            elif stored_direction == "b_to_a":
+                # protein_b → protein_a means query → partner
+                final_direction = "main_to_primary"
+            else:
+                # bidirectional stays bidirectional
+                final_direction = stored_direction or "bidirectional"
+        else:
+            # Query protein is protein_a (natural order)
+            # Convert absolute → query-relative from protein_a's perspective
+            if stored_direction == "a_to_b":
+                # protein_a → protein_b means query → partner
+                final_direction = "main_to_primary"
+            elif stored_direction == "b_to_a":
+                # protein_b → protein_a means partner → query
+                final_direction = "primary_to_main"
+            else:
+                # bidirectional stays bidirectional
+                final_direction = stored_direction or "bidirectional"
+
+        # Step 2: Set source/target based on FINAL DIRECTION (not canonical ordering!)
+        if final_direction == "main_to_primary":
+            # Main protein affects interactor: query → interactor
+            interaction_data["source"] = protein_symbol
+            interaction_data["target"] = partner.symbol
+        elif final_direction == "primary_to_main":
+            # Interactor affects main protein: interactor → query
+            interaction_data["source"] = partner.symbol
+            interaction_data["target"] = protein_symbol
+        else:
+            # Bidirectional/undirected: use alphabetical order for consistency
+            if protein_symbol < partner.symbol:
+                interaction_data["source"] = protein_symbol
+                interaction_data["target"] = partner.symbol
+            else:
+                interaction_data["source"] = partner.symbol
+                interaction_data["target"] = protein_symbol
+
+        interaction_data["direction"] = final_direction
+
+        # Extract interaction_type and upstream_interactor from DB columns
+        # Use interaction_type from DB column for both fields
+        interaction_type_value = interaction.interaction_type or "direct"
+        interaction_data["type"] = interaction_type_value  # Frontend reads this
+        interaction_data["interaction_type"] = interaction_type_value  # Metadata
+        if interaction.upstream_interactor:
+            interaction_data["upstream_interactor"] = interaction.upstream_interactor
+
+        # Special handling for indirect interactions:
+        # For indirect interactions, source should be upstream_interactor, not main protein
+        # Example: p62→KEAP1→NRF2 should render as source=KEAP1, target=NRF2
+        if interaction_type_value == "indirect" and interaction.upstream_interactor:
+            interaction_data["source"] = interaction.upstream_interactor
+            # Target is the partner protein (already set correctly above)
+            # Direction already set correctly at line 474 from database - don't override
+            # IMPORTANT: Add flag to indicate direction semantics have changed
+            # Direction is now LINK-ABSOLUTE (upstream→partner), not query-relative (main→partner)
+            interaction_data["_direction_is_link_absolute"] = True
+
+        # Extract chain metadata for indirect interactions
+        if interaction.mediator_chain:
+            interaction_data["mediator_chain"] = interaction.mediator_chain
+        if interaction.depth:
+            interaction_data["depth"] = interaction.depth
+        if interaction.chain_context:
+            interaction_data["chain_context"] = interaction.chain_context
+
+        # Ensure required fields have defaults
+        if interaction_data.get("confidence") is None:
+            interaction_data["confidence"] = 0.5
+        if interaction_data.get("arrow") is None:
+            interaction_data["arrow"] = "binds"
+        if interaction_data.get("functions") is None:
+            interaction_data["functions"] = []
+        if interaction_data.get("evidence") is None:
+            interaction_data["evidence"] = []
+        if interaction_data.get("pmids") is None:

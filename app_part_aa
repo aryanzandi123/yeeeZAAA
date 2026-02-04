@@ -1,0 +1,300 @@
+from dotenv import load_dotenv
+import os
+
+# Load .env file - try current directory and parent directory
+load_dotenv()
+load_dotenv(override=True)  # Reload to ensure fresh values
+
+# Hardcode API key as fallback (TEMPORARY - for debugging)
+if not os.getenv("GOOGLE_API_KEY"):
+    print("[WARN]WARNING: Using hardcoded API key. Create a .env file with GOOGLE_API_KEY for production.")
+
+import re
+import sys
+import json
+import time
+import logging
+import threading
+from pathlib import Path
+from flask import Flask, request, jsonify, render_template, send_from_directory
+
+# --- Structured logging ---
+logging.basicConfig(
+    level=logging.INFO,
+    format='%(asctime)s [%(levelname)s] %(name)s: %(message)s',
+    stream=sys.stderr,
+)
+logger = logging.getLogger('propath')
+
+from utils.pruner import (
+    run_prune_job,
+    pruned_filename,
+    is_pruned_fresh,
+    make_prune_job_id,
+    parse_prune_job_id,
+    HARD_MAX_KEEP_DEFAULT,
+    PRUNED_DIRNAME,
+    PROTEIN_RE,
+)
+
+# Import protein database for cross-query knowledge
+import utils.protein_database as pdb
+
+# --- Import your existing functions ---
+# You'll need to make them importable, e.g., from runner import run_pipeline
+from runner import run_full_job, run_requery_job
+from visualizer import create_visualization
+
+# --- V2 PIPELINE IMPORTS ---
+# from scripts.pathway_hierarchy.ai_hierarchy_builder import PathwayHierarchyBuilder # REMOVED: Class does not exist
+from scripts.pathway_v2.step1_init_roots import init_roots
+from scripts.pathway_v2.step2_assign_initial_terms import assign_initial_terms
+from scripts.pathway_v2.step3_refine_pathways import refine_pathways
+from scripts.pathway_v2.step4_build_hierarchy_backwards import build_hierarchy
+from scripts.pathway_v2.step5_discover_siblings import discover_siblings
+from scripts.pathway_v2.step6_reorganize_pathways import reorganize_pathways
+from scripts.pathway_v2.verify_pipeline import verify
+import queue
+import logging
+
+# --- PIPELINE STATUS TRACKING ---
+PIPELINE_STATUS = {
+    "is_running": False,
+    "current_step": None,
+    "total_steps": 6,
+    "logs": [],
+    "error": None,
+    "query_filter": None  # Track which query the pipeline is filtering on
+}
+PIPELINE_LOCK = threading.Lock()
+# --------------------------------
+
+# --- App Setup ---
+app = Flask(__name__)
+
+# --- Database Configuration (PostgreSQL via Railway) ---
+# Use DATABASE_PUBLIC_URL for local dev (accessible externally)
+# Use DATABASE_URL for production (Railway internal network)
+database_url = os.getenv('DATABASE_PUBLIC_URL') or os.getenv('DATABASE_URL')
+if not database_url:
+    print("[WARN]WARNING: DATABASE_URL not set. Using SQLite fallback (local dev only).", file=sys.stderr)
+    database_url = 'sqlite:///fallback.db'
+elif database_url.startswith('postgres://'):
+    # Railway provides postgres:// but SQLAlchemy 1.4+ requires postgresql://
+    database_url = database_url.replace('postgres://', 'postgresql://', 1)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = database_url
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+_engine_options = {
+    'pool_pre_ping': True,  # Verify connections before using
+}
+if database_url.startswith('postgresql'):
+    _engine_options.update({
+        'pool_size': 5,
+        'pool_recycle': 3600,
+        'connect_args': {'connect_timeout': 10},
+    })
+app.config['SQLALCHEMY_ENGINE_OPTIONS'] = _engine_options
+
+# Initialize SQLAlchemy with app
+from models import db
+db.init_app(app)
+
+# Create tables and validate database connection
+with app.app_context():
+    print("\n" + "="*60, file=sys.stderr)
+    print("[DATABASE] Initializing PostgreSQL connection...", file=sys.stderr)
+    print(f"[DATABASE] URL: {database_url.split('@')[0]}@***", file=sys.stderr)  # Hide credentials
+
+    try:
+        # Test connection first
+        db.session.execute(db.text('SELECT 1'))
+        print("[DATABASE] [OK]Connection verified", file=sys.stderr)
+
+        # Create tables if they don't exist
+        db.create_all()
+
+        # Verify tables exist
+        from models import Protein, Interaction
+        protein_count = Protein.query.count()
+        interaction_count = Interaction.query.count()
+
+        print("[DATABASE] [OK]Tables initialized", file=sys.stderr)
+        print(f"[DATABASE]   • Proteins table: {protein_count} entries", file=sys.stderr)
+        print(f"[DATABASE]   • Interactions table: {interaction_count} entries", file=sys.stderr)
+        print(f"[DATABASE] [OK]Database ready for sync", file=sys.stderr)
+        print("="*60 + "\n", file=sys.stderr)
+
+    except Exception as e:
+        print(f"\n[ERROR][DATABASE] Initialization failed: {e}", file=sys.stderr)
+        print(f"   Falling back to file-based cache only", file=sys.stderr)
+        print(f"   All query results will be saved to cache/ directory", file=sys.stderr)
+        print(f"   Run 'python sync_cache_to_db.py <PROTEIN>' to sync manually later", file=sys.stderr)
+        print("="*60 + "\n", file=sys.stderr)
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+
+CACHE_DIR = Path("cache")
+CACHE_DIR.mkdir(exist_ok=True)
+PRUNED_DIR = CACHE_DIR / PRUNED_DIRNAME
+PRUNED_DIR.mkdir(exist_ok=True)
+
+# --- Arrow → Effect label mapping (single source of truth) ---
+ARROW_TO_EFFECT = {
+    "activates": "activation",
+    "inhibits": "inhibition",
+    "binds": "binding",
+    "regulates": "regulation",
+    "complex": "complex formation",
+}
+
+def arrow_to_effect(arrow):
+    """Convert arrow type to human-readable effect label."""
+    return ARROW_TO_EFFECT.get(arrow, arrow)
+
+# --- Job Tracking (Crucial for handling concurrency) ---
+# This dictionary will store the status of running jobs.
+# The lock is essential to prevent race conditions when multiple users access it.
+jobs = {}
+jobs_lock = threading.Lock()
+
+# Cleanup: mark in-progress jobs as interrupted on shutdown
+import atexit
+
+def _cleanup_jobs_on_exit():
+    with jobs_lock:
+        for name, job in jobs.items():
+            if job.get("status") == "processing":
+                job["status"] = "error"
+                job["progress"] = "Server restarted — job was interrupted."
+
+atexit.register(_cleanup_jobs_on_exit)
+
+# Periodic stale-job cleanup (remove completed/errored jobs older than 5 minutes)
+_JOB_TTL_SECONDS = 300
+
+def _evict_stale_jobs():
+    """Remove completed/errored jobs older than TTL. Called on each status check."""
+    now = time.time()
+    with jobs_lock:
+        stale = [
+            name for name, job in jobs.items()
+            if job.get("status") in ("complete", "error", "cancelled")
+            and now - job.get("_finished_at", now) > _JOB_TTL_SECONDS
+        ]
+        for name in stale:
+            del jobs[name]
+
+# --- Main Routes ---
+@app.route('/')
+def index():
+    """Serves the main HTML page."""
+    return render_template('index.html')
+
+@app.route('/api/search/<protein>')
+def search_protein(protein):
+    """
+    Search for a protein in the database (no querying/research).
+
+    Returns:
+        JSON: {
+            "status": "found" | "not_found",
+            "protein": str,
+            "has_interactions": bool (if found),
+            "interaction_count": int (if found),
+            "last_queried": str (if found),
+            "query_count": int (if found)
+        }
+    """
+    # Validate protein name
+    if not re.match(r'^[a-zA-Z0-9_-]+$', protein):
+        return jsonify({
+            "error": "Invalid protein name format. Please use only letters, numbers, hyphens, and underscores."
+        }), 400
+
+    try:
+        from models import Protein, Interaction
+
+        # Check if protein exists in database
+        protein_obj = Protein.query.filter_by(symbol=protein).first()
+
+        if not protein_obj:
+            return jsonify({
+                "status": "not_found",
+                "protein": protein
+            })
+
+        # Count interactions (bidirectional due to canonical ordering)
+        interaction_count = db.session.query(Interaction).filter(
+            (Interaction.protein_a_id == protein_obj.id) |
+            (Interaction.protein_b_id == protein_obj.id)
+        ).count()
+
+        return jsonify({
+            "status": "found",
+            "protein": protein,
+            "has_interactions": interaction_count > 0,
+            "interaction_count": interaction_count,
+            "last_queried": protein_obj.last_queried.isoformat() if protein_obj.last_queried else None,
+            "query_count": protein_obj.query_count
+        })
+
+    except Exception as e:
+        print(f"⚠️  Search failed: {e}", file=sys.stderr)
+        return jsonify({"error": "Database search failed"}), 500
+
+@app.route('/api/query', methods=['POST'])
+def start_query():
+    """Starts a new pipeline job in the background."""
+    data = request.json
+    protein_name = data.get('protein')
+    if not protein_name:
+        return jsonify({"error": "Protein name is required"}), 400
+
+    if not re.match(r'^[a-zA-Z0-9_-]+$', protein_name):
+        return jsonify({
+            "error": "Invalid protein name format. Please use only letters, numbers, hyphens, and underscores."
+        }), 400
+
+    # Extract configuration (with defaults and validation)
+    try:
+        interactor_rounds = int(data.get('interactor_rounds', 3))
+        function_rounds = int(data.get('function_rounds', 3))
+        max_depth = int(data.get('max_depth', 3))
+
+        # Clamp to valid range (3-8)
+        interactor_rounds = max(3, min(8, interactor_rounds))
+        function_rounds = max(3, min(8, function_rounds))
+        # max_depth: 1-4 limited, 5+ unlimited
+        max_depth = max(1, max_depth)
+    except (TypeError, ValueError):
+        # If invalid, use defaults
+        interactor_rounds = 3
+        function_rounds = 3
+        max_depth = 3
+
+    # Extract skip_validation option (default: False)
+    skip_validation = bool(data.get('skip_validation', False))
+
+    # Extract skip_deduplicator option (default: False)
+    skip_deduplicator = bool(data.get('skip_deduplicator', False))
+
+    # Extract skip_arrow_determination option (default: False)
+    skip_arrow_determination = bool(data.get('skip_arrow_determination', False))
+
+    # Extract skip_fact_checking option (default: False)
+    skip_fact_checking = bool(data.get('skip_fact_checking', False))
+
+    # No instant returns - always run pipeline
+    # This allows finding NEW interactions for existing proteins
+    # The pipeline has built-in history awareness via known_interactions context
+
+    with jobs_lock:
+        # Check if a job for this protein is already running
+        current_job = jobs.get(protein_name)
+        if current_job:
+            # Only prevent starting a new job if one is actively processing
+            # Allow restarting if the previous job was cancelled, errored, or is cancelling
+            current_status = current_job.get("status")
+            if current_status == "processing":
+                # Check if the job has a cancel event that's been set (being cancelled)

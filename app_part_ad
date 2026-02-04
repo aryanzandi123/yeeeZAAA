@@ -1,0 +1,300 @@
+            if shared_data.get("functions"):
+                for func in shared_data["functions"]:
+                    current_pw = func.get("pathway")
+
+                    # Already has a string pathway from Step 3 - keep it!
+                    if isinstance(current_pw, str) and current_pw and current_pw != "Uncategorized":
+                        continue
+
+                    # Already has a dict pathway - extract name
+                    if isinstance(current_pw, dict) and current_pw.get("name"):
+                        func["pathway"] = current_pw["name"]  # Flatten to string
+                        continue
+
+                    # No pathway - use interaction-level fallback
+                    if v2_pathway:
+                        func["pathway"] = v2_pathway
+            else:
+                # If no functions exist, create a generic one so it shows up
+                if v2_pathway:
+                    shared_data["functions"] = [{
+                        "function": v2_pathway,
+                        "pathway": v2_pathway,
+                        "description": f"Interaction classified as {v2_pathway}",
+                        "evidence": [],
+                        "pmids": []
+                    }]
+
+            # Expose step3_finalized_pathway for modal display
+            if v2_pathway:
+                shared_data["step3_finalized_pathway"] = v2_pathway
+
+            interactions_list.append(shared_data)
+
+    # =========================================================================
+    # BUILD PATHWAY HIERARCHY FROM DATABASE TABLES (NOT JSONB)
+    # =========================================================================
+    # This queries PathwayInteraction junction table to get all pathways linked
+    # to this protein's interactions, then builds the full hierarchy from
+    # Pathway and PathwayParent tables. This ensures we see ALL pathways
+    # including root pathways that may not be directly in interaction JSONB.
+    # =========================================================================
+    from models import Pathway, PathwayParent, PathwayInteraction
+
+    # Step 1: Get all interaction IDs for this protein query
+    # CRITICAL FIX: Include Chain Links and Shared Links in pathway calculation
+    # distinct() not needed as we manualy control aggregation
+    interaction_db_ids = [ix.id for ix in db_interactions] + \
+                        [ix.id for ix in all_chain_links] + \
+                        [ix.id for ix in all_shared_links]
+
+    # Step 2: Query PathwayInteraction junction table to get pathway assignments
+    pathway_interactions = []
+    pathway_ids_set = set()
+    if interaction_db_ids:
+        pathway_interactions = db.session.query(PathwayInteraction).filter(
+            PathwayInteraction.interaction_id.in_(interaction_db_ids)
+        ).all()
+        for pwi in pathway_interactions:
+            pathway_ids_set.add(pwi.pathway_id)
+
+    # Step 3: Query all directly linked pathways
+    pathway_by_id = {}
+    if pathway_ids_set:
+        pathway_objs = Pathway.query.filter(Pathway.id.in_(pathway_ids_set)).all()
+        pathway_by_id = {p.id: p for p in pathway_objs}
+
+    # Step 4: Prefetch the ENTIRE PathwayParent table (typically small: hundreds of rows)
+    # This eliminates multiple per-layer BFS queries and sibling queries
+    all_parent_links = PathwayParent.query.all()
+    _parents_of = {}  # child_id -> [parent_id, ...]
+    _children_of = {}  # parent_id -> [child_id, ...]
+    for link in all_parent_links:
+        _parents_of.setdefault(link.child_pathway_id, []).append(link.parent_pathway_id)
+        _children_of.setdefault(link.parent_pathway_id, []).append(link.child_pathway_id)
+
+    # BFS up to collect all ancestors (in-memory, no more per-layer DB queries)
+    current_layer_ids = set(pathway_by_id.keys())
+    visited_ids = set(pathway_by_id.keys())
+
+    while current_layer_ids:
+        next_layer_ids = set()
+        for cid in current_layer_ids:
+            for pid in _parents_of.get(cid, []):
+                if pid not in visited_ids:
+                    next_layer_ids.add(pid)
+                    visited_ids.add(pid)
+        current_layer_ids = next_layer_ids
+
+    # Step 5: Fetch all collected ancestor objects
+    missing_ids = visited_ids - set(pathway_by_id.keys())
+    if missing_ids:
+        ancestor_objs = Pathway.query.filter(Pathway.id.in_(missing_ids)).all()
+        for a in ancestor_objs:
+            pathway_by_id[a.id] = a
+
+    # Step 6: ALWAYS include all root pathways (hierarchy_level = 0)
+    root_pathways = Pathway.query.filter(Pathway.hierarchy_level == 0).all()
+    for rp in root_pathways:
+        if rp.id not in pathway_by_id:
+            pathway_by_id[rp.id] = rp
+
+    # Step 6.5: Include SIBLING pathways for complete taxonomy visualization
+    # For each pathway we have, find its parent(s), then include ALL children of those parents
+    current_pathway_ids = set(pathway_by_id.keys())
+    sibling_ids_to_add = set()
+
+    if current_pathway_ids:
+        parent_ids = set()
+        for cid in current_pathway_ids:
+            parent_ids.update(_parents_of.get(cid, []))
+
+        for pid in parent_ids:
+            for child_id in _children_of.get(pid, []):
+                if child_id not in pathway_by_id:
+                    sibling_ids_to_add.add(child_id)
+
+    # Fetch and add sibling pathway objects
+    if sibling_ids_to_add:
+        sibling_objs = Pathway.query.filter(Pathway.id.in_(sibling_ids_to_add)).all()
+        for sib in sibling_objs:
+            pathway_by_id[sib.id] = sib
+
+    # Step 7: Build parent/child maps scoped to our collected pathways
+    all_pathway_ids = list(pathway_by_id.keys())
+    all_pathway_ids_set = set(all_pathway_ids)
+    parents_map = {}   # child_id -> [parent_id, ...]
+    children_map = {}  # parent_id -> [child_id, ...]
+
+    for link in all_parent_links:
+        if link.child_pathway_id in all_pathway_ids_set or link.parent_pathway_id in all_pathway_ids_set:
+            parents_map.setdefault(link.child_pathway_id, []).append(link.parent_pathway_id)
+            children_map.setdefault(link.parent_pathway_id, []).append(link.child_pathway_id)
+
+    # Step 8: Build pathway_groups from DATABASE data (not JSONB!)
+    pathway_groups = {}
+    for pw_id, pw_obj in pathway_by_id.items():
+        pw_name = pw_obj.name
+
+        # Build parent/child IDs for frontend
+        parent_ids = parents_map.get(pw_id, [])
+        child_ids = children_map.get(pw_id, [])
+        parent_pathway_ids = []
+        child_pathway_ids = []
+
+        for pid in parent_ids:
+            if pid in pathway_by_id:
+                p_name = pathway_by_id[pid].name
+                parent_pathway_ids.append(f"pathway_{p_name.replace(' ', '_').replace('-', '_')}")
+
+        for cid in child_ids:
+            if cid in pathway_by_id:
+                c_name = pathway_by_id[cid].name
+                child_pathway_ids.append(f"pathway_{c_name.replace(' ', '_').replace('-', '_')}")
+
+        # Build ancestry dynamically from parents_map (since DB ancestor_ids might be empty)
+        # Trace up parents until a root is reached
+        ancestry = []
+        curr_id = pw_id
+        visited_anc = set()
+        path_stack = [pw_obj.name]
+
+        # Simple DFS/While loop to find ONE path to root (for breadcrumbs)
+        # If multiple parents, valid path might be ambiguous, we pick the first one
+        while True:
+            pids = parents_map.get(curr_id, [])
+            if not pids:
+                break
+
+            # Prefer a parent that is in our active set
+            valid_parent = None
+            for pid in pids:
+                if pid in pathway_by_id and pid not in visited_anc:
+                    valid_parent = pid
+                    break
+
+            if not valid_parent:
+                break
+
+            parent_obj = pathway_by_id[valid_parent]
+            path_stack.insert(0, parent_obj.name)
+            curr_id = valid_parent
+            visited_anc.add(valid_parent)
+
+            if parent_obj.hierarchy_level == 0:
+                break
+
+        ancestry = path_stack
+
+        pathway_groups[pw_name] = {
+            "id": f"pathway_{pw_name.replace(' ', '_').replace('-', '_')}",
+            "name": pw_name,
+            "ontology_id": pw_obj.ontology_id,
+            "ontology_source": pw_obj.ontology_source,
+            "hierarchy_level": pw_obj.hierarchy_level or 0,
+            "is_leaf": pw_obj.is_leaf if pw_obj.is_leaf is not None else True,
+            "protein_count": pw_obj.protein_count or 0,
+            "interactor_ids": set(),
+            "interactions": [],
+            "interaction_count": 0,
+            "parent_pathway_ids": parent_pathway_ids,
+            "child_pathway_ids": child_pathway_ids,
+            "ancestry": ancestry
+        }
+
+    # Step 9: Build interaction_data lookup by DB ID
+    # We need to correlate DB interaction IDs with interaction_data objects
+    interaction_data_by_id = {}
+    for item in interactions_list:
+        if item.get("_db_id"):
+            interaction_data_by_id[item["_db_id"]] = item
+
+    # Step 10: Link interactions to pathways from PathwayInteraction junction
+    for pwi in pathway_interactions:
+        pw_obj = pathway_by_id.get(pwi.pathway_id)
+        if not pw_obj:
+            continue
+
+        pw_name = pw_obj.name
+        if pw_name not in pathway_groups:
+            continue
+
+        interaction_data = interaction_data_by_id.get(pwi.interaction_id)
+        if not interaction_data:
+            continue
+
+        # Track interactors
+        source = interaction_data.get("source")
+        target = interaction_data.get("target")
+        if source and source != protein_symbol:
+            pathway_groups[pw_name]["interactor_ids"].add(source)
+        if target and target != protein_symbol:
+            pathway_groups[pw_name]["interactor_ids"].add(target)
+
+        pathway_groups[pw_name]["interaction_count"] += 1
+
+        # Store interaction object for leaf pathway rendering
+        pathway_groups[pw_name]["interactions"].append({
+            "source": source,
+            "target": target,
+            "arrow": interaction_data.get("arrow", "binds"),
+            "direction": interaction_data.get("direction", "bidirectional"),
+            "confidence": interaction_data.get("confidence", 0.5),
+            "type": interaction_data.get("type", "direct"),
+            "interaction_effect": interaction_data.get("interaction_effect", "binding"),
+            "functions": interaction_data.get("functions", []),
+            "evidence": interaction_data.get("evidence", []),
+            "pmids": interaction_data.get("pmids", [])
+        })
+
+    # Step 11: Convert sets to lists for JSON serialization
+    pathways_list = []
+    for pw_data in pathway_groups.values():
+        pw_data["interactor_ids"] = sorted(list(pw_data["interactor_ids"]))
+        pathways_list.append(pw_data)
+
+    # Step 12: Sort by hierarchy level (roots first), then by interaction count
+    pathways_list.sort(key=lambda p: (p["hierarchy_level"], -p["interaction_count"]))
+
+    # Build snapshot_json with new structure
+    snapshot_json = {
+        "main": protein_symbol,
+        "proteins": sorted(list(protein_set)),  # All unique proteins (sorted for consistency)
+        "interactions": interactions_list,  # All interactions with full JSONB data
+        "pathways": pathways_list  # Pathway groups for visualization
+    }
+
+    # Build ctx_json (keep for backwards compatibility, simplified)
+    ctx_json = {
+        "main": protein_symbol,
+        "proteins": snapshot_json["proteins"],
+        "interactions": interactions_list,
+        "interactor_history": [p for p in snapshot_json["proteins"] if p != protein_symbol],
+        "function_history": {},
+        "function_batches": []
+    }
+
+    return {
+        "snapshot_json": snapshot_json,
+        "ctx_json": ctx_json
+    }
+
+
+def build_expansion_json_from_db(protein_symbol: str, visible_proteins: list = None) -> dict:
+    """
+    Build expansion JSON with auto-cross-linking support.
+
+    This extends build_full_json_from_db() to discover shared interactions between
+    newly-expanded proteins and existing visible proteins in the graph.
+
+    Example:
+        User has HDAC6 visible, expands VCP.
+        VCP's interactors include BECN1.
+        If BECN1 also interacts with HDAC6 (already visible), that link is included.
+
+    Args:
+        protein_symbol: Protein to expand (e.g., "VCP")
+        visible_proteins: List of proteins currently visible in graph (e.g., ["HDAC6", "ATXN3"])
+
+    Returns:
+        Dict with snapshot_json and ctx_json, including discovered cross-links

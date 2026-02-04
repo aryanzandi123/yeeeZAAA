@@ -1,0 +1,299 @@
+    """
+    Build compact rich context with all 4 key elements:
+    - Biological cascades
+    - Functions
+    - Interaction summaries
+    - Downstream effects
+
+    NEW: Reads data for ALL visible proteins (not just parent) to capture expanded nodes.
+    Reads from PostgreSQL database first (NEW format), falls back to file cache (OLD format).
+    Handles both NEW format (proteins[], interactions[]) and OLD format (interactors[]).
+
+    Args:
+        parent: Root protein symbol
+        visible_proteins: List of currently visible protein symbols
+
+    Returns:
+        Dict with main protein and compact interaction data
+    """
+    # Build visible set for filtering
+    visible_set = set(visible_proteins)
+
+    # Track all interactions using canonical key for deduplication
+    # Key: "PROTEIN_A-PROTEIN_B" (alphabetically sorted to handle bidirectional)
+    interactions_map = {}
+
+    # Read data for ALL visible proteins (not just parent)
+    for protein in visible_proteins:
+        # Try to build from PostgreSQL database first (NEW format)
+        snapshot = None
+        try:
+            db_result = build_full_json_from_db(protein)
+            if db_result:
+                snapshot = db_result.get("snapshot_json", db_result)
+        except Exception as e:
+            print(f"[WARN]Database query failed for {protein}: {e}", file=sys.stderr)
+
+        # Fallback to file cache (OLD format)
+        if not snapshot:
+            root_data = _read_cache_json(protein)
+            if root_data:
+                snapshot = root_data.get("snapshot_json", root_data)
+
+        if not snapshot or not isinstance(snapshot, dict):
+            continue
+
+        # Check format: NEW (interactions array) vs OLD (interactors array)
+        raw_interactions = snapshot.get("interactions", None)
+
+        if raw_interactions is not None and isinstance(raw_interactions, list):
+            # ===== NEW FORMAT: interactions array =====
+            for interaction in raw_interactions:
+                if not isinstance(interaction, dict):
+                    continue
+
+                source = interaction.get("source", "")
+                target = interaction.get("target", "")
+
+                # Only include interactions where BOTH endpoints are visible
+                if not source or not target:
+                    continue
+                if source not in visible_set or target not in visible_set:
+                    continue
+
+                # Create canonical key (alphabetically sorted)
+                canonical_key = "-".join(sorted([source, target]))
+
+                # Skip if already processed (deduplicate)
+                if canonical_key in interactions_map:
+                    continue
+
+                # Build compact interaction
+                try:
+                    confidence = float(interaction.get("confidence", 0.0))
+                except (ValueError, TypeError):
+                    confidence = 0.0
+
+                compact_inter = {
+                    "source": str(source),
+                    "target": str(target),
+                    "type": str(interaction.get("type", "direct")),
+                    "arrow": _normalize_arrow_value(interaction.get("arrow", "")),
+                    "direction": _normalize_direction_value(interaction.get("direction", "")),
+                    "confidence": confidence,
+                    "pmids": [],
+                    "summary": str(interaction.get("support_summary", "")).strip(),
+                    "functions": []
+                }
+
+                # Extract PMIDs (limit to 5, store as strings)
+                raw_pmids = interaction.get("pmids", [])
+                if isinstance(raw_pmids, list):
+                    compact_inter["pmids"] = [str(p) for p in raw_pmids[:5] if p]
+
+                # Extract functions using helper
+                compact_inter["functions"] = _extract_compact_functions(interaction.get("functions", []))
+
+                interactions_map[canonical_key] = compact_inter
+
+        else:
+            # ===== OLD FORMAT: interactors array (transform to new) =====
+            interactors = snapshot.get("interactors", [])
+            if not isinstance(interactors, list):
+                continue
+
+            main_protein = snapshot.get("main", protein)
+
+            for inter in interactors:
+                if not isinstance(inter, dict):
+                    continue
+
+                primary = inter.get("primary", "")
+                # Only include if primary is visible
+                if not primary or primary not in visible_set:
+                    continue
+
+                # Create canonical key (alphabetically sorted)
+                canonical_key = "-".join(sorted([main_protein, primary]))
+
+                # Skip if already processed (deduplicate)
+                if canonical_key in interactions_map:
+                    continue
+
+                # Build compact interaction (transform old format to new)
+                try:
+                    confidence = float(inter.get("confidence", 0.0))
+                except (ValueError, TypeError):
+                    confidence = 0.0
+
+                compact_inter = {
+                    "source": str(main_protein),
+                    "target": str(primary),
+                    "type": "direct",  # old format only had direct interactions
+                    "arrow": _normalize_arrow_value(inter.get("arrow", "")),
+                    "direction": _normalize_direction_value(inter.get("direction", "")),
+                    "confidence": confidence,
+                    "pmids": [],
+                    "summary": str(inter.get("support_summary", "")).strip(),
+                    "functions": []
+                }
+
+                # Extract PMIDs (limit to 5, store as strings)
+                raw_pmids = inter.get("pmids", [])
+                if isinstance(raw_pmids, list):
+                    compact_inter["pmids"] = [str(p) for p in raw_pmids[:5] if p]
+
+                # Extract functions using helper
+                compact_inter["functions"] = _extract_compact_functions(inter.get("functions", []))
+
+                interactions_map[canonical_key] = compact_inter
+
+    # Convert map to list
+    interactions = list(interactions_map.values())
+
+    return {
+        "main": str(parent),
+        "interactions": interactions
+    }
+
+
+def _build_chat_system_prompt(parent: str, rich_context: dict) -> str:
+    """
+    Build system prompt with compact rich context using 2-3 letter abbreviations.
+
+    Includes ALL 4 key elements:
+    - Biological cascades (BC)
+    - Functions (FN)
+    - Interaction summaries (SUM)
+    - Downstream effects (SE)
+
+    Args:
+        parent: Root protein symbol
+        rich_context: Rich context dict from _build_compact_rich_context
+
+    Returns:
+        Complete system prompt string with legend and data
+    """
+
+    # Build abbreviation legend
+    legend = """ABBREVIATION LEGEND:
+SUM=summary | FN=function | EFF=effect
+BC=biological_consequence | SE=specific_effects
+
+Arrows: -> (activates), -| (inhibits), <-> (binds)"""
+
+    main_protein = rich_context.get("main", parent)
+    interactions = rich_context.get("interactions", [])
+
+    # Build interactions section
+    interactions_lines = []
+    interactions_lines.append(f"ROOT PROTEIN: {main_protein}")
+    interactions_lines.append("")
+
+    if not interactions:
+        interactions_lines.append("No interaction data available in current view.")
+    else:
+        interactions_lines.append("INTERACTIONS:")
+        interactions_lines.append("")
+
+        for i, inter in enumerate(interactions, 1):
+            # NEW: Use source/target instead of primary
+            source = inter.get("source", "Unknown")
+            target = inter.get("target", "Unknown")
+            interaction_type = inter.get("type", "direct")
+            # Normalize arrow/direction values for consistent rendering
+            arrow = _normalize_arrow_value(inter.get("arrow", "unk"))
+            direction = _normalize_direction_value(inter.get("direction", "unk"))
+            confidence = inter.get("confidence", 0.0)
+            pmids = inter.get("pmids", [])
+            summary = inter.get("summary", "")
+
+            # Build SOURCE + ARROW + TARGET line based on direction
+            if direction == "bidir":
+                # Bidirectional - format: ATXN3 <-> VCP (binds)
+                if arrow == "bind":
+                    interaction_line = f"{source} <-> {target}"
+                elif arrow == "act":
+                    interaction_line = f"{source} <-> {target} (activates)"
+                elif arrow == "inh":
+                    interaction_line = f"{source} <-> {target} (inhibits)"
+                elif arrow == "reg":
+                    interaction_line = f"{source} <-> {target} (regulates)"
+                else:
+                    interaction_line = f"{source} <-> {target}"
+            elif direction == "m2p":
+                # Main to primary (source -> target)
+                if arrow == "act":
+                    interaction_line = f"{source} -> {target}"
+                elif arrow == "inh":
+                    interaction_line = f"{source} -| {target}"
+                elif arrow == "bind":
+                    interaction_line = f"{source} -> {target} (binds)"
+                elif arrow == "reg":
+                    interaction_line = f"{source} -> {target} (regulates)"
+                else:
+                    interaction_line = f"{source} -> {target}"
+            elif direction == "p2m":
+                # Primary to main (target -> source)
+                if arrow == "act":
+                    interaction_line = f"{target} -> {source}"
+                elif arrow == "inh":
+                    interaction_line = f"{target} -| {source}"
+                elif arrow == "bind":
+                    interaction_line = f"{target} -> {source} (binds)"
+                elif arrow == "reg":
+                    interaction_line = f"{target} -> {source} (regulates)"
+                else:
+                    interaction_line = f"{target} -> {source}"
+            else:
+                # Unknown direction - show source -> target with arrow
+                if arrow == "act":
+                    interaction_line = f"{source} -> {target}"
+                elif arrow == "inh":
+                    interaction_line = f"{source} -| {target}"
+                elif arrow == "bind":
+                    interaction_line = f"{source} <-> {target}"
+                elif arrow == "reg":
+                    interaction_line = f"{source} -> {target} (regulates)"
+                else:
+                    interaction_line = f"{source} - {target}"
+
+            # Compact header line with interaction
+            header = f"{i}. {interaction_line}"
+            interactions_lines.append(header)
+
+            # Summary (keep verbose for readability)
+            if summary:
+                interactions_lines.append(f"   SUM: {summary}")
+
+            # Functions section
+            functions = inter.get("functions", [])
+            if functions:
+                interactions_lines.append("   Functions:")
+                for j, fn in enumerate(functions, 1):
+                    fn_name = fn.get("name", "Unknown")
+                    fn_arrow = fn.get("arrow", "unk")
+                    fn_conf = fn.get("confidence", 0.0)
+                    fn_pmids = fn.get("pmids", [])
+                    fn_effect = fn.get("effect", "")
+                    bio_cons = fn.get("biological_consequence", [])
+                    spec_effs = fn.get("specific_effects", [])
+
+                    # Function header
+                    interactions_lines.append(f"     F{j}: {fn_name} ACT:{fn_arrow}")
+
+                    # Effect description (verbose for biological context)
+                    if fn_effect:
+                        interactions_lines.append(f"         EFF: {fn_effect}")
+
+                    # Biological consequence (arrow chain)
+                    if bio_cons:
+                        bc_chain = " -> ".join(bio_cons)
+                        interactions_lines.append(f"         BC: {bc_chain}")
+
+                    # Specific effects (list)
+                    if spec_effs:
+                        se_list = "; ".join(spec_effs)
+                        interactions_lines.append(f"         SE: {se_list}")
+
+            interactions_lines.append("")  # Blank line between interactions

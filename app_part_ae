@@ -1,0 +1,299 @@
+
+    Side effects:
+        Queries database via SQLAlchemy
+    """
+    from models import Protein, Interaction
+
+    # Get base expansion data (protein's direct interactions + shared links between its interactors)
+    result = build_full_json_from_db(protein_symbol)
+    if not result:
+        return None
+
+    # If no visible proteins provided, return base result (no cross-linking needed)
+    if not visible_proteins or not isinstance(visible_proteins, list):
+        return result
+
+    # Filter out the protein being expanded from visible list (already in base result)
+    visible_proteins = [p for p in visible_proteins if p != protein_symbol]
+    if not visible_proteins:
+        return result
+
+    # Get all new proteins from expansion (excluding main and visible proteins)
+    snapshot = result["snapshot_json"]
+    new_proteins = [
+        p for p in snapshot["proteins"]
+        if p != protein_symbol and p not in visible_proteins
+    ]
+
+    if not new_proteins:
+        # No new proteins added, no cross-links possible
+        return result
+
+    # Query for cross-links between new proteins and visible proteins
+    # Example: new_proteins = ["BECN1"], visible_proteins = ["HDAC6"]
+    # Find interactions where one protein is in new_proteins and other is in visible_proteins
+
+    # Get Protein objects for lookups
+    new_protein_objs = Protein.query.filter(Protein.symbol.in_(new_proteins)).all()
+    visible_protein_objs = Protein.query.filter(Protein.symbol.in_(visible_proteins)).all()
+
+    if not new_protein_objs or not visible_protein_objs:
+        return result
+
+    new_ids = [p.id for p in new_protein_objs]
+    visible_ids = [p.id for p in visible_protein_objs]
+
+    # Query interactions where one protein is new and other is visible
+    # Need to check both orderings due to canonical storage
+    cross_link_interactions = db.session.query(Interaction).filter(
+        db.or_(
+            db.and_(
+                Interaction.protein_a_id.in_(new_ids),
+                Interaction.protein_b_id.in_(visible_ids)
+            ),
+            db.and_(
+                Interaction.protein_a_id.in_(visible_ids),
+                Interaction.protein_b_id.in_(new_ids)
+            )
+        )
+    ).all()
+
+    # Add discovered cross-links to interactions list
+    interactions_list = snapshot["interactions"]
+    existing_ids = {
+        f"{i.get('source', '')}-{i.get('target', '')}"
+        for i in interactions_list
+        if i.get('source') and i.get('target')
+    }
+    existing_ids.update({
+        f"{i.get('target', '')}-{i.get('source', '')}"
+        for i in interactions_list
+        if i.get('source') and i.get('target')
+    })
+
+    for cross_ix in cross_link_interactions:
+        # Extract FULL JSONB data
+        cross_data = cross_ix.data.copy()
+
+        # Determine source/target
+        protein_a = cross_ix.protein_a
+        protein_b = cross_ix.protein_b
+
+        cross_data["source"] = protein_a.symbol
+        cross_data["target"] = protein_b.symbol
+        cross_data["type"] = "cross_link"  # Mark as discovered cross-link
+        cross_data["direction"] = cross_ix.direction if cross_ix.direction else "bidirectional"
+
+        # Ensure required fields have defaults
+        if cross_data.get("confidence") is None:
+            cross_data["confidence"] = 0.5
+        if cross_data.get("arrow") is None:
+            cross_data["arrow"] = cross_ix.arrow or "binds"
+        if cross_data.get("functions") is None:
+            cross_data["functions"] = []
+        if cross_data.get("evidence") is None:
+            cross_data["evidence"] = []
+        if cross_data.get("pmids") is None:
+            cross_data["pmids"] = []
+        if cross_data.get("intent") is None:
+            cross_data["intent"] = "binding"
+
+        # Check if link already exists (avoid duplicates)
+        link_id = f"{cross_data['source']}-{cross_data['target']}"
+        rev_link_id = f"{cross_data['target']}-{cross_data['source']}"
+
+        if link_id not in existing_ids and rev_link_id not in existing_ids:
+            interactions_list.append(cross_data)
+            existing_ids.add(link_id)
+
+            # Add proteins to protein set if not already present
+            if protein_a.symbol not in snapshot["proteins"]:
+                snapshot["proteins"].append(protein_a.symbol)
+            if protein_b.symbol not in snapshot["proteins"]:
+                snapshot["proteins"].append(protein_b.symbol)
+
+    # Re-sort proteins for consistency
+    snapshot["proteins"] = sorted(snapshot["proteins"])
+
+    # Update ctx_json
+    result["ctx_json"]["proteins"] = snapshot["proteins"]
+    result["ctx_json"]["interactions"] = interactions_list
+    result["ctx_json"]["interactor_history"] = [p for p in snapshot["proteins"] if p != protein_symbol]
+
+    return result
+
+
+@app.route('/api/results/<protein>')
+def get_results(protein):
+    """
+    Serves complete JSON data for a protein.
+
+    Builds from PostgreSQL database (full snapshot_json + ctx_json).
+
+    Returns:
+        JSON: {snapshot_json: {...}, ctx_json: {...}}
+    """
+    # Build from PostgreSQL database
+    try:
+        result = build_full_json_from_db(protein)
+        if result:
+            return jsonify(result)
+        else:
+            return jsonify({"error": "Protein not found"}), 404
+    except Exception as e:
+        print(f"❌ Database query failed: {e}", file=sys.stderr)
+        return jsonify({"error": "Database query failed"}), 500
+
+
+@app.route('/api/pathway/<pathway_id>/interactors')
+def get_pathway_interactors(pathway_id):
+    """
+    Lazy-load interactors for a leaf pathway.
+
+    Used by hierarchical pathway visualization to defer loading interactor data
+    until user expands to leaf level.
+
+    Args:
+        pathway_id: Pathway ID in format "pathway_Name_Here" or just "Name Here"
+
+    Returns:
+        JSON: {pathway_id, interactors: [{symbol, confidence, interaction_data}, ...]}
+    """
+    from models import Pathway, PathwayInteraction, Interaction, Protein
+    from sqlalchemy.orm import joinedload
+
+    # Parse pathway name from ID
+    pathway_name = pathway_id
+    if pathway_name.startswith("pathway_"):
+        pathway_name = pathway_name[8:]  # Remove "pathway_" prefix
+    pathway_name = pathway_name.replace("_", " ")
+
+    # Query pathway from database
+    pathway = Pathway.query.filter_by(name=pathway_name).first()
+    if not pathway:
+        return jsonify({"error": f"Pathway not found: {pathway_name}"}), 404
+
+    # Eager-load interaction + both proteins in a single query (fixes N+1)
+    pw_interactions = (
+        PathwayInteraction.query
+        .filter_by(pathway_id=pathway.id)
+        .options(
+            joinedload(PathwayInteraction.interaction)
+            .joinedload(Interaction.protein_a),
+            joinedload(PathwayInteraction.interaction)
+            .joinedload(Interaction.protein_b),
+        )
+        .all()
+    )
+
+    interactors = []
+    seen_symbols = set()  # Dedupe by symbol
+
+    for pwi in pw_interactions:
+        interaction = pwi.interaction
+        if not interaction:
+            continue
+
+        # Get both proteins in the interaction (already loaded via joinedload)
+        protein_a = interaction.protein_a
+        protein_b = interaction.protein_b
+
+        # Add both proteins as potential interactors (frontend will filter by context)
+        for protein in [protein_a, protein_b]:
+            if protein and protein.symbol not in seen_symbols:
+                seen_symbols.add(protein.symbol)
+                interactors.append({
+                    "symbol": protein.symbol,
+                    "confidence": float(pwi.assignment_confidence) if pwi.assignment_confidence else 0.8,
+                    "interaction_data": interaction.data  # Full JSONB payload
+                })
+
+    return jsonify({
+        "pathway_id": pathway_id,
+        "pathway_name": pathway.name,
+        "hierarchy_level": pathway.hierarchy_level or 0,
+        "is_leaf": pathway.is_leaf if pathway.is_leaf is not None else True,
+        "interactors": interactors
+    })
+
+
+@app.route('/api/visualize/<protein>')
+def get_visualization(protein):
+    """
+    Generates and serves HTML visualization.
+
+    Builds from PostgreSQL database, passes dict to visualizer.
+
+    Returns:
+        HTML string
+    """
+    # Build from PostgreSQL database
+    try:
+        result = build_full_json_from_db(protein)
+        if result:
+            # DEBUG: Log data structure for troubleshooting
+            print(f"[DEBUG] Visualization for {protein}:", file=sys.stderr)
+            print(f"  Result keys: {list(result.keys())}", file=sys.stderr)
+            if 'snapshot_json' in result:
+                snap = result['snapshot_json']
+                print(f"  snapshot_json keys: {list(snap.keys())}", file=sys.stderr)
+                print(f"  Main: {snap.get('main')}", file=sys.stderr)
+                print(f"  Proteins count: {len(snap.get('proteins', []))}", file=sys.stderr)
+                print(f"  Interactions count: {len(snap.get('interactions', []))}", file=sys.stderr)
+                print(f"  Interactors count (legacy): {len(snap.get('interactors', []))}", file=sys.stderr)
+
+            # Pass dict to visualizer
+            from visualizer import create_visualization_from_dict
+            html = create_visualization_from_dict(result)
+
+            # Add cache-busting headers
+            from flask import make_response
+            response = make_response(html)
+            response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+            response.headers['Pragma'] = 'no-cache'
+            response.headers['Expires'] = '0'
+            return response
+        else:
+            print(f"[DEBUG] Protein {protein} not found in database, trying cache fallback...", file=sys.stderr)
+            # CACHE FALLBACK: Try to load from file cache if database doesn't have data
+            cache_path = CACHE_DIR / f"{protein.upper()}.json"
+            if cache_path.exists():
+                try:
+                    import json
+                    with open(cache_path, 'r', encoding='utf-8') as f:
+                        cache_data = json.load(f)
+                    print(f"[DEBUG] Loaded {protein} from cache file", file=sys.stderr)
+                    # Build response structure expected by visualizer
+                    result = {
+                        "snapshot_json": cache_data.get("snapshot_json", cache_data),
+                        "ctx_json": cache_data.get("ctx_json")
+                    }
+                    from visualizer import create_visualization_from_dict
+                    html = create_visualization_from_dict(result)
+                    from flask import make_response
+                    response = make_response(html)
+                    response.headers['Cache-Control'] = 'no-cache, no-store, must-revalidate'
+                    response.headers['Pragma'] = 'no-cache'
+                    response.headers['Expires'] = '0'
+                    return response
+                except Exception as cache_err:
+                    print(f"[DEBUG] Cache fallback failed: {cache_err}", file=sys.stderr)
+            return "Protein not found.", 404
+    except Exception as e:
+        print(f"❌ Database visualization failed for {protein}: {e}", file=sys.stderr)
+        import traceback
+        traceback.print_exc(file=sys.stderr)
+        return "Database query failed.", 500
+
+
+# ---------------------------
+# PRUNED EXPANSION ENDPOINTS
+# ---------------------------
+
+def _get_api_key() -> str:
+    return os.getenv("GOOGLE_API_KEY", "")
+
+@app.post('/api/expand/pruned')
+def expand_pruned():
+    """
+    Request a pruned subgraph for an expanded interactor with auto-cross-linking.
