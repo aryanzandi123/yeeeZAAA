@@ -1,0 +1,90 @@
+{
+  "primary": "CTGF",
+  "interaction_type": "indirect",
+  "upstream_interactor": "YAP1",
+  "mediator_chain": [
+    "YAP1"
+  ],
+  "depth": 2,
+  "support_summary": "ATXN3 indirectly promotes the expression of Connective Tissue Growth Factor (CTGF) by directly stabilizing the transcription factor YAP1, which drives CTGF transcription.",
+  "functions": [
+    {
+      "function": "CTGF Gene Expression",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 indirectly upregulates the expression of Connective Tissue Growth Factor (CTGF) by directly modulating the stability of the transcriptional coactivator YAP1. ATXN3 interacts with YAP1 and removes polyubiquitin chains, preventing its degradation by the proteasome. The stabilized YAP1 can then translocate to the nucleus, where it complexes with TEAD transcription factors to activate the transcription of target genes, including CTGF.",
+      "effect_description": "By increasing the protein stability and therefore the activity of YAP1, ATXN3 leads to an increase in the transcription of the CTGF gene, resulting in higher levels of CTGF mRNA and protein. CTGF is a secreted matricellular protein that promotes oncogenic processes such as cell adhesion, migration, proliferation, and angiogenesis.",
+      "biological_consequence": [
+        "ATXN3 deubiquitinates and stabilizes YAP1 protein → Increased levels of nuclear YAP1 → YAP1 forms a complex with TEAD transcription factors → The YAP1/TEAD complex binds to the CTGF gene promoter → Transcription of CTGF is activated, leading to increased CTGF mRNA and protein levels → Promotion of cancer cell migration and proliferation"
+      ],
+      "specific_effects": [
+        "Targeted deletion of ATXN3 in cancer cells leads to a significant decrease in the protein levels of YAP1 without altering its mRNA expression.",
+        "Genetic suppression of ATXN3 selectively inhibits the expression of YAP1 target genes, including CTGF.",
+        "Overexpression of YAP1 in ATXN3-deficient cells rescues the reduced expression of CTGF."
+      ],
+      "evidence": [
+        {
+          "paper_title": "ATXN3 deubiquitinates YAP1 to promote tumor growth",
+          "journal": "American Journal of Cancer Research",
+          "year": 2023,
+          "relevant_quote": "Herein, we report that targeted deletion of the ATXN3 gene in cancer cells by the CRISPR-Cas9 system resulted in decreased protein expression of Yes-associated protein 1 (YAP1) without altering its mRNA transcription. Interestingly, genetic ATXN3 suppression selectively inhibited the expression levels of YAP1 target genes including the connective tissue growth factor (Ctgf) and cysteine-rich angiogenic inducer 61 (Cyr61), both of which have important functions in cell adhesion, migration, proliferation and angiogenesis.",
+          "pmid": "37818078"
+        }
+      ],
+      "pmids": [
+        "37818078"
+      ],
+      "direct_arrow": "activates",
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": "YAP1",
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [
+          "YAP1"
+        ],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "ATXN3, functioning as a deubiquitinase, directly interacts with the transcriptional coactivator YAP1. This interaction facilitates the removal of polyubiquitin chains from YAP1, thereby preventing its proteasomal degradation and consequently increasing its protein stability. The stabilized YAP1 then translocates to the nucleus, where it forms a complex with TEAD transcription factors. This nuclear YAP1/TEAD complex subsequently binds to the promoter regions of target genes, including CTGF, leading to the activation of their transcription.",
+  "effect": "The ATXN3-mediated stabilization and activation of YAP1 result in a significant increase in CTGF gene transcription, leading to elevated levels of CTGF mRNA and protein. As a secreted matricellular protein, this increased CTGF then promotes various oncogenic processes, including enhanced cell adhesion, migration, proliferation, and angiogenesis.",
+  "summary": "ATXN3 critically upregulates CTGF expression by stabilizing YAP1 protein, thereby promoting oncogenic phenotypes. This mechanism is strongly supported by findings that genetic suppression of ATXN3 inhibits CTGF expression, which can be rescued by YAP1 overexpression in ATXN3-deficient cells.",
+  "evidence": [
+    {
+      "paper_title": "ATXN3 deubiquitinates YAP1 to promote tumor growth",
+      "journal": "American Journal of Cancer Research",
+      "year": 2023,
+      "relevant_quote": "Herein, we report that targeted deletion of the ATXN3 gene in cancer cells by the CRISPR-Cas9 system resulted in decreased protein expression of Yes-associated protein 1 (YAP1) without altering its mRNA transcription. Interestingly, genetic ATXN3 suppression selectively inhibited the expression levels of YAP1 target genes including the connective tissue growth factor (Ctgf) and cysteine-rich angiogenic inducer 61 (Cyr61), both of which have important functions in cell adhesion, migration, proliferation and angiogenesis."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "YAP1 --activates--> CTGF:",
+  "protein_a": "ATXN3",
+  "protein_b": "CTGF",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.730513Z",
+  "last_updated": "2026-02-04T04:49:14.730513Z"
+}

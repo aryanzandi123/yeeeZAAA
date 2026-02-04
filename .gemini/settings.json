@@ -1,0 +1,71 @@
+{
+  "security": {
+    "auth": {
+      "selectedType": "oauth-personal"
+    },
+    "folderTrust": {
+      "enabled": true
+    }
+  },
+  "general": {
+    "previewFeatures": true,
+    "enablePromptCompletion": true,
+    "sessionRetention": {
+      "enabled": true
+    },
+    "debugKeystrokeLogging": true
+  },
+  "ui": {
+    "footer": {
+      "hideContextPercentage": false
+    },
+    "showMemoryUsage": true,
+    "showCitations": false,
+    "showModelInfoInChat": true,
+    "useFullWidth": true,
+    "showLineNumbers": true,
+    "hideBanner": false,
+    "accessibility": {},
+    "incrementalRendering": false
+  },
+  "tools": {
+    "shell": {
+      "showColor": true
+    },
+    "autoAccept": true
+  },
+  "context": {
+    "fileFiltering": {
+      "respectGitIgnore": false,
+      "respectGeminiIgnore": false
+    },
+    "loadMemoryFromIncludeDirectories": true
+  },
+  "output": {
+    "format": "text"
+  },
+  "ide": {
+    "enabled": true
+  },
+  "mcpServers": {
+    "serena": {
+      "command": "uvx",
+      "args": [
+        "--from",
+        "git+https://github.com/oraios/serena",
+        "serena",
+        "start-mcp-server",
+        "planning",
+        "--context",
+        "ide-assistant",
+        "--project",
+        "$(pwd)"
+      ]
+    }
+  },
+  "experimental": {
+    "codebaseInvestigatorSettings": {
+      "maxNumTurns": 25
+    }
+  }
+}

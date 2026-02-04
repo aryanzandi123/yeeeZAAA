@@ -1,0 +1,94 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "indirect",
+  "upstream_interactor": "TP53",
+  "mediator_chain": [
+    "PNKP",
+    "ATM",
+    "TP53"
+  ],
+  "depth": 4,
+  "support_summary": "ATXN3 indirectly upregulates the pro-apoptotic protein PUMA (PMAIP1) via the PNKP/ATM/p53 signaling axis, contributing to neuronal cell death.",
+  "functions": [
+    {
+      "function": "PMAIP1 (PUMA) Gene Expression",
+      "arrow": "activates",
+      "cellular_process": "In the context of Spinocerebellar Ataxia Type 3 (SCA3), mutant ATXN3 protein interacts with and inhibits the 3'-phosphatase activity of the DNA repair enzyme Polynucleotide Kinase 3'-Phosphatase (PNKP). This impairment of DNA repair leads to the accumulation of DNA damage, which triggers a chronic DNA damage response. This response involves the activation of the serine/threonine kinase ATM, which in turn phosphorylates and activates the tumor suppressor protein p53. Activated p53 then functions as a transcription factor, binding to the promoter of the PMAIP1 gene (encoding the pro-apoptotic protein PUMA) and upregulating its expression.",
+      "effect_description": "The increased transcription of PMAIP1 results in elevated levels of PUMA protein. PUMA is a BH3-only member of the Bcl-2 family that promotes apoptosis by neutralizing anti-apoptotic Bcl-2 proteins, leading to mitochondrial dysfunction and eventual neuronal cell death, a key pathological feature of SCA3.",
+      "biological_consequence": [
+        "Mutant ATXN3 binds to and inhibits PNKP's 3'-phosphatase activity → DNA strand breaks accumulate, causing persistent DNA damage → The DNA damage response activates ATM via autophosphorylation at Ser1981 → Activated ATM phosphorylates p53 at Ser15, stabilizing and activating it → Activated p53 transcriptionally upregulates target genes, including PMAIP1 (PUMA) → Increased PUMA protein levels trigger the intrinsic apoptotic pathway, leading to neuronal death."
+      ],
+      "specific_effects": [
+        "Mutant ATXN3 decreases the 3'-phosphatase activity of PNKP.",
+        "Chronic activation of the ATM→p53 signaling pathway is observed.",
+        "Increased transcription of p53 target genes, including PMAIP1 (PUMA), BAX, and NOXA, is triggered."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Inactivation of PNKP by Mutant ATXN3 Triggers Apoptosis by Activating the DNA Damage-Response Pathway in SCA3",
+          "journal": "PLoS Genetics",
+          "year": 2015,
+          "relevant_quote": "By contrast, mutant ATXN3 interacts with and decreases PNKP's 3'-phosphatase activity, leading to the persistent accumulation of DNA damage in the post-mitotic neurons and resulting in chronic activation of the DNA damage-response ATM→p53 signaling pathway in SCA3. This triggers apoptosis by increasing expression of such p53 target genes as BAX, PUMA and NOXA in SCA3.",
+          "pmid": "25590633"
+        }
+      ],
+      "pmids": [
+        "25590633"
+      ],
+      "direct_arrow": "activates",
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": "TP53",
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [
+          "PNKP",
+          "ATM",
+          "TP53"
+        ],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "In the context of Spinocerebellar Ataxia Type 3 (SCA3), mutant ATXN3 protein initiates a cascade by interacting with and inhibiting the 3'-phosphatase activity of the DNA repair enzyme Polynucleotide Kinase 3'-Phosphatase (PNKP). This impairment of DNA repair leads to the accumulation of DNA strand breaks, triggering a chronic DNA damage response. Subsequently, the serine/threonine kinase ATM is activated via autophosphorylation at Ser1981, which then phosphorylates the tumor suppressor protein p53 at Ser15, thereby stabilizing and activating it. Activated p53 functions as a transcription factor, binding directly to the promoter region of the PMAIP1 gene and transcriptionally upregulating its expression.",
+  "effect": "The increased transcription of PMAIP1 results in elevated levels of the pro-apoptotic PUMA protein. PUMA, a BH3-only member of the Bcl-2 family, promotes apoptosis by neutralizing anti-apoptotic Bcl-2 proteins, which subsequently leads to mitochondrial dysfunction. Ultimately, this cascade culminates in widespread neuronal cell death, a hallmark pathological feature of Spinocerebellar Ataxia Type 3 (SCA3).",
+  "summary": "Mutant ATXN3 indirectly activates PMAIP1 gene expression by initiating a chronic DNA damage response that culminates in p53-mediated transcriptional upregulation of PMAIP1. This activation of the ATM→p53 signaling pathway and subsequent increase in PUMA protein levels are critical drivers of neuronal apoptosis in Spinocerebellar Ataxia Type 3.",
+  "evidence": [
+    {
+      "paper_title": "Inactivation of PNKP by Mutant ATXN3 Triggers Apoptosis by Activating the DNA Damage-Response Pathway in SCA3",
+      "journal": "PLoS Genetics",
+      "year": 2015,
+      "relevant_quote": "By contrast, mutant ATXN3 interacts with and decreases PNKP's 3'-phosphatase activity, leading to the persistent accumulation of DNA damage in the post-mitotic neurons and resulting in chronic activation of the DNA damage-response ATM→p53 signaling pathway in SCA3. This triggers apoptosis by increasing expression of such p53 target genes as BAX, PUMA and NOXA in SCA3."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "TP53 --activates--> PMAIP1:",
+  "protein_a": "PMAIP1",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.690842Z",
+  "last_updated": "2026-02-04T04:49:14.690842Z"
+}

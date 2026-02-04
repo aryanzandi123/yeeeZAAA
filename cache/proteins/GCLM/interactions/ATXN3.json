@@ -1,0 +1,101 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "indirect",
+  "upstream_interactor": "NFE2L2",
+  "mediator_chain": [
+    "NFE2L2"
+  ],
+  "depth": 2,
+  "functions": [
+    {
+      "function": "GCLM Gene Expression",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 is proposed to indirectly promote the expression of Glutamate-cysteine ligase modifier subunit (GCLM) by positively regulating the transcription factor NFE2L2/Nrf2. Nrf2 is a master regulator of the antioxidant response and directly binds to the promoter of the GCLM gene to activate its transcription.",
+      "effect_description": "By potentially maintaining Nrf2 activity, ATXN3 would enhance the transcription of Nrf2 target genes, including GCLM. This increases the synthesis of glutathione, a critical cellular antioxidant, thereby strengthening the cell's defense against oxidative stress.",
+      "biological_consequence": [
+        "ATXN3 positively influences NFE2L2/Nrf2 protein levels or activity → Nrf2 translocates to the nucleus and binds to the Antioxidant Response Element (ARE) in the GCLM gene promoter → Transcription of GCLM is activated → GCLM protein levels increase → Glutathione (GSH) synthesis is enhanced → Cellular antioxidant capacity is strengthened."
+      ],
+      "specific_effects": [
+        "Nrf2 is a critical transcription factor for the induction of GCLM expression."
+      ],
+      "evidence": [
+        {
+          "paper_title": "The Role of NRF2 in Trinucleotide Repeat Expansion Disorders",
+          "journal": "International Journal of Molecular Sciences",
+          "year": 2023,
+          "relevant_quote": "Studies indicate that ATXN3 aggregation reduces NRF2 levels and activity.",
+          "pmid": "38929088"
+        },
+        {
+          "paper_title": "Nrf2 regulates antioxidant gene expression evoked by oxidized phospholipids in endothelial cells and murine arteries in vivo",
+          "journal": "Arteriosclerosis, Thrombosis, and Vascular Biology",
+          "year": 2008,
+          "relevant_quote": "Using the small interfering RNA approach, we demonstrate that Nrf2 is critical in mediating the induction of glutamate-cysteine ligase modifier subunit (GCLM) and NAD(P)H quinone oxidoreductase-1 (NQO1) by oxPAPC in human endothelial cells...",
+          "pmid": "18535259"
+        }
+      ],
+      "pmids": [
+        "38929088",
+        "18535259"
+      ],
+      "direct_arrow": "activates",
+      "interaction_effect": "activation",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": "NFE2L2",
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [
+          "NFE2L2"
+        ],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": "The input claim is directionally correct but lacks direct evidence for the initial step. While NFE2L2 (Nrf2) is a well-established transcriptional activator of the GCLM gene, the assertion that wild-type ATXN3 directly stabilizes Nrf2 is not explicitly supported by primary literature. Instead, studies indicate that in the context of Spinocerebellar Ataxia Type 3, the aggregation of mutant ATXN3 leads to a *reduction* in Nrf2 levels and activity. Therefore, the role of wild-type ATXN3 in positively regulating Nrf2 stability remains an inference rather than a directly proven mechanism. The cascade is plausible but the ATXN3-Nrf2 link requires more direct validation.",
+  "mechanism": "ATXN3 is proposed to indirectly activate the transcription of the Glutamate-cysteine ligase modifier subunit (GCLM) gene by positively regulating the transcription factor NFE2L2 (Nrf2). This regulation, which may involve influencing Nrf2 protein levels or its transcriptional activity, leads to an accumulation or activation of Nrf2. Subsequently, activated Nrf2 translocates to the nucleus and directly engages with the Antioxidant Response Element (ARE), a specific DNA sequence located within the promoter region of the GCLM gene. This sequence-specific binding of Nrf2 to the GCLM promoter recruits co-activators and the basal transcription machinery, thereby initiating and enhancing GCLM gene transcription.",
+  "effect": "The ATXN3-mediated enhancement of GCLM transcription results in elevated GCLM protein levels. As GCLM is a critical subunit of glutamate-cysteine ligase, its increased availability directly boosts the synthesis of glutathione (GSH), a crucial cellular antioxidant. This cascade ultimately strengthens the cell's overall defense against oxidative stress.",
+  "summary": "ATXN3's proposed indirect activation of GCLM expression via Nrf2 is biologically significant for maintaining cellular redox homeostasis. This mechanism contributes to fortifying the cell's antioxidant capacity, which is vital for protection against oxidative damage.",
+  "evidence": [
+    {
+      "paper_title": "The Role of NRF2 in Trinucleotide Repeat Expansion Disorders",
+      "journal": "International Journal of Molecular Sciences",
+      "year": 2023,
+      "relevant_quote": "Studies indicate that ATXN3 aggregation reduces NRF2 levels and activity."
+    },
+    {
+      "paper_title": "Nrf2 regulates antioxidant gene expression evoked by oxidized phospholipids in endothelial cells and murine arteries in vivo",
+      "journal": "Arteriosclerosis, Thrombosis, and Vascular Biology",
+      "year": 2008,
+      "relevant_quote": "Using the small interfering RNA approach, we demonstrate that Nrf2 is critical in mediating the induction of glutamate-cysteine ligase modifier subunit (GCLM) and NAD(P)H quinone oxidoreductase-1 (NQO1) by oxPAPC in human endothelial cells..."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "NFE2L2 --activates--> GCLM:",
+  "protein_a": "GCLM",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.719126Z",
+  "last_updated": "2026-02-04T04:49:14.719126Z"
+}

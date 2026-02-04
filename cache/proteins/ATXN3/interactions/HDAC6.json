@@ -1,0 +1,75 @@
+{
+  "primary": "HDAC6",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 interacts with the transcriptional component HDAC6, and this interaction has been implicated in the progression of pancreatic cancer via deubiquitination.",
+  "functions": [
+    {
+      "function": "HDAC6 Stability",
+      "arrow": "activates",
+      "likely_direction": "main_to_primary",
+      "cellular_process": "ATXN3 directly interacts with Histone Deacetylase 6 (HDAC6) and functions as its deubiquitinase, removing ubiquitin chains that would otherwise target HDAC6 for proteasomal degradation.",
+      "effect_description": "By deubiquitinating and stabilizing HDAC6, ATXN3 increases its protein levels. This has been shown to promote the malignant progression of pancreatic cancer, as elevated HDAC6 levels contribute to increased cell proliferation, migration, and invasion.",
+      "biological_consequence": [
+        "ATXN3 binds to HDAC6 → ATXN3 removes ubiquitin chains from HDAC6 → HDAC6 degradation is prevented and its protein levels increase → Pancreatic cancer cell proliferation and invasion are promoted"
+      ],
+      "specific_effects": [
+        "ATXN3 interacts with HDAC6 and regulates its degradation through deubiquitination.",
+        "ATXN3-mediated stabilization of HDAC6 facilitates malignant phenotypes in pancreatic cancer.",
+        "Downregulation of HDAC6 can inhibit the cancer-promoting effects of ATXN3."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Involvement of Ataxin-3 (ATXN3) in the malignant progression of pancreatic cancer via deubiquitinating HDAC6",
+          "year": 2023,
+          "pmid": "37460341"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "37460341"
+      ],
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "mechanism": "ATXN3, a deubiquitinase (DUB), directly interacts with Histone Deacetylase 6 (HDAC6). Utilizing its intrinsic DUB activity, ATXN3 catalyzes the removal of ubiquitin chains from HDAC6, a post-translational modification that typically targets proteins for proteasomal degradation. This enzymatic deubiquitination event prevents the ubiquitin-proteasome system from degrading HDAC6, thereby stabilizing the HDAC6 protein. While specific binding domains or catalytic residues are not detailed in the provided data, the direct interaction and subsequent enzymatic removal of ubiquitin are key molecular events.",
+  "effect": "The ATXN3-mediated stabilization of HDAC6 results in elevated intracellular HDAC6 protein levels. This increase in HDAC6 expression subsequently promotes malignant phenotypes in pancreatic cancer cells, manifesting as enhanced cell proliferation, migration, and invasion. These cellular changes contribute to the overall malignant progression of the disease.",
+  "summary": "ATXN3 activates HDAC6 by directly interacting with it and functioning as its deubiquitinase, leading to increased HDAC6 protein stability and levels. This interaction is critical in pancreatic cancer, where ATXN3-mediated HDAC6 stabilization drives malignant progression, a phenotype that can be abrogated by HDAC6 downregulation.",
+  "evidence": [
+    {
+      "paper_title": "Involvement of Ataxin-3 (ATXN3) in the malignant progression of pancreatic cancer via deubiquitinating HDAC6",
+      "year": 2023
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --activates--> HDAC6:",
+  "protein_a": "ATXN3",
+  "protein_b": "HDAC6",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.652836Z",
+  "last_updated": "2026-02-04T04:49:14.652836Z"
+}

@@ -1,0 +1,93 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "indirect",
+  "upstream_interactor": "TP53",
+  "mediator_chain": [
+    "PNKP",
+    "ATM",
+    "TP53"
+  ],
+  "depth": 4,
+  "support_summary": "ATXN3 indirectly influences the expression of the pro-apoptotic protein BAX through a signaling cascade involving PNKP, ATM, and the transcription factor p53.",
+  "functions": [
+    {
+      "function": "BAX Gene Expression",
+      "arrow": "activates",
+      "cellular_process": "Mutant ATXN3 indirectly activates the transcription of the pro-apoptotic BCL2-Associated X (BAX) gene. This occurs via a multi-step signaling cascade initiated by DNA damage. The inhibition of the DNA repair enzyme PNKP by mutant ATXN3 leads to the activation of ATM kinase.",
+      "effect_description": "Once activated, ATM phosphorylates and activates the transcription factor p53. Activated p53 then binds to the promoter region of the BAX gene, driving its transcription. The resulting increase in BAX protein levels promotes mitochondrial outer membrane permeabilization, cytochrome c release, and the initiation of the intrinsic apoptotic cascade, leading to neuronal cell death in SCA3.",
+      "biological_consequence": [
+        "Mutant ATXN3 inhibits PNKP, causing DNA strand breaks → ATM is activated via autophosphorylation → ATM phosphorylates and activates p53 → Activated p53 translocates to the nucleus and binds to the BAX gene promoter → Transcription of BAX mRNA is increased → BAX protein levels rise, promoting apoptosis."
+      ],
+      "specific_effects": [
+        "The ATM→p53 signaling pathway, triggered by mutant ATXN3, increases the expression of p53 target genes, including BAX.",
+        "Ectopic expression of mutant ATXN3 in cultured neurons results in p53 activation and increased expression of BAX."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Inactivation of PNKP by Mutant ATXN3 Triggers Apoptosis by Activating the DNA Damage-Response Pathway in SCA3",
+          "journal": "PLoS Genetics",
+          "year": 2015,
+          "relevant_quote": "By contrast, mutant ATXN3 interacts with and decreases PNKP's 3'-phosphatase activity, leading to the persistent accumulation of DNA damage in the post-mitotic neurons and resulting in chronic activation of the DNA damage-response ATM→p53 signaling pathway in SCA3. This triggers apoptosis by increasing expression of such p53 target genes as BAX, PUMA and NOXA in SCA3.",
+          "pmid": "25590633"
+        }
+      ],
+      "pmids": [
+        "25590633"
+      ],
+      "direct_arrow": "activates",
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": "TP53",
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [
+          "PNKP",
+          "ATM",
+          "TP53"
+        ],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "Mutant ATXN3 indirectly activates the transcription of the pro-apoptotic BAX gene via a multi-step signaling cascade. This process is initiated by mutant ATXN3 inhibiting the DNA repair enzyme PNKP, which leads to the accumulation of DNA strand breaks. These DNA lesions trigger the autophosphorylation and subsequent activation of ATM kinase. Activated ATM then phosphorylates and activates the transcription factor p53, which subsequently translocates to the nucleus and binds directly to the promoter region of the BAX gene, thereby driving its transcriptional upregulation.",
+  "effect": "The increased transcription of BAX mRNA leads to a rise in BAX protein levels within the cell. Elevated BAX protein promotes mitochondrial outer membrane permeabilization (MOMP) and the subsequent release of cytochrome c into the cytoplasm. This initiates the intrinsic apoptotic cascade, ultimately culminating in neuronal cell death, a key pathological feature observed in Spinocerebellar Ataxia Type 3 (SCA3).",
+  "summary": "Mutant ATXN3 indirectly activates BAX transcription through an ATM-p53 signaling pathway, promoting apoptosis. This mechanism is supported by findings that ectopic expression of mutant ATXN3 in cultured neurons results in p53 activation and increased BAX expression.",
+  "evidence": [
+    {
+      "paper_title": "Inactivation of PNKP by Mutant ATXN3 Triggers Apoptosis by Activating the DNA Damage-Response Pathway in SCA3",
+      "journal": "PLoS Genetics",
+      "year": 2015,
+      "relevant_quote": "By contrast, mutant ATXN3 interacts with and decreases PNKP's 3'-phosphatase activity, leading to the persistent accumulation of DNA damage in the post-mitotic neurons and resulting in chronic activation of the DNA damage-response ATM→p53 signaling pathway in SCA3. This triggers apoptosis by increasing expression of such p53 target genes as BAX, PUMA and NOXA in SCA3."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "TP53 --activates--> BAX:",
+  "protein_a": "BAX",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.688057Z",
+  "last_updated": "2026-02-04T04:49:14.688057Z"
+}

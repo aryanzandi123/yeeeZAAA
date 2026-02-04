@@ -1,0 +1,87 @@
+{
+  "primary": "Bcl-2",
+  "interaction_type": "indirect",
+  "upstream_interactor": "PRKN",
+  "mediator_chain": [
+    "PRKN"
+  ],
+  "depth": 2,
+  "support_summary": "ATXN3 indirectly affects the autophagy inhibitor Bcl-2 by directly regulating the activity of the E3 ligase Parkin (PRKN).",
+  "functions": [
+    {
+      "function": "Apoptosis",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 indirectly regulates the anti-apoptotic protein Bcl-2. ATXN3 inhibits the E3 ligase activity of Parkin (PRKN). Parkin, in turn, can monoubiquitinate Bcl-2, which paradoxically leads to an increase in Bcl-2 levels and inhibits autophagy.",
+      "effect_description": "By inhibiting Parkin's E3 ligase activity, ATXN3 prevents the Parkin-mediated modulation of Bcl-2. This complex interplay links ATXN3 to the regulation of both apoptosis and autophagy through the Parkin-Bcl-2 axis.",
+      "biological_consequence": [
+        "ATXN3 inhibits Parkin E3 ligase activity → Parkin-mediated monoubiquitination of Bcl-2 is reduced → Bcl-2 levels and its anti-apoptotic function are altered"
+      ],
+      "specific_effects": [
+        "ATXN3 regulates the activity of the E3 ligase Parkin, which is important for the ubiquitination of the autophagy inhibitor Bcl-2."
+      ],
+      "evidence": [
+        {
+          "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+          "year": 2024,
+          "pmid": "39320846"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "39320846"
+      ],
+      "direct_arrow": "inhibits",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": "PRKN",
+        "direct_arrow": "inhibits",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [
+          "PRKN"
+        ],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "inhibition"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "inhibits"
+    ]
+  },
+  "mechanism": "ATXN3 indirectly regulates the anti-apoptotic protein Bcl-2 by inhibiting the E3 ligase activity of Parkin (PRKN). Parkin typically monoubiquitinates Bcl-2, a post-translational modification that paradoxically leads to an increase in Bcl-2 protein levels and inhibits autophagy. By inhibiting Parkin's E3 ligase activity, ATXN3 reduces the Parkin-mediated monoubiquitination of Bcl-2, thereby preventing this stabilization and subsequent accumulation.",
+  "effect": "The ATXN3-mediated reduction in Parkin's E3 ligase activity results in decreased monoubiquitination of Bcl-2, leading to lower cellular levels of this anti-apoptotic protein. Consequently, this modulation promotes cellular apoptosis and alleviates the Bcl-2-mediated inhibition of autophagy, influencing overall cellular fate.",
+  "summary": "ATXN3 critically regulates cellular apoptosis and autophagy by indirectly controlling the stability and levels of the anti-apoptotic protein Bcl-2 through its inhibitory action on the E3 ligase Parkin, highlighting a significant regulatory axis in cellular homeostasis.",
+  "evidence": [
+    {
+      "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+      "year": 2024
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activates",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "PRKN --activates--> Bcl-2:",
+  "protein_a": "ATXN3",
+  "protein_b": "Bcl-2",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.664067Z",
+  "last_updated": "2026-02-04T04:49:14.664067Z"
+}

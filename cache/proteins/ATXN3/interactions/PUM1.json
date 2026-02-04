@@ -1,0 +1,72 @@
+{
+  "primary": "PUM1",
+  "interaction_type": "indirect",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "functions": [
+    {
+      "function": "RNA-mediated Gene",
+      "arrow": "regulates",
+      "likely_direction": "bidirectional",
+      "cellular_process": "ATXN3 and the RNA-binding protein PUM1 are both implicated in the pathogenesis of different forms of spinocerebellar ataxia. While a direct protein-protein interaction has been suggested, their functional relationship likely involves the regulation of shared RNA targets or pathways relevant to neuronal function and survival.",
+      "effect_description": "The interaction between ATXN3 and PUM1 may influence the post-transcriptional regulation of genes involved in neurodegeneration, although the specific targets and outcomes of this interplay are not yet fully understood.",
+      "biological_consequence": [
+        "ATXN3 and PUM1 interact in a complex → Regulation of specific mRNA stability or translation is altered → Neuronal protein homeostasis is affected → Contribution to ataxia pathogenesis"
+      ],
+      "specific_effects": [
+        "Both ATXN3 and PUM1 are genetically linked to different types of spinocerebellar ataxia."
+      ],
+      "evidence": [],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "regulates",
+      "direction": "",
+      "interaction_direction": "indirect",
+      "function_effect": "regulation",
+      "arrow_context": {
+        "direct_from": null,
+        "direct_arrow": "regulates",
+        "net_from": "ATXN3",
+        "net_arrow": "regulates",
+        "mediator_chain": [],
+        "is_indirect": true
+      },
+      "net_arrow": "regulates",
+      "direct_arrow": "regulates",
+      "net_effect": "regulation",
+      "direct_effect": "regulation"
+    }
+  ],
+  "support_summary": "ATXN3 and PUM1 are both linked to spinocerebellar ataxias, but the direct functional consequence of their interaction is not well characterized.",
+  "arrow": "regulates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "_validation_status": "rejected",
+  "mechanism": "A direct protein-protein interaction between ATXN3 and PUM1 has been suggested, though the specific binding domains and residues involved in this association are yet to be precisely elucidated. This interaction is hypothesized to activate PUM1, potentially by modulating its RNA-binding affinity or its recruitment to specific mRNA targets. ATXN3 may act as a scaffold, facilitating PUM1's interaction with particular RNA substrates or regulatory complexes, or it could influence PUM1's post-translational state, thereby enhancing PUM1's regulatory capacity and altering its functional conformation. The functional interplay likely involves ATXN3 influencing PUM1's ability to regulate shared RNA targets, thereby impacting their stability or translational efficiency.",
+  "effect": "The activation of PUM1 by ATXN3 leads to altered post-transcriptional regulation of specific mRNA targets, impacting their stability and translational efficiency. This dysregulation consequently affects neuronal protein homeostasis, which is critical for maintaining cellular function and viability. Ultimately, these cellular changes contribute to the pathogenesis of neurodegenerative disorders.",
+  "summary": "The interaction between ATXN3 and PUM1 represents a critical regulatory node in RNA-mediated gene regulation, with significant implications for neurodegeneration. Notably, both proteins are genetically linked to the pathogenesis of different forms of spinocerebellar ataxia.",
+  "evidence": [],
+  "_llm_synthesized": true,
+  "interaction_effect": "regulation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --regulates--> PUM1:",
+  "protein_a": "ATXN3",
+  "protein_b": "PUM1",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.693402Z",
+  "last_updated": "2026-02-04T04:49:14.693402Z"
+}

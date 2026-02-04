@@ -1,0 +1,74 @@
+{
+  "primary": "FOXO4",
+  "interaction_type": "direct",
+  "upstream_interactor": "HDAC3",
+  "mediator_chain": [
+    "HDAC3"
+  ],
+  "depth": 2,
+  "functions": [
+    {
+      "function": "FOXO4-mediated Transcription",
+      "arrow": "activates",
+      "cellular_process": "Under oxidative stress, both ATXN3 and the transcription factor FOXO4 translocate to the nucleus. ATXN3 directly interacts with FOXO4, functioning as a transcriptional coactivator to enhance the expression of FOXO4 target genes involved in stress resistance.",
+      "effect_description": "This interaction potentiates the cellular antioxidant response. By co-activating FOXO4, ATXN3 increases the transcription of protective genes, such as Superoxide Dismutase 2 (SOD2), which helps to mitigate oxidative damage.",
+      "biological_consequence": [
+        "Oxidative stress (e.g., H2O2 treatment) induces nuclear translocation of both ATXN3 and FOXO4 → ATXN3 physically binds to FOXO4 in the nucleus → The ATXN3-FOXO4 complex binds to FOXO-responsive elements in gene promoters → Transcription of target genes, such as SOD2, is activated → Cellular resistance to oxidative stress is increased."
+      ],
+      "specific_effects": [
+        "ATXN3 functions as a transcriptional coactivator for FOXO4.",
+        "Increases FOXO4-dependent expression of the antioxidant enzyme Superoxide Dismutase 2 (SOD2)."
+      ],
+      "evidence": [
+        {
+          "paper_title": "FOXO4-dependent upregulation of superoxide dismutase-2 in response to oxidative stress is impaired in spinocerebellar ataxia type 3",
+          "journal": "Human Molecular Genetics",
+          "year": 2011,
+          "relevant_quote": "To identify ATXN3-regulated pathways, we screened for transcription factors specifically interacting with ATXN3 and identified the forkhead box class O (FOXO) transcription factor 4 (FOXO4). ... We here provide evidence that normal ATXN3 is a coactivator of FOXO4 and is required for the FOXO4-dependent induction of the antioxidant enzyme superoxide dismutase-2 (SOD2) in response to oxidative stress.",
+          "pmid": "21536589"
+        }
+      ],
+      "pmids": [
+        "21536589"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "inhibits"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": "The input claim that ATXN3 inhibits FOXO4 via HDAC3-mediated deacetylation is incorrect. Primary literature shows the opposite: ATXN3 acts as a coactivator for FOXO4-mediated transcription, particularly under conditions of oxidative stress. The interaction is direct, and it enhances the expression of FOXO4 target genes like the antioxidant enzyme SOD2. While ATXN3 does interact with HDAC3, the specific context of inhibiting FOXO4 through this mechanism is not supported.",
+  "mechanism": "Under conditions of oxidative stress, both ATXN3 and the transcription factor FOXO4 undergo nuclear translocation. Within the nucleus, ATXN3 directly interacts with FOXO4, functioning as a transcriptional coactivator. This physical binding of ATXN3 to FOXO4 facilitates the formation of a complex that subsequently binds to FOXO-responsive elements located within the promoters of target genes. This molecular association is critical for enhancing the transcriptional machinery's activity at these specific gene loci.",
+  "effect": "The coactivation by ATXN3 significantly enhances FOXO4-mediated transcription, leading to an increased expression of genes involved in cellular stress resistance. Notably, this interaction robustly increases the transcription of the antioxidant enzyme Superoxide Dismutase 2 (SOD2). Consequently, this potentiation of FOXO4 activity strengthens the cellular antioxidant response and effectively mitigates oxidative damage.",
+  "summary": "ATXN3 serves as a critical transcriptional coactivator for FOXO4, particularly under oxidative stress, by enhancing the expression of protective genes. This mechanism is exemplified by its ability to increase FOXO4-dependent transcription of Superoxide Dismutase 2 (SOD2), thereby bolstering cellular resistance to oxidative stress.",
+  "evidence": [
+    {
+      "paper_title": "FOXO4-dependent upregulation of superoxide dismutase-2 in response to oxidative stress is impaired in spinocerebellar ataxia type 3",
+      "journal": "Human Molecular Genetics",
+      "year": 2011,
+      "relevant_quote": "To identify ATXN3-regulated pathways, we screened for transcription factors specifically interacting with ATXN3 and identified the forkhead box class O (FOXO) transcription factor 4 (FOXO4). ... We here provide evidence that normal ATXN3 is a coactivator of FOXO4 and is required for the FOXO4-dependent induction of the antioxidant enzyme superoxide dismutase-2 (SOD2) in response to oxidative stress."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 2
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --activates--> FOXO4:",
+  "protein_a": "ATXN3",
+  "protein_b": "FOXO4",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.716629Z",
+  "last_updated": "2026-02-04T04:49:14.716629Z"
+}

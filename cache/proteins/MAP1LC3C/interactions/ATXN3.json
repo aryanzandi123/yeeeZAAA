@@ -1,0 +1,86 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 directly interacts with LC3C, a member of the LC3/GABARAP family, during the early stages of autophagy.",
+  "functions": [
+    {
+      "function": "Autophagosome Formation",
+      "arrow": "activates",
+      "likely_direction": "bidirectional",
+      "cellular_process": "ATXN3 directly interacts with MAP1LC3C (LC3C), a member of the Atg8 family of proteins, via conserved LIR (LC3-interacting region) domains within its Josephin domain. This interaction occurs during the early stages of autophagy.",
+      "effect_description": "This transient interaction localizes ATXN3 to early autophagosomes. ATXN3 is proposed to stimulate efficient autophagic flux by preventing the superfluous initiation of autophagosomes, thereby ensuring the proper maturation and function of the autophagy pathway.",
+      "biological_consequence": [
+        "ATXN3 binds to LC3C on nascent autophagosomes → ATXN3 modulates the early steps of autophagosome formation → Efficient autophagic flux is promoted → Cellular survival under starvation conditions is supported"
+      ],
+      "specific_effects": [
+        "ATXN3 interacts with LC3C and GABARAP in the early stages of autophagy, promoting the process.",
+        "The interaction is mediated by two LIR domains in the Josephin domain of ATXN3.",
+        "ATXN3 localizes to early autophagosomes but is not itself degraded, suggesting a regulatory role.",
+        "Depletion of ATXN3 in human cells leads to a reduction in the autophagosomal degradation of proteins."
+      ],
+      "evidence": [
+        {
+          "paper_title": "The Machado-Joseph disease deubiquitylase ataxin-3 interacts with LC3C/GABARAP and promotes autophagy",
+          "year": 2019,
+          "pmid": "31625269"
+        },
+        {
+          "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+          "year": 2024,
+          "pmid": "39320846"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "31625269",
+        "39320846"
+      ],
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "binds",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "mechanism": "ATXN3 directly interacts with MAP1LC3C (LC3C), a member of the Atg8 family of proteins, during the early stages of autophagy. This interaction is mediated by two conserved LIR (LC3-interacting region) domains located within the Josephin domain of ATXN3. These LIR motifs facilitate the transient binding of ATXN3 to nascent autophagosomes via LC3C and GABARAP, positioning ATXN3 to modulate the initial steps of autophagosome formation.",
+  "effect": "The transient interaction between ATXN3 and MAP1LC3C localizes ATXN3 to early autophagosomes, where it acts as a regulator rather than being degraded itself. This localization enables ATXN3 to stimulate efficient autophagic flux by preventing the superfluous initiation of autophagosomes, thereby ensuring the proper maturation and function of the autophagy pathway. Consequently, this modulation supports cellular survival, particularly under starvation conditions.",
+  "summary": "ATXN3, through its direct interaction with MAP1LC3C via LIR domains, is a crucial regulator of autophagosome formation and flux. Experimental evidence demonstrates that depletion of ATXN3 in human cells significantly reduces the autophagosomal degradation of proteins, highlighting its essential role in maintaining cellular proteostasis.",
+  "evidence": [
+    {
+      "paper_title": "The Machado-Joseph disease deubiquitylase ataxin-3 interacts with LC3C/GABARAP and promotes autophagy",
+      "year": 2019
+    },
+    {
+      "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+      "year": 2024
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "binds",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --binds--> MAP1LC3C:",
+  "protein_a": "MAP1LC3C",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.648330Z",
+  "last_updated": "2026-02-04T04:49:14.648330Z"
+}

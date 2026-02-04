@@ -1,0 +1,96 @@
+{
+  "primary": "RNF4",
+  "interaction_type": "indirect",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 functionally antagonizes the SUMO-targeted ubiquitin ligase RNF4 at sites of DNA damage to regulate the stability of the checkpoint mediator MDC1.",
+  "functions": [
+    {
+      "function": "MDC1 Ubiquitination",
+      "arrow": "inhibits",
+      "likely_direction": "main_to_primary",
+      "cellular_process": "At sites of DNA double-strand breaks, the SUMO-targeted ubiquitin ligase RNF4 polyubiquitinates the checkpoint mediator MDC1, promoting its removal from chromatin. ATXN3 is recruited to these same sites where it acts as a deubiquitinase for MDC1.",
+      "effect_description": "ATXN3 directly counteracts the E3 ligase activity of RNF4 on their shared substrate, MDC1. By deubiquitinating MDC1, ATXN3 prevents its premature, RNF4-mediated removal from DNA lesions, thereby stabilizing the DNA damage response platform.",
+      "biological_consequence": [
+        "DNA damage occurs → RNF4 is recruited and ubiquitinates MDC1 for removal → ATXN3 is recruited and deubiquitinates MDC1 → The effect of RNF4 is counteracted, and MDC1 is retained at the damage site → The DNA damage response is consolidated and stabilized"
+      ],
+      "specific_effects": [
+        "ATXN3 counteracts RNF4 through its DUB activity by regulating MDC1 ubiquitination.",
+        "The opposing and balanced activities of RNF4 and ATXN3 consolidate robust MDC1-dependent signaling and repair of DSBs."
+      ],
+      "evidence": [
+        {
+          "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+          "year": 2024,
+          "pmid": "39320846"
+        },
+        {
+          "paper_title": "Ataxin-3 consolidates the MDC1-dependent DNA double-strand break response by counteracting the SUMO-targeted ubiquitin ligase RNF4",
+          "year": 2017,
+          "pmid": "28275011"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "inhibits",
+      "direction": "",
+      "pmids": [
+        "39320846",
+        "28275011"
+      ],
+      "interaction_direction": "main_to_primary",
+      "function_effect": "inhibition",
+      "arrow_context": {
+        "direct_from": null,
+        "direct_arrow": "inhibits",
+        "net_from": "ATXN3",
+        "net_arrow": "inhibits",
+        "mediator_chain": [],
+        "is_indirect": true
+      },
+      "net_arrow": "inhibits",
+      "direct_arrow": "inhibits",
+      "net_effect": "inhibition",
+      "direct_effect": "inhibition"
+    }
+  ],
+  "arrow": "inhibits",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "inhibits"
+    ]
+  },
+  "mechanism": "ATXN3, a deubiquitinase (DUB) characterized by its catalytic Josephin domain, directly counteracts the E3 ubiquitin ligase activity of RNF4, which utilizes its RING domain to polyubiquitinate the checkpoint mediator MDC1. Both ATXN3 and RNF4 are recruited to DNA double-strand breaks (DSBs) where they converge on MDC1. While RNF4 ubiquitinates MDC1 to promote its removal from chromatin, ATXN3 specifically removes these ubiquitin modifications from MDC1, thereby reversing the RNF4-mediated ubiquitination and preventing the premature dissociation of MDC1 from DNA lesions.",
+  "effect": "The antagonistic actions of ATXN3 and RNF4 on MDC1 ubiquitination lead to the stabilization of MDC1 at DNA damage sites. By preventing the RNF4-mediated removal of MDC1, ATXN3 ensures the sustained presence of this critical scaffold protein. This balance is essential for consolidating a robust DNA damage response and facilitating efficient repair of double-strand breaks.",
+  "summary": "ATXN3 acts as a deubiquitinase that directly counteracts the E3 ligase RNF4 by removing ubiquitin marks from MDC1 at DNA double-strand breaks. This opposing activity is critical for stabilizing the DNA damage response platform, ensuring robust signaling and repair of genomic lesions.",
+  "evidence": [
+    {
+      "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+      "year": 2024
+    },
+    {
+      "paper_title": "Ataxin-3 consolidates the MDC1-dependent DNA double-strand break response by counteracting the SUMO-targeted ubiquitin ligase RNF4",
+      "year": 2017
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "inhibition",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 2
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --inhibits--> RNF4:",
+  "protein_a": "ATXN3",
+  "protein_b": "RNF4",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.725908Z",
+  "last_updated": "2026-02-04T04:49:14.725908Z"
+}

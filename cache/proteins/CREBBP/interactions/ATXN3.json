@@ -1,0 +1,135 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "The transcriptional coactivator CREB-binding protein (CBP, or CREBBP) directly interacts with ATXN3, as shown by co-immunoprecipitation, implicating ATXN3 in transcriptional regulation.",
+  "functions": [
+    {
+      "function": "Transcriptional Coactivator Activity",
+      "arrow": "inhibits",
+      "cellular_process": "ATXN3 acts as a direct transcriptional corepressor by physically interacting with the histone acetyltransferase (HAT) CREB-binding protein (CREBBP, also known as CBP) and its paralog p300.",
+      "effect_description": "The C-terminal domain of ATXN3 binds to CREBBP/p300 and directly represses their intrinsic HAT activity. By inhibiting histone acetylation, ATXN3 prevents the formation of an open chromatin state, thereby repressing the transcription of target genes that are dependent on CREBBP/p300 coactivation.",
+      "biological_consequence": [
+        "ATXN3 C-terminus binds to CREBBP/p300 → The histone acetyltransferase (HAT) activity of CREBBP/p300 is inhibited → Histones at target gene promoters are not acetylated → Chromatin remains in a condensed state → Transcription is repressed."
+      ],
+      "specific_effects": [
+        "Directly binds to and represses the transcriptional activity of CREBBP, p300, and PCAF coactivators.",
+        "Functions as an inhibitor of histone acetyltransferases by binding to histones and preventing their acetylation."
+      ],
+      "evidence": [
+        {
+          "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+          "journal": "Expert Reviews in Molecular Medicine",
+          "year": 2024,
+          "relevant_quote": "The C-terminal domain of ATXN3 binds CBP, p300 and PCAF coactivators and represses their transcriptional activity (Ref. Reference Li106).",
+          "pmid": "39320846"
+        },
+        {
+          "paper_title": "Ataxin-3 is a histone-binding protein with two independent transcriptional corepressor activities",
+          "journal": "Journal of Biological Chemistry",
+          "year": 2002,
+          "relevant_quote": "Another line of evidence suggests that AT3 acts as a transcriptional repressor via inhibition of histone acetyltransferase (HAT) activity of the major transcriptional coactivators, cAMP response element-binding protein (CREB) binding protein (CBP), p300, and p300/CBP-associated factor (PCAF).",
+          "pmid": "12297501"
+        }
+      ],
+      "pmids": [
+        "39320846",
+        "12297501"
+      ],
+      "interaction_effect": "inhibits",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "inhibition"
+    },
+    {
+      "function": "CREBBP Protein Stability",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 may regulate the protein stability of CREBBP through its deubiquitinase (DUB) activity, although this is a secondary mechanism inferred from knockdown studies.",
+      "effect_description": "Loss or reduction of ATXN3 activity has been shown to facilitate the polyubiquitination and subsequent degradation of CREBBP. This suggests that under normal conditions, ATXN3 may deubiquitinate CREBBP, thereby protecting it from proteasomal degradation and stabilizing its protein levels. This represents a potentially activating role, in contrast to its direct inhibition of HAT activity.",
+      "biological_consequence": [
+        "ATXN3 deubiquitinates K48-linked ubiquitin chains on CREBBP → CREBBP is protected from proteasomal degradation → CREBBP protein levels are stabilized → Transcriptional coactivator pool is maintained."
+      ],
+      "specific_effects": [
+        "Knockdown of ATXN3 leads to enhanced polyubiquitination of CREBBP.",
+        "Decreased ATXN3 activity facilitates CREBBP ubiquitination and degradation."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Mutant huntingtin impairs PNKP and ATXN3, disrupting DNA repair and transcription",
+          "journal": "Proceedings of the National Academy of Sciences",
+          "year": 2021,
+          "relevant_quote": "A concomitant decrease in Ataxin-3 activity facilitates CBP ubiquitination and degradation, adversely impacting transcription and DNA repair.",
+          "pmid": "30994454"
+        },
+        {
+          "paper_title": "The deubiquitinase function of ataxin-3 and its role in the pathogenesis of Machado-Joseph disease and other diseases",
+          "journal": "The FEBS Journal",
+          "year": 2024,
+          "relevant_quote": "Knockdown of ataxin-3 results in enhanced polyubiquitination of CBP, suggesting ataxin-3 may deubiquitinate CBP.",
+          "pmid": "38497605"
+        }
+      ],
+      "pmids": [
+        "30994454",
+        "38497605"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "regulates",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": "The input claim that ATXN3 'activates' transcription via CREBBP is a 'Mechanistic Opposite' error. Primary literature clearly shows that ATXN3 binds to and directly REPRESSES the histone acetyltransferase (HAT) activity of CREBBP and its paralog p300. A secondary, potentially activating, mechanism involving stabilization via deubiquitination has also been suggested but the primary reported function is inhibitory.",
+  "mechanism": "ATXN3 directly interacts with the histone acetyltransferase (HAT) CREBBP (and its paralog p300) via its C-terminal domain, functioning as a direct transcriptional corepressor by inhibiting their intrinsic HAT activity. Concurrently, ATXN3, through its deubiquitinase (DUB) activity, is proposed to remove K48-linked ubiquitin chains from CREBBP. This deubiquitination event protects CREBBP from proteasomal degradation, thereby stabilizing its protein levels within the cell.",
+  "effect": "The direct inhibition of CREBBP's HAT activity by ATXN3 prevents histone acetylation, which in turn maintains a condensed chromatin state and represses the transcription of target genes dependent on CREBBP coactivation. Conversely, ATXN3's DUB activity stabilizes CREBBP protein levels by preventing its proteasomal degradation, thereby ensuring the maintenance of the cellular pool of this crucial transcriptional coactivator.",
+  "summary": "ATXN3 exerts a complex regulatory influence on CREBBP, directly inhibiting its histone acetyltransferase activity while also potentially stabilizing its protein levels through deubiquitination. Experimental findings indicate that a reduction in ATXN3 activity leads to enhanced polyubiquitination and subsequent degradation of CREBBP, highlighting its role in maintaining CREBBP homeostasis.",
+  "evidence": [
+    {
+      "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+      "journal": "Expert Reviews in Molecular Medicine",
+      "year": 2024,
+      "relevant_quote": "The C-terminal domain of ATXN3 binds CBP, p300 and PCAF coactivators and represses their transcriptional activity (Ref. Reference Li106)."
+    },
+    {
+      "paper_title": "Ataxin-3 is a histone-binding protein with two independent transcriptional corepressor activities",
+      "journal": "Journal of Biological Chemistry",
+      "year": 2002,
+      "relevant_quote": "Another line of evidence suggests that AT3 acts as a transcriptional repressor via inhibition of histone acetyltransferase (HAT) activity of the major transcriptional coactivators, cAMP response element-binding protein (CREB) binding protein (CBP), p300, and p300/CBP-associated factor (PCAF)."
+    },
+    {
+      "paper_title": "Mutant huntingtin impairs PNKP and ATXN3, disrupting DNA repair and transcription",
+      "journal": "Proceedings of the National Academy of Sciences",
+      "year": 2021,
+      "relevant_quote": "A concomitant decrease in Ataxin-3 activity facilitates CBP ubiquitination and degradation, adversely impacting transcription and DNA repair."
+    },
+    {
+      "paper_title": "The deubiquitinase function of ataxin-3 and its role in the pathogenesis of Machado-Joseph disease and other diseases",
+      "journal": "The FEBS Journal",
+      "year": 2024,
+      "relevant_quote": "Knockdown of ataxin-3 results in enhanced polyubiquitination of CBP, suggesting ataxin-3 may deubiquitinate CBP."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "regulation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 2
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --regulates--> CREBBP:",
+  "protein_a": "CREBBP",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.635171Z",
+  "last_updated": "2026-02-04T04:49:14.635171Z"
+}

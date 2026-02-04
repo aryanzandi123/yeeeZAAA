@@ -1,0 +1,75 @@
+{
+  "primary": "MDC1",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 acts as a deubiquitinase for MDC1, stabilizing it to ensure accurate activation of the DNA damage response (DDR).",
+  "functions": [
+    {
+      "function": "MDC1 Chromatin Retention in DNA Damage Response",
+      "arrow": "activates",
+      "cellular_process": "In the DNA double-strand break (DSB) response, ATXN3 is recruited to sites of DNA damage. There, it functions as a deubiquitinase for the checkpoint mediator protein MDC1, directly counteracting the activity of the SUMO-targeted ubiquitin ligase RNF4, which promotes MDC1's removal from chromatin.",
+      "effect_description": "By deubiquitinating MDC1, ATXN3 prevents its premature, RNF4-mediated release from the chromatin surrounding a DSB. This action prolongs the residence time of MDC1 at the damage site, which is critical for the stable recruitment of downstream signaling and repair factors.",
+      "biological_consequence": [
+        "DNA double-strand break (DSB) occurs → RNF4 polyubiquitinates MDC1 to promote its removal → ATXN3 is recruited to the DSB site → ATXN3 deubiquitinates MDC1 → MDC1's chromatin dwell time is increased → Stable platform is maintained for recruitment of RNF8, RNF168, 53BP1, and BRCA1 → Robust DNA damage signaling and efficient repair is consolidated"
+      ],
+      "specific_effects": [
+        "Negatively regulates RNF4-induced polyubiquitination of MDC1.",
+        "Markedly increases the chromatin dwell time of MDC1 at DSBs.",
+        "Consolidates the recruitment of downstream DNA damage response factors like RNF8, RNF168, 53BP1, and BRCA1.",
+        "Promotes efficient MDC1-dependent DSB repair."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Ataxin-3 consolidates the MDC1-dependent DNA double-strand break response by counteracting the SUMO-targeted ubiquitin ligase RNF4",
+          "journal": "The EMBO Journal",
+          "year": 2017,
+          "relevant_quote": "Here, we report that the deubiquitylation enzyme (DUB) ataxin-3 counteracts RNF4 activity during the DNA double-strand break (DSB) response. We find that ataxin-3 negatively regulates ubiquitylation of the checkpoint mediator MDC1, a known RNF4 substrate. Loss of ataxin-3 markedly decreases the chromatin dwell time of MDC1 at DSBs, which can be fully reversed by co-depletion of RNF4.",
+          "pmid": "28275011"
+        }
+      ],
+      "pmids": [
+        "28275011"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "At DNA double-strand break (DSB) sites, ATXN3, functioning as a deubiquitinase (DUB) via its Josephin domain, directly removes polyubiquitin chains from the checkpoint mediator protein MDC1. This action specifically counteracts the activity of the SUMO-targeted ubiquitin ligase RNF4, which is responsible for polyubiquitinating MDC1 to promote its dislodgement from chromatin. By deubiquitinating MDC1, ATXN3 prevents its premature, RNF4-mediated release from the chromatin surrounding the DSB.",
+  "effect": "The deubiquitination of MDC1 by ATXN3 markedly increases MDC1's chromatin dwell time at DSBs, thereby maintaining a stable platform for the sequential recruitment of critical downstream DNA damage response factors such as RNF8, RNF168, 53BP1, and BRCA1. This sustained presence of MDC1 at damage sites is essential for robust DNA damage signaling and ultimately promotes efficient MDC1-dependent DNA double-strand break repair.",
+  "summary": "By deubiquitinating MDC1 at DNA double-strand breaks, ATXN3 significantly prolongs MDC1's chromatin dwell time, a critical step that consolidates the recruitment of essential downstream DNA damage response factors and promotes efficient repair.",
+  "evidence": [
+    {
+      "paper_title": "Ataxin-3 consolidates the MDC1-dependent DNA double-strand break response by counteracting the SUMO-targeted ubiquitin ligase RNF4",
+      "journal": "The EMBO Journal",
+      "year": 2017,
+      "relevant_quote": "Here, we report that the deubiquitylation enzyme (DUB) ataxin-3 counteracts RNF4 activity during the DNA double-strand break (DSB) response. We find that ataxin-3 negatively regulates ubiquitylation of the checkpoint mediator MDC1, a known RNF4 substrate. Loss of ataxin-3 markedly decreases the chromatin dwell time of MDC1 at DSBs, which can be fully reversed by co-depletion of RNF4."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --activates--> MDC1:",
+  "protein_a": "ATXN3",
+  "protein_b": "MDC1",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.670300Z",
+  "last_updated": "2026-02-04T04:49:14.670300Z"
+}

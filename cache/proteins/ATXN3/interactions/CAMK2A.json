@@ -1,0 +1,85 @@
+{
+  "primary": "CAMK2A",
+  "interaction_type": "indirect",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 interacts with Calcium/calmodulin-dependent protein kinase II alpha (CAMK2A) within large protein complexes, an interaction altered by the pathogenic polyQ expansion in ATXN3.",
+  "functions": [
+    {
+      "function": "Protein Complex Formation",
+      "arrow": "activates",
+      "likely_direction": "bidirectional",
+      "cellular_process": "ATXN3 interacts with Calcium/calmodulin-dependent protein kinase II alpha (CAMK2A), a subunit of a large, circular protein complex.",
+      "effect_description": "This interaction is part of ATXN3's broader function within large protein complexes. The pathogenic polyglutamine expansion in ATXN3 disrupts this interaction, which may affect the normal oligomerization and function of CAMK2A-containing complexes and contribute to the formation of toxic protein aggregates.",
+      "biological_consequence": [
+        "ATXN3 interacts with CAMK2A within a large complex → The function of the complex is maintained → Pathogenic polyQ expansion in ATXN3 disrupts the interaction → Complex integrity and function are compromised → Aggregation pathways may be initiated"
+      ],
+      "specific_effects": [
+        "Mutant ataxin-3 abnormally interacts with subunits of large complexes such as Camk2a."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Impaired interactions of ataxin-3 with protein complexes reveals their specific structure and functions in SCA3 Ki150 model",
+          "year": 2022,
+          "pmid": "37033372"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "37033372"
+      ],
+      "interaction_direction": "bidirectional",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": null,
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "direct_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "complex",
+  "direction": "bidirectional",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "mechanism": "ATXN3, a deubiquitinase, directly interacts with Calcium/calmodulin-dependent protein kinase II alpha (CAMK2A), a key subunit within a large, circular protein complex. This physical association is critical for the proper assembly, structural integrity, and functional maintenance of the CAMK2A-containing complex, thereby activating or sustaining its normal oligomeric state and enzymatic activity. While specific binding domains mediating this interaction are not explicitly detailed, the integrity of this complex formation is paramount for CAMK2A's cellular roles. Pathogenic expansion of the polyglutamine tract within ATXN3, however, abrogates this crucial interaction.",
+  "effect": "The disruption of the ATXN3-CAMK2A interaction by mutant ataxin-3 compromises the integrity and normal oligomerization of CAMK2A-containing complexes, leading to impaired complex function. This impairment initiates pathways that contribute to the formation of toxic protein aggregates within the cell. Consequently, cellular processes reliant on functional CAMK2A complexes are negatively impacted, potentially contributing to neurodegeneration.",
+  "summary": "Normal ATXN3 interaction with CAMK2A is essential for the assembly and functional maintenance of large CAMK2A-containing protein complexes. Pathogenic polyglutamine expansion in ATXN3 specifically disrupts this interaction, leading to compromised complex integrity and the initiation of protein aggregation pathways.",
+  "evidence": [
+    {
+      "paper_title": "Impaired interactions of ataxin-3 with protein complexes reveals their specific structure and functions in SCA3 Ki150 model",
+      "year": 2022
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "complex formation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 4
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--complex--> CAMK2A:",
+  "protein_a": "ATXN3",
+  "protein_b": "CAMK2A",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.681467Z",
+  "last_updated": "2026-02-04T04:49:14.681467Z"
+}

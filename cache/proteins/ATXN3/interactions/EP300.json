@@ -1,0 +1,92 @@
+{
+  "primary": "EP300",
+  "interaction_type": "indirect",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 interacts with p300 (EP300), a histone acetyltransferase and transcriptional coactivator, suggesting a role for ATXN3 in modulating transcription.",
+  "functions": [
+    {
+      "function": "Transcriptional Repression",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 functions as a transcriptional repressor by modulating chromatin structure. It interacts with a complex of transcriptional regulators, including the histone acetyltransferase EP300 (p300) and, critically, the histone deacetylase HDAC3. This interaction is independent of ATXN3's catalytic deubiquitinase activity.",
+      "effect_description": "ATXN3 facilitates the recruitment of HDAC3 to chromatin. This action promotes histone deacetylation, leading to chromatin condensation and the formation of heterochromatin. The resulting compact chromatin structure restricts the access of the transcriptional machinery to DNA, thereby repressing the transcription of target genes. The loss of wild-type ATXN3, or the presence of the pathogenic polyQ-expanded form, disrupts this process, leading to a more open chromatin state and aberrant increases in transcription.",
+      "biological_consequence": [
+        "ATXN3 interacts with transcriptional regulators like EP300 in the nucleus → ATXN3 recruits and controls the subcellular localization of HDAC3, bringing it to chromatin → HDAC3 deacetylates histones at target gene loci → Chromatin becomes more condensed (heterochromatin formation) → Transcription is repressed."
+      ],
+      "specific_effects": [
+        "Promotes the recruitment of HDAC3 to chromatin.",
+        "Contributes to a more compact chromatin state, indicated by decreased sensitivity to micrococcal nuclease digestion.",
+        "Functionally represses gene transcription in a manner independent of its deubiquitinase catalytic activity."
+      ],
+      "evidence": [
+        {
+          "paper_title": "ATXN3 controls DNA replication and transcription by regulating chromatin structure",
+          "journal": "Nucleic Acids Research",
+          "year": 2023,
+          "relevant_quote": "The lack of ATXN3 leads to abnormalities in nuclear and nucleolar morphology, alters DNA replication timing and increases transcription. Additionally, indicators of more open chromatin...were detected in the absence of ATXN3. Interestingly, the effects observed in cells lacking ATXN3 are epistatic to the inhibition or lack of the histone deacetylase 3 (HDAC3), an interaction partner of ATXN3. The absence of ATXN3 decreases the recruitment of endogenous HDAC3 to the chromatin...suggesting that ATXN3 controls the subcellular localization of HDAC3.",
+          "pmid": "36971114"
+        }
+      ],
+      "pmids": [
+        "36971114"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": null,
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "direct_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "regulates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": "The input claim that ATXN3 'activates' transcription through its interaction with the co-activator EP300 is a 'Mechanistic Opposite' error. Primary literature indicates that ATXN3 is involved in transcriptional REPRESSION. ATXN3 associates with transcriptional regulatory complexes and recruits histone deacetylase 3 (HDAC3) to chromatin, leading to a more compact chromatin state (heterochromatin) and subsequent repression of gene expression. The interaction with EP300 places ATXN3 in the vicinity of active transcriptional machinery, where it exerts an inhibitory function rather than an activating one.",
+  "mechanism": "ATXN3 functions as a transcriptional repressor by forming a nuclear complex with key chromatin modifiers, including the histone acetyltransferase EP300 and the histone deacetylase HDAC3. Within this complex, ATXN3 critically facilitates the recruitment and controls the subcellular localization of HDAC3, directing it to target gene loci on chromatin. This action promotes localized histone deacetylation, which directly counteracts the histone acetylation activity of EP300 and other acetyltransferases, thereby inhibiting their transcriptional activating effects. This mechanism operates independently of ATXN3's deubiquitinase catalytic activity.",
+  "effect": "ATXN3 facilitates the recruitment of HDAC3 to chromatin. This action promotes histone deacetylation, leading to chromatin condensation and the formation of heterochromatin. The resulting compact chromatin structure restricts the access of the transcriptional machinery to DNA, thereby repressing the transcription of target genes. The loss of wild-type ATXN3, or the presence of the pathogenic polyQ-expanded form, disrupts this process, leading to a more open chromatin state and aberrant increases in transcription.",
+  "summary": "ATXN3 acts as a crucial transcriptional repressor by modulating chromatin structure, a function independent of its deubiquitinase activity. Its ability to promote a more compact chromatin state, evidenced by decreased sensitivity to micrococcal nuclease digestion, is essential for maintaining proper gene expression.",
+  "evidence": [
+    {
+      "paper_title": "ATXN3 controls DNA replication and transcription by regulating chromatin structure",
+      "journal": "Nucleic Acids Research",
+      "year": 2023,
+      "relevant_quote": "The lack of ATXN3 leads to abnormalities in nuclear and nucleolar morphology, alters DNA replication timing and increases transcription. Additionally, indicators of more open chromatin...were detected in the absence of ATXN3. Interestingly, the effects observed in cells lacking ATXN3 are epistatic to the inhibition or lack of the histone deacetylase 3 (HDAC3), an interaction partner of ATXN3. The absence of ATXN3 decreases the recruitment of endogenous HDAC3 to the chromatin...suggesting that ATXN3 controls the subcellular localization of HDAC3."
+    },
+    {
+      "paper_title": "Ataxin-3 Protein and RNA Toxicity in Spinocerebellar Ataxia Type 3: Current Insights and Emerging Therapeutic Strategies",
+      "journal": "International Journal of Molecular Sciences",
+      "year": 2016,
+      "relevant_quote": "Transcriptional regulation by ataxin-3 might arise through different mechanisms, since ataxin-3 is known to interact with numerous transcriptional regulators such as...cAMP response element-binding protein binding protein (CBP), p300, p300/CBP-associated factor (PCAF), nuclear receptor co-repressor (NCoR1), histone deacetylase (HDAC) 3 and 6...Moreover, ataxin-3 can inhibit histone acetylation and repress transcription in vivo via interaction with the polyQ repeat."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "regulation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --regulates--> EP300:",
+  "protein_a": "ATXN3",
+  "protein_b": "EP300",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.637654Z",
+  "last_updated": "2026-02-04T04:49:14.637654Z"
+}

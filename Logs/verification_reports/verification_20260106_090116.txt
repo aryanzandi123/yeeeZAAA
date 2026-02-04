@@ -1,0 +1,50 @@
+=================================================================
+            PATHWAY VERIFICATION REPORT
+            Generated: 2026-01-06 09:01:16
+=================================================================
+
+SUMMARY
+-----------------------------------------------------------------
+  Interactions verified:  49
+  Pathways verified:      260
+  Checks passed:          14
+  Checks failed:          0
+
+STATUS: [FAIL] FAIL
+
+CHECKS
+-----------------------------------------------------------------
+  [OK] interactions_have_pathway
+  [OK] pathway_references_valid
+  [OK] interaction_data_consistency
+  [OK] all_roots_exist
+  [OK] no_duplicate_names
+  [OK] no_empty_names
+  [OK] usage_count_accuracy (10 issues)
+  [OK] no_cycles
+  [OK] single_parent
+  [OK] no_orphan_pathways
+  [OK] parent_exists
+  [OK] levels_correct (1 issues)
+  [OK] ancestor_ids_accurate (5 issues)
+  [OK] is_leaf_accurate (10 issues)
+
+ISSUES BY SEVERITY
+-----------------------------------------------------------------
+  [LOW] 26 issues
+
+WARNINGS (non-blocking)
+-----------------------------------------------------------------
+  [WARN] Pathway 'Protein Quality Control' usage_count=0, actual=2
+  [WARN] Pathway 'DNA Damage Response' usage_count=0, actual=1
+  [WARN] Pathway 'Neuronal Function' usage_count=0, actual=1
+  [WARN] Pathway 'Transcriptional Regulation' usage_count=0, actual=7
+  [WARN] Pathway 'Hippo Signaling Pathway' usage_count=0, actual=1
+  [WARN] Pathway 'Aggresome Formation' usage_count=0, actual=3
+  [WARN] Pathway 'Mitophagy' usage_count=0, actual=2
+  [WARN] Pathway 'Mitochondrial Quality Control' usage_count=0, actual=2
+  [WARN] Pathway 'Mitochondrial Dynamics' usage_count=0, actual=4
+  [WARN] Pathway 'Aggrephagy' usage_count=0, actual=2
+  ... and 16 more
+
+=================================================================

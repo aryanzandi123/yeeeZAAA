@@ -1,0 +1,75 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 directly interacts with and stabilizes the tumor suppressor p53 by deubiquitinating it, thereby regulating its role in apoptosis and the DNA damage response.",
+  "functions": [
+    {
+      "function": "TP53 Protein Stability",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 functions as a deubiquitinating enzyme (DUB) for the tumor suppressor protein p53. It directly binds to both native and polyubiquitinated p53, counteracting the activity of E3 ligases like MDM2 that target p53 for proteasomal degradation.",
+      "effect_description": "By removing ubiquitin chains from p53, ATXN3 prevents its recognition and subsequent degradation by the 26S proteasome. This action increases the protein half-life and leads to the accumulation of stable, functionally active p53, which can then transactivate its target genes.",
+      "biological_consequence": [
+        "Cellular stress (e.g., DNA damage) → ATXN3 binds to polyubiquitinated p53 via its Josephin and UIM domains → ATXN3 cleaves ubiquitin chains from p53 → p53 degradation is inhibited, leading to its accumulation → Stabilized p53 activates transcription of target genes (e.g., CDKN1A/p21, BAX) → Cell cycle arrest or apoptosis is initiated"
+      ],
+      "specific_effects": [
+        "Directly binds to and deubiquitinates p53.",
+        "Stabilizes p53 by repressing its degradation through the ubiquitin-proteasome pathway.",
+        "Increases the half-life of the p53 protein.",
+        "Promotes p53-dependent transcriptional activation and apoptosis."
+      ],
+      "evidence": [
+        {
+          "paper_title": "The Machado-Joseph Disease Deubiquitinase Ataxin-3 Regulates the Stability and Apoptotic Function of p53",
+          "journal": "PLoS Genetics",
+          "year": 2015,
+          "relevant_quote": "Here, we identify p53 to be a novel substrate of ATX-3. ATX-3 binds to native and polyubiquitinated p53 and deubiquitinates and stabilizes p53 by repressing its degradation through the ubiquitin (Ub)-proteasome pathway.",
+          "pmid": "27851749"
+        }
+      ],
+      "pmids": [
+        "27851749"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "ATXN3 functions as a deubiquitinating enzyme (DUB) for the tumor suppressor protein TP53, directly binding to both native and polyubiquitinated TP53. It utilizes its Josephin and UIM domains to interact with polyubiquitinated TP53. Through its DUB activity, ATXN3 cleaves ubiquitin chains from TP53, thereby directly counteracting the ubiquitination activity of E3 ligases such as MDM2. This deubiquitination prevents the recognition and subsequent degradation of TP53 by the 26S proteasome.",
+  "effect": "The deubiquitination of TP53 by ATXN3 significantly increases the protein's half-life and leads to its accumulation within the cell. This stabilization of TP53 promotes its functional activity, enabling it to transactivate its target genes, such as CDKN1A/p21 and BAX, which are crucial for initiating cell cycle arrest or apoptosis.",
+  "summary": "ATXN3 activates TP53 by functioning as a deubiquitinating enzyme, directly stabilizing TP53 protein levels through the inhibition of its ubiquitin-proteasome pathway-mediated degradation. This action is critical for promoting TP53-dependent transcriptional activation and subsequent cellular responses like cell cycle arrest or apoptosis.",
+  "evidence": [
+    {
+      "paper_title": "The Machado-Joseph Disease Deubiquitinase Ataxin-3 Regulates the Stability and Apoptotic Function of p53",
+      "journal": "PLoS Genetics",
+      "year": 2015,
+      "relevant_quote": "Here, we identify p53 to be a novel substrate of ATX-3. ATX-3 binds to native and polyubiquitinated p53 and deubiquitinates and stabilizes p53 by repressing its degradation through the ubiquitin (Ub)-proteasome pathway."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --activates--> TP53:",
+  "protein_a": "TP53",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.668100Z",
+  "last_updated": "2026-02-04T04:49:14.668100Z"
+}

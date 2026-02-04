@@ -1,0 +1,112 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "VCP/p97 is a well-established direct interaction partner of ATXN3, validated by co-immunoprecipitation and its involvement in ER-associated degradation (ERAD) pathways alongside ATXN3.",
+  "functions": [
+    {
+      "function": "Endoplasmic Reticulum-Associated Degradation (ERAD)",
+      "arrow": "inhibits",
+      "cellular_process": "ATXN3 interacts with the N-terminal domain of the AAA+ ATPase VCP/p97 through a VCP binding motif (VBM) near its C-terminus. This interaction is nucleotide-dependent, favored in the absence of nucleotide or the presence of ATP, but not ADP. ATXN3 and other VCP cofactors, such as Ufd1, bind to VCP in a mutually exclusive manner.",
+      "effect_description": "By binding to VCP, ATXN3 modulates the ERAD pathway. It competes with the Ufd1 cofactor for VCP binding, which diminishes the retrotranslocation of ubiquitinated substrates from the endoplasmic reticulum to the cytosol for subsequent degradation by the proteasome. This competition effectively reduces the degradation rate of ERAD substrates.",
+      "biological_consequence": [
+        "ATXN3 binds to VCP/p97 → ATXN3 displaces the Ufd1 cofactor from the VCP complex → VCP-dependent extraction and retrotranslocation of ERAD substrates from the ER is inhibited → Degradation of misfolded ER proteins is slowed → Cellular protein quality control flux is regulated."
+      ],
+      "specific_effects": [
+        "ATXN3 expression leads to increased cellular levels of ERAD substrates, such as CD3δ, by decreasing their rate of degradation.",
+        "Pathogenic, polyglutamine-expanded ATXN3 enhances the binding to VCP and decreases the degradation of ERAD substrates to a greater extent than wild-type ATXN3.",
+        "Knockdown of endogenous ATXN3 reduces the cellular levels of the ERAD substrate CD3δ.",
+        "In a reconstituted in vitro system, ATXN3 inhibits the retrotranslocation of an ERAD substrate from the ER.",
+        "The interaction between ATXN3 and VCP is a prerequisite for the ATXN3-dependent accumulation of ERAD substrates."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Ataxin-3 binds VCP/p97 and regulates retrotranslocation of ERAD substrates",
+          "journal": "Human Molecular Genetics",
+          "year": 2006,
+          "relevant_quote": "AT3 and Ufd1 bind VCP in a mutually exclusive manner; AT3 decreases the interaction of VCP with Ufd1 as well as with ubiquitylated proteins. Using a reconstituted system, AT3 inhibits retrotranslocation of an ERAD substrate from the ER. These data suggest that a normal function of AT3 is to regulate flow through the ERAD pathway by modulating VCP-dependent extraction of proteins from the ER.",
+          "pmid": "16822850"
+        }
+      ],
+      "pmids": [
+        "16822850"
+      ],
+      "interaction_effect": "inhibits",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "inhibition"
+    },
+    {
+      "function": "ATXN3 Deubiquitinase (DUB) Activity",
+      "arrow": "activates",
+      "cellular_process": "The AAA+ ATPase VCP/p97 directly interacts with ATXN3 and enhances its deubiquitinase (DUB) activity. This interaction is thought to position ATXN3 optimally near polyubiquitinated substrates that are being processed by the VCP complex.",
+      "effect_description": "VCP-mediated activation of ATXN3's DUB activity facilitates the trimming or removal of ubiquitin chains from VCP-associated substrates. This enzymatic activity can rescue proteins from proteasomal degradation, enable ubiquitin recycling, and regulate the overall flux of substrates through protein degradation pathways.",
+      "biological_consequence": [
+        "VCP binds a polyubiquitinated substrate → VCP recruits and binds ATXN3 → VCP allosterically activates ATXN3's catalytic Josephin domain → ATXN3 cleaves ubiquitin chains from the VCP-bound substrate → The fate of the substrate is altered (e.g., rescued from degradation) and ubiquitin homeostasis is maintained."
+      ],
+      "specific_effects": [
+        "VCP/p97 was demonstrated to be an activator of the DUB activity of wild-type ATXN3 in in vitro deubiquitination assays.",
+        "VCP/p97 does not activate the deubiquitinase activity of polyglutamine-expanded ATXN3.",
+        "The interaction with VCP/p97 may position ATXN3 in close proximity to polyubiquitinated protein substrates, facilitating their processing."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Valosin-Containing Protein (VCP/p97) Is an Activator of Wild-Type Ataxin-3",
+          "journal": "PLoS ONE",
+          "year": 2012,
+          "relevant_quote": "VCP/p97 was shown to be an activator specifically of wild-type ataxin-3, exhibiting no effect on expanded ataxin-3... Based on our results we propose a model where ataxin-3 normally functions with its interactors to specify the cellular fate of ubiquitinated proteins.",
+          "pmid": "22970133"
+        }
+      ],
+      "pmids": [
+        "22970133"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "primary_to_main",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "regulates",
+  "direction": "bidirectional",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates",
+      "inhibits"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "ATXN3 interacts with the N-terminal domain of the AAA+ ATPase VCP/p97 through a VCP binding motif (VBM) near its C-terminus. This interaction is nucleotide-dependent, favored in the absence of nucleotide or the presence of ATP, but not ADP. ATXN3 binding to VCP is mutually exclusive with that of cofactors like Ufd1. Furthermore, VCP directly binds and allosterically activates ATXN3's catalytic Josephin domain, optimally positioning ATXN3 near polyubiquitinated substrates processed by the VCP complex.",
+  "effect": "As a result of this interaction, ATXN3 modulates the ERAD pathway by competing with Ufd1 for VCP binding, which diminishes the retrotranslocation of ubiquitinated substrates from the endoplasmic reticulum to the cytosol, thereby slowing their degradation and increasing their cellular levels. Concurrently, VCP binding activates ATXN3's deubiquitinase activity, facilitating the trimming of ubiquitin chains from VCP-associated substrates, which can rescue proteins from proteasomal degradation and regulate ubiquitin homeostasis.",
+  "summary": "ATXN3 dually regulates VCP-dependent protein quality control, inhibiting ERAD substrate degradation while simultaneously having its DUB activity activated by VCP. Notably, pathogenic polyglutamine-expanded ATXN3 enhances its binding to VCP and decreases ERAD substrate degradation to a greater extent than wild-type ATXN3, yet VCP does not activate the DUB activity of the expanded form.",
+  "evidence": [
+    {
+      "paper_title": "Ataxin-3 binds VCP/p97 and regulates retrotranslocation of ERAD substrates",
+      "journal": "Human Molecular Genetics",
+      "year": 2006,
+      "relevant_quote": "AT3 and Ufd1 bind VCP in a mutually exclusive manner; AT3 decreases the interaction of VCP with Ufd1 as well as with ubiquitylated proteins. Using a reconstituted system, AT3 inhibits retrotranslocation of an ERAD substrate from the ER. These data suggest that a normal function of AT3 is to regulate flow through the ERAD pathway by modulating VCP-dependent extraction of proteins from the ER."
+    },
+    {
+      "paper_title": "Valosin-Containing Protein (VCP/p97) Is an Activator of Wild-Type Ataxin-3",
+      "journal": "PLoS ONE",
+      "year": 2012,
+      "relevant_quote": "VCP/p97 was shown to be an activator specifically of wild-type ataxin-3, exhibiting no effect on expanded ataxin-3... Based on our results we propose a model where ataxin-3 normally functions with its interactors to specify the cellular fate of ubiquitinated proteins."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "regulation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--regulates--> VCP:",
+  "protein_a": "VCP",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.619555Z",
+  "last_updated": "2026-02-04T04:49:14.619555Z"
+}

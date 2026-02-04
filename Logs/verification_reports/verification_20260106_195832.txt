@@ -1,0 +1,40 @@
+=================================================================
+            PATHWAY VERIFICATION REPORT
+            Generated: 2026-01-06 19:58:32
+=================================================================
+
+SUMMARY
+-----------------------------------------------------------------
+  Interactions verified:  49
+  Pathways verified:      260
+  Checks passed:          14
+  Checks failed:          0
+
+STATUS: [OK] PASS
+
+CHECKS
+-----------------------------------------------------------------
+  [OK] interactions_have_pathway
+  [OK] pathway_references_valid
+  [OK] interaction_data_consistency
+  [OK] all_roots_exist
+  [OK] no_duplicate_names
+  [OK] no_empty_names
+  [OK] usage_count_accuracy
+  [OK] no_cycles
+  [OK] single_parent
+  [OK] no_orphan_pathways
+  [OK] parent_exists
+  [OK] levels_correct (1 issues)
+  [OK] ancestor_ids_accurate
+  [OK] is_leaf_accurate
+
+ISSUES BY SEVERITY
+-----------------------------------------------------------------
+  [LOW] 1 issues
+
+WARNINGS (non-blocking)
+-----------------------------------------------------------------
+  [WARN] Pathway 'DNA Damage Response' level=0, should be 4 (parent 'Cellular Stress Response' is level 3)
+
+=================================================================

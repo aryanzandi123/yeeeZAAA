@@ -1,0 +1,87 @@
+{
+  "primary": "YAP1",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 directly interacts with and deubiquitinates the Hippo pathway effector YAP1, stabilizing the protein and promoting its oncogenic functions in various cancers.",
+  "functions": [
+    {
+      "function": "YAP1 Stability",
+      "arrow": "activates",
+      "likely_direction": "main_to_primary",
+      "cellular_process": "ATXN3 directly interacts with the WW domains of the transcriptional coactivator YAP1. As a deubiquitinase, ATXN3 removes ubiquitin chains from YAP1, thereby protecting it from proteasomal degradation.",
+      "effect_description": "By stabilizing YAP1, ATXN3 increases its protein levels and prolongs its half-life. This leads to enhanced nuclear accumulation of YAP1 and increased transcription of its target genes, which are involved in cell proliferation, migration, and survival.",
+      "biological_consequence": [
+        "ATXN3 binds to YAP1 → ATXN3 deubiquitinates YAP1 → YAP1 is stabilized and accumulates → YAP1 translocates to the nucleus and activates target gene expression (e.g., CTGF, CYR61) → Cancer cell proliferation, migration, and growth are promoted"
+      ],
+      "specific_effects": [
+        "ATXN3 functions as a YAP1 deubiquitinase.",
+        "Targeted deletion of ATXN3 results in a dramatic reduction in YAP1 protein levels.",
+        "ATXN3 co-expression significantly prolongs the half-life of YAP1.",
+        "The interaction promotes the expression of YAP1 target genes CTGF and CYR61.",
+        "High ATXN3 expression positively correlates with high YAP1 expression in human breast and pancreatic cancers."
+      ],
+      "evidence": [
+        {
+          "paper_title": "ATXN3 deubiquitinates YAP1 to promote tumor growth",
+          "year": 2023,
+          "pmid": "37818078"
+        },
+        {
+          "paper_title": "ATXN3 promotes prostate cancer progression by stabilizing YAP",
+          "year": 2022,
+          "pmid": "37349820"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "37818078",
+        "37349820"
+      ],
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "mechanism": "ATXN3, a deubiquitinase, directly interacts with the WW domains of the transcriptional coactivator YAP1. This specific binding facilitates ATXN3's enzymatic activity, leading to the removal of ubiquitin chains from YAP1. By deubiquitinating YAP1, ATXN3 counteracts its ubiquitination-mediated degradation. This molecular action protects YAP1 from the ubiquitin-proteasome system, thereby stabilizing the protein.",
+  "effect": "The deubiquitination and stabilization of YAP1 by ATXN3 result in increased YAP1 protein levels and a significantly prolonged half-life within the cell. This leads to enhanced nuclear accumulation of YAP1, consequently boosting the transcription of its target genes, such as CTGF and CYR61. Ultimately, this promotes cellular processes like proliferation, migration, and survival, often contributing to cancer progression.",
+  "summary": "ATXN3 activates YAP1 by functioning as its deubiquitinase, a crucial mechanism for maintaining YAP1 protein stability and promoting its oncogenic signaling. This is underscored by experimental findings demonstrating that targeted deletion of ATXN3 results in a dramatic reduction in YAP1 protein levels.",
+  "evidence": [
+    {
+      "paper_title": "ATXN3 deubiquitinates YAP1 to promote tumor growth",
+      "year": 2023
+    },
+    {
+      "paper_title": "ATXN3 promotes prostate cancer progression by stabilizing YAP",
+      "year": 2022
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --activates--> YAP1:",
+  "protein_a": "ATXN3",
+  "protein_b": "YAP1",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.723202Z",
+  "last_updated": "2026-02-04T04:49:14.723202Z"
+}

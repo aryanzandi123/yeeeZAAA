@@ -1,0 +1,76 @@
+{
+  "primary": "HDAC3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "HDAC3 is a known interaction partner of ATXN3, and their interaction is crucial for regulating chromatin structure, DNA replication, and transcription.",
+  "functions": [
+    {
+      "function": "Chromatin Compaction",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 plays a structural, catalytic-independent role in global chromatin organization by controlling the subcellular localization and recruitment of Histone Deacetylase 3 (HDAC3) to chromatin.",
+      "effect_description": "By facilitating the proper recruitment of HDAC3 to chromatin, ATXN3 promotes histone deacetylation, leading to a more compact, heterochromatic state. This function is essential for regulating DNA replication timing and global transcription. In the absence of ATXN3, or in the presence of polyQ-expanded ATXN3 which sequesters HDAC3, HDAC3 is mislocalized away from chromatin. This results in histone hyperacetylation, a more open euchromatin structure, altered DNA replication, and increased global transcription.",
+      "biological_consequence": [
+        "ATXN3 binds and recruits HDAC3 to chromatin → Histone deacetylation is maintained → Chromatin is compacted into heterochromatin → Global transcription and DNA replication are properly controlled.",
+        "Absence of ATXN3 → HDAC3 is mislocalized from the chromatin → Histones become hyperacetylated → Chromatin shifts to a more open, euchromatic state → Global transcription increases and DNA replication timing is altered."
+      ],
+      "specific_effects": [
+        "The function of ATXN3 in chromatin organization occurs independently of its catalytic deubiquitinase activity.",
+        "Absence of ATXN3 decreases the recruitment of endogenous HDAC3 to chromatin.",
+        "Lack of ATXN3 results in indicators of more open chromatin, including increased mobility of histone H1 and higher sensitivity to micrococcal nuclease digestion.",
+        "PolyQ-expanded ATXN3 mimics the null mutant by sequestering HDAC3, preventing its proper localization."
+      ],
+      "evidence": [
+        {
+          "paper_title": "ATXN3 controls DNA replication and transcription by regulating chromatin structure",
+          "journal": "Nucleic Acids Research",
+          "year": 2023,
+          "relevant_quote": "Here we report the role of ATXN3 in chromatin organization during unperturbed conditions, in a catalytic-independent manner... The absence of ATXN3 decreases the recruitment of endogenous HDAC3 to the chromatin, as well as the HDAC3 nuclear/cytoplasm ratio after HDAC3 overexpression, suggesting that ATXN3 controls the subcellular localization of HDAC3.",
+          "pmid": "36971114"
+        }
+      ],
+      "pmids": [
+        "36971114"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "binds",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "ATXN3 activates HDAC3 by directly binding to it and serving as a structural scaffold that facilitates its proper recruitment to chromatin. This catalytic-independent function of ATXN3 ensures the correct subcellular localization of HDAC3, enabling its access to histone substrates. Experimental evidence demonstrates that the absence of ATXN3 significantly decreases the recruitment of endogenous HDAC3 to chromatin. Pathogenic polyQ-expanded ATXN3 sequesters HDAC3, preventing its chromatin localization and thereby disrupting this activation mechanism.",
+  "effect": "The ATXN3-mediated recruitment of HDAC3 to chromatin promotes histone deacetylation, which is crucial for maintaining a compact, heterochromatic state. This chromatin compaction is essential for the proper regulation of DNA replication timing and global transcription. Conversely, the absence of functional ATXN3 leads to histone hyperacetylation, resulting in a more open euchromatin structure, altered DNA replication, and increased global transcription.",
+  "summary": "ATXN3 is a critical regulator of chromatin structure, activating HDAC3 by ensuring its proper localization to chromatin. This interaction is vital for maintaining a compact heterochromatic state, as evidenced by the increased mobility of histone H1 and higher sensitivity to micrococcal nuclease digestion observed in the absence of ATXN3.",
+  "evidence": [
+    {
+      "paper_title": "ATXN3 controls DNA replication and transcription by regulating chromatin structure",
+      "journal": "Nucleic Acids Research",
+      "year": 2023,
+      "relevant_quote": "Here we report the role of ATXN3 in chromatin organization during unperturbed conditions, in a catalytic-independent manner... The absence of ATXN3 decreases the recruitment of endogenous HDAC3 to the chromatin, as well as the HDAC3 nuclear/cytoplasm ratio after HDAC3 overexpression, suggesting that ATXN3 controls the subcellular localization of HDAC3."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "binding",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 2
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --binds--> HDAC3:",
+  "protein_a": "ATXN3",
+  "protein_b": "HDAC3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.632948Z",
+  "last_updated": "2026-02-04T04:49:14.632948Z"
+}

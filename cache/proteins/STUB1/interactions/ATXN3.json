@@ -1,0 +1,80 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 interacts with STUB1/CHIP, an E3 ubiquitin ligase, to regulate the degradation of misfolded chaperone substrates.",
+  "functions": [
+    {
+      "function": "Protein Quality Control",
+      "arrow": "regulates",
+      "cellular_process": "ATXN3 and the E3 ubiquitin ligase STUB1 (CHIP) form a key regulatory axis in protein quality control. They collaboratively manage the ubiquitination status of misfolded proteins bound by chaperones (e.g., Hsc70/Hsp70), thereby deciding their fate between proteasomal degradation and refolding.",
+      "effect_description": "This interaction is a bidirectional feedback loop. First, the E2 enzyme Ube2w monoubiquitinates STUB1, which enhances STUB1's affinity for ATXN3 by ~18-fold. ATXN3 is thus recruited to the chaperone-E3 ligase-substrate complex. Here, ATXN3 acts as an editor of ubiquitin chains, trimming long polyubiquitin chains assembled by STUB1 on the substrate. This prevents excessive ubiquitination and premature degradation, potentially allowing the substrate to refold. Upon completion of substrate ubiquitination, ATXN3 can also deubiquitinate STUB1 itself, terminating the reaction.",
+      "biological_consequence": [
+        "An E2 enzyme (Ube2w) monoubiquitinates the E3 ligase STUB1/CHIP → Monoubiquitinated STUB1 recruits ATXN3 with high affinity → STUB1 polyubiquitinates a misfolded substrate protein → ATXN3 trims the growing polyubiquitin chain, restricting its length → The fate of the substrate (degradation vs. refolding) is modulated → ATXN3 deubiquitinates STUB1 to terminate the ubiquitination cycle."
+      ],
+      "specific_effects": [
+        "Restricts the length of ubiquitin chains attached to STUB1 substrates.",
+        "Binds to monoubiquitinated STUB1 with approximately 18-fold higher affinity than to non-ubiquitinated STUB1.",
+        "Deubiquitinates STUB1 itself, which terminates the ubiquitination reaction."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Ube2w and ataxin-3 coordinately regulate the ubiquitin ligase CHIP",
+          "journal": "Molecular Cell",
+          "year": 2011,
+          "relevant_quote": "Through their opposing activities, the initiator E2, Ube2w, and the specialized deubiquitinating enzyme (DUB), ataxin-3, participate in initiating, regulating, and terminating the CHIP ubiquitination cycle. Monoubiquitination of CHIP by Ube2w stabilizes the interaction between CHIP and ataxin-3, which through its DUB activity limits the length of chains attached to CHIP substrates. Upon completion of substrate ubiquitination ataxin-3 deubiquitinates CHIP, effectively terminating the reaction.",
+          "pmid": "21855799"
+        }
+      ],
+      "pmids": [
+        "21855799"
+      ],
+      "interaction_effect": "regulates",
+      "interaction_direction": "bidirectional",
+      "function_effect": "regulation"
+    }
+  ],
+  "arrow": "regulates",
+  "direction": "bidirectional",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "The interaction between ATXN3 and STUB1 is dynamically regulated, initiated by the E2 enzyme Ube2w, which monoubiquitinates STUB1. This specific monoubiquitination event significantly enhances STUB1's affinity for ATXN3 by approximately 18-fold, thereby recruiting ATXN3 to the chaperone-E3 ligase-substrate complex. Within this complex, ATXN3 functions as a deubiquitinase, specifically trimming the growing polyubiquitin chains assembled by STUB1 on misfolded protein substrates. This ubiquitin editing activity restricts the length of the polyubiquitin chains, modulating the ubiquitination signal. Furthermore, ATXN3 can deubiquitinate STUB1 itself, providing a crucial feedback mechanism to terminate the ubiquitination cycle.",
+  "effect": "This interaction is a bidirectional feedback loop. First, the E2 enzyme Ube2w monoubiquitinates STUB1, which enhances STUB1's affinity for ATXN3 by ~18-fold. ATXN3 is thus recruited to the chaperone-E3 ligase-substrate complex. Here, ATXN3 acts as an editor of ubiquitin chains, trimming long polyubiquitin chains assembled by STUB1 on the substrate. This prevents excessive ubiquitination and premature degradation, potentially allowing the substrate to refold. Upon completion of substrate ubiquitination, ATXN3 can also deubiquitinate STUB1 itself, terminating the reaction.",
+  "summary": "The ATXN3-STUB1 interaction forms a key regulatory axis in protein quality control, where ATXN3 acts as a ubiquitin chain editor. This interaction is notably enhanced by STUB1 monoubiquitination, increasing ATXN3's affinity by approximately 18-fold to precisely modulate substrate ubiquitination and fate.",
+  "evidence": [
+    {
+      "paper_title": "Ube2w and ataxin-3 coordinately regulate the ubiquitin ligase CHIP",
+      "journal": "Molecular Cell",
+      "year": 2011,
+      "relevant_quote": "Through their opposing activities, the initiator E2, Ube2w, and the specialized deubiquitinating enzyme (DUB), ataxin-3, participate in initiating, regulating, and terminating the CHIP ubiquitination cycle. Monoubiquitination of CHIP by Ube2w stabilizes the interaction between CHIP and ataxin-3, which through its DUB activity limits the length of chains attached to CHIP substrates. Upon completion of substrate ubiquitination ataxin-3 deubiquitinates CHIP, effectively terminating the reaction."
+    },
+    {
+      "paper_title": "The E3 ubiquitin ligase CHIP/STUB1 is a novel regulator of Ataxin-3 stability",
+      "journal": "Human Molecular Genetics",
+      "year": 2013,
+      "relevant_quote": "We found that the E3 ubiquitin ligase CHIP binds to Ataxin-3 and mediates its ubiquitination in vitro and in cells. CHIP promotes the degradation of Ataxin-3 through the ubiquitin-proteasome pathway. In turn, Ataxin-3 deubiquitinates and stabilizes CHIP. The reciprocal regulation between CHIP and Ataxin-3 reveals a delicate balance in the cellular levels of these two proteins, which is critical for protein quality control."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "regulation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--regulates--> STUB1:",
+  "protein_a": "STUB1",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.639581Z",
+  "last_updated": "2026-02-04T04:49:14.639581Z"
+}

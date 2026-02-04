@@ -1,0 +1,73 @@
+{
+  "primary": "TCP1",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 interacts with T-complex protein 1 (TCP1), a component of the CCT/TRiC chaperonin complex. This interaction is disrupted by the polyQ mutation in ATXN3.",
+  "functions": [
+    {
+      "function": "Protein Folding",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 directly interacts with TCP1, a core subunit of the chaperonin containing TCP-1 (CCT/TRiC) complex. This complex is crucial for the proper folding of a large number of cytosolic proteins, including actin and tubulin, thereby playing a key role in cellular proteostasis.",
+      "effect_description": "The polyglutamine (polyQ) expansion in mutant ATXN3 leads to a weakened or lost interaction with the CCT complex. This impairment disrupts the normal protein folding machinery, which can lead to an accumulation of misfolded proteins, increased aggregation, and defects in cellular processes that rely on properly folded CCT substrates, such as mitochondrial transport along axons.",
+      "biological_consequence": [
+        "Wild-type ATXN3 binds to the CCT/TRiC complex via subunits like TCP1 → The complex facilitates ATP-dependent folding of nascent and misfolded proteins → Cellular proteostasis is maintained → Pathogenic polyQ expansion in ATXN3 weakens or ablates this interaction → CCT/TRiC chaperonin function is impaired → Misfolded proteins accumulate, contributing to aggregation and cellular toxicity in SCA3."
+      ],
+      "specific_effects": [
+        "Mutant ataxin-3 exhibits weakened or lost interaction with the CCT chaperone complex.",
+        "The abnormal interaction between mutant ataxin-3 and CCT/TRiC subunits, including TCP1, is associated with impaired transport of mitochondria in neurites."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Impaired interactions of ataxin-3 with protein complexes reveals their specific structure and functions in SCA3 Ki150 model",
+          "journal": "Cellular and Molecular Life Sciences",
+          "year": 2022,
+          "relevant_quote": "Among others, mutant ataxin-3 abnormally interacted with subunits of large complexes such as Cct5 and 6, Tcp1, and Camk2a and Camk2b... We demonstrated that the presence of mutant ataxin-3 protein results in weakened or loss of interaction with CCT chaperone complexes responsible for transport along neurits...",
+          "pmid": "37033372"
+        }
+      ],
+      "pmids": [
+        "37033372"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "binds",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "Wild-type ATXN3 directly associates with TCP1, a core subunit of the chaperonin containing TCP-1 (CCT/TRiC) complex, thereby integrating ATXN3 into the cellular protein folding machinery. This interaction is crucial for the CCT/TRiC complex's ATP-dependent folding of nascent and misfolded proteins, ensuring proteostasis. Pathogenic polyglutamine (polyQ) expansion within mutant ATXN3 leads to a significantly weakened or lost interaction with the CCT complex. This suggests that the expanded polyQ tract sterically hinders or conformationally alters ATXN3's ability to stably bind CCT/TRiC subunits like TCP1.",
+  "effect": "The compromised interaction between mutant ATXN3 and the CCT/TRiC complex via TCP1 impairs the chaperonin's capacity to properly fold its client proteins, leading to an accumulation of misfolded proteins and increased aggregation. This proteotoxic environment subsequently disrupts cellular processes reliant on properly folded CCT substrates, such as mitochondrial transport along axons.",
+  "summary": "The direct binding of wild-type ATXN3 to TCP1 is fundamental for CCT/TRiC chaperonin function and cellular proteostasis. The pathogenic polyQ expansion in ATXN3 abrogates this interaction, which is experimentally linked to impaired mitochondrial transport in neurites, a critical aspect of Spinocerebellar Ataxia Type 3 (SCA3) pathology.",
+  "evidence": [
+    {
+      "paper_title": "Impaired interactions of ataxin-3 with protein complexes reveals their specific structure and functions in SCA3 Ki150 model",
+      "journal": "Cellular and Molecular Life Sciences",
+      "year": 2022,
+      "relevant_quote": "Among others, mutant ataxin-3 abnormally interacted with subunits of large complexes such as Cct5 and 6, Tcp1, and Camk2a and Camk2b... We demonstrated that the presence of mutant ataxin-3 protein results in weakened or loss of interaction with CCT chaperone complexes responsible for transport along neurits..."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "binding",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --binds--> TCP1:",
+  "protein_a": "ATXN3",
+  "protein_b": "TCP1",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.683720Z",
+  "last_updated": "2026-02-04T04:49:14.683720Z"
+}

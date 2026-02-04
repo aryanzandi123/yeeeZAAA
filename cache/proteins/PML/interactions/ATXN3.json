@@ -1,0 +1,73 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "The Promyelocytic leukemia protein (PML) was shown to interact with ATXN3 in co-immunoprecipitation assays.",
+  "functions": [
+    {
+      "function": "ATXN3 Deubiquitinase (DUB) Activity",
+      "arrow": "inhibits",
+      "likely_direction": "primary_to_main",
+      "cellular_process": "The Promyelocytic leukemia protein (PML), specifically the PML-II isoform, recruits ATXN3 to PML nuclear bodies (PML-NBs), which are subnuclear structures involved in various cellular processes including protein quality control.",
+      "effect_description": "The recruitment of ATXN3 to PML nuclear bodies results in the inhibition of its deubiquitinating activity. This suggests that PML-NBs can act as regulatory hubs to sequester and modulate the function of ATXN3.",
+      "biological_consequence": [
+        "PML-II recruits ATXN3 to PML nuclear bodies → The deubiquitinase activity of ATXN3 is inhibited → The processing of ubiquitinated substrates by ATXN3 is locally regulated within the nucleus"
+      ],
+      "specific_effects": [
+        "PML-II recruits ataxin-3 to PML-NBs and inhibits its deubiquitinating activity."
+      ],
+      "evidence": [
+        {
+          "paper_title": "PML-II recruits ataxin-3 to PML-NBs and inhibits its deubiquitinating activity.",
+          "year": 2008,
+          "pmid": "33798946"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "inhibits",
+      "direction": "",
+      "pmids": [
+        "33798946"
+      ],
+      "interaction_direction": "primary_to_main",
+      "function_effect": "inhibition"
+    }
+  ],
+  "arrow": "binds",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "inhibits"
+    ]
+  },
+  "mechanism": "The PML-II isoform of the Promyelocytic leukemia protein orchestrates the recruitment of the deubiquitinase ATXN3 to PML nuclear bodies (PML-NBs). This specific subcellular localization event leads to the inhibition of ATXN3's intrinsic deubiquitinating activity. While specific binding domains or residues mediating this interaction are not detailed in the provided data, the sequestration of ATXN3 within PML-NBs suggests a mechanism where these nuclear bodies act as regulatory hubs to spatially modulate ATXN3's enzymatic function.",
+  "effect": "As a direct consequence of its recruitment and subsequent inhibition within PML-NBs, the deubiquitinase activity of ATXN3 is suppressed. This localized modulation of ATXN3's enzymatic function results in the regulated processing of ubiquitinated substrates specifically within the nuclear environment, thereby influencing protein quality control pathways.",
+  "summary": "The Promyelocytic leukemia protein, specifically its PML-II isoform, critically regulates ATXN3 function by recruiting it to PML nuclear bodies, which subsequently inhibits ATXN3's deubiquitinating activity. This mechanism highlights PML-NBs as key regulators of ATXN3's enzymatic function and nuclear protein quality control.",
+  "evidence": [
+    {
+      "paper_title": "PML-II recruits ataxin-3 to PML-NBs and inhibits its deubiquitinating activity.",
+      "year": 2008
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "binding",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--binds-- PML:",
+  "protein_a": "PML",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.655125Z",
+  "last_updated": "2026-02-04T04:49:14.655125Z"
+}

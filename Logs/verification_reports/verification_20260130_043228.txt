@@ -1,0 +1,69 @@
+=================================================================
+            PATHWAY VERIFICATION REPORT
+            Generated: 2026-01-30 04:32:28
+=================================================================
+
+SUMMARY
+-----------------------------------------------------------------
+  Interactions verified:  52
+  Pathways verified:      275
+  Checks passed:          13
+  Checks failed:          1
+
+STATUS: [FAIL] FAIL
+        (9 auto-fixes applied)
+
+CHECKS
+-----------------------------------------------------------------
+  [OK] interactions_have_pathway
+  [OK] pathway_references_valid
+  [OK] interaction_data_consistency
+  [OK] all_roots_exist
+  [OK] no_duplicate_names
+  [OK] no_empty_names
+  [OK] usage_count_accuracy
+  [OK] no_cycles
+  [OK] single_parent
+  [FAIL] no_orphan_pathways (11 issues)
+  [OK] parent_exists
+  [OK] levels_correct (10 issues)
+  [OK] ancestor_ids_accurate
+  [OK] is_leaf_accurate (4 issues)
+
+ISSUES BY SEVERITY
+-----------------------------------------------------------------
+  [MEDIUM] 10 issues
+  [HIGH] 1 issues
+  [LOW] 14 issues
+
+BLOCKING ISSUES (must fix manually)
+-----------------------------------------------------------------
+  [!] ...and 115 more orphaned pathways
+
+AUTO-FIXES APPLIED
+-----------------------------------------------------------------
+  [FIXED] Created root pathway 'Immune Response'
+  [FIXED] Created root pathway 'Neuronal Function'
+  [FIXED] Created root pathway 'Cell Cycle'
+  [FIXED] Created root pathway 'Vesicle Transport'
+  [FIXED] Changed 'Protein Quality Control' level from 0 to 0
+  [FIXED] Changed 'Cytoskeleton Organization' level from 0 to 0
+  [FIXED] Changed 'Cell Death' level from 0 to 0
+  [FIXED] Changed 'Cellular Signaling' level from 0 to 0
+  [FIXED] Changed 'Metabolism' level from 0 to 0
+
+WARNINGS (non-blocking)
+-----------------------------------------------------------------
+  [WARN] Pathway 'RNA Splicing' is orphaned (level=-1)
+  [WARN] Pathway 'DNA Damage Response' is orphaned (level=-1)
+  [WARN] Pathway 'Protein Turnover Regulation' is orphaned (level=-1)
+  [WARN] Pathway 'Regulation of Gene Expression' is orphaned (level=-1)
+  [WARN] Pathway 'Nutrient Sensing' is orphaned (level=-1)
+  [WARN] Pathway 'Organelle-Specific Transport' is orphaned (level=-1)
+  [WARN] Pathway 'mRNA Processing' is orphaned (level=-1)
+  [WARN] Pathway 'Genotoxic Stress Response' is orphaned (level=-1)
+  [WARN] Pathway 'Intracellular Transport' is orphaned (level=-1)
+  [WARN] Pathway 'Growth Factor Signaling' is orphaned (level=-1)
+  ... and 14 more
+
+=================================================================

@@ -1,0 +1,1382 @@
+
+================================================================================
+TIMESTAMP: 2026-01-05 10:54:11
+RESPONSE LENGTH: 1166
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "795",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Transcriptional Regulation",
+          "reasoning": "TBP is a core component of the basal transcription machinery required for transcription initiation."
+        }
+      ],
+      "primary_pathway": "Transcriptional Regulation"
+    },
+    {
+      "interaction_id": "796",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Transcriptional Regulation",
+          "reasoning": "ATXN3 modulates the expression levels of the chaperone HSP70 at the transcriptional level."
+        },
+        {
+          "function_index": 1,
+          "pathway": "Protein Quality Control",
+          "reasoning": "HSP70 is a molecular chaperone that directly interacts with ATXN3 to prevent its misfolding and aggregation."
+        }
+      ],
+      "primary_pathway": "Protein Quality Control"
+    },
+    {
+      "interaction_id": "797",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Transcriptional Regulation",
+          "reasoning": "HDAC1 and HDAC3
+
+================================================================================
+TIMESTAMP: 2026-01-05 11:10:02
+RESPONSE LENGTH: 468
+FULL RESPONSE:
+{
+  "merges": [
+    {
+      "name_a": "Cotranscriptional Gene Silencing",
+      "name_b": "Transcriptional Gene Silencing",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Cotranscriptional Gene Silencing",
+      "name_b": "Transcriptional Gene Silencing (TGS)",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Cotranslational Protein Folding",
+      "name_b": "Post-translational
+
+================================================================================
+TIMESTAMP: 2026-01-05 11:10:04
+RESPONSE LENGTH: 458
+FULL RESPONSE:
+{
+  "merges": [
+    {
+      "name_a": "Cellular Metabolic Process",
+      "name_b": "Metabolic Process",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Cellular Response to Stimulus",
+      "name_b": "Response to Stimulus",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Cotranscriptional Gene Silencing",
+      "name_b": "Post-Transcriptional Gene Silencing",
+      "
+
+================================================================================
+TIMESTAMP: 2026-01-05 13:02:01
+RESPONSE LENGTH: 1127
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "838",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Mitochondrial Dynamics",
+          "reasoning": "OPA1 is a key regulator of mitochondrial inner membrane fusion and cristae structure, which are central components of mitochondrial dynamics."
+        }
+      ],
+      "primary_pathway": "Mitochondrial Dynamics"
+    },
+    {
+      "interaction_id": "839",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagy",
+          "reasoning": "SQSTM1 (p62) is a classic autophagy adapter that facilitates the clearance of ubiquitinated cargo."
+        }
+      ],
+      "primary_pathway": "Autophagy"
+    },
+    {
+      "interaction_id": "840",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagy",
+          "reasoning": "BECN1 and SQSTM1 are both core components of the autophagy machinery involved in cargo recognition and autophagosome formation."
+        }
+      ],
+      "primary_pathway": "Autophagy"
+    },
+    {
+      "interaction
+
+================================================================================
+TIMESTAMP: 2026-01-05 13:03:34
+RESPONSE LENGTH: 982
+FULL RESPONSE:
+{
+  "refinements": [
+    {
+      "interaction_id": "842",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Ubiquitin-Proteasome System"
+        }
+      ],
+      "primary_pathway": "Ubiquitin-Proteasome System"
+    },
+    {
+      "interaction_id": "843",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "DNA Damage Response"
+        }
+      ],
+      "primary_pathway": "DNA Damage Response"
+    },
+    {
+      "interaction_id": "850",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Oxidative Stress Response"
+        }
+      ],
+      "primary_pathway": "Oxidative Stress Response"
+    },
+    {
+      "interaction_id": "856",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "DNA Damage Response"
+        },
+        {
+          "function_index": 1,
+          
+
+================================================================================
+TIMESTAMP: 2026-01-05 16:41:46
+RESPONSE LENGTH: 503
+FULL RESPONSE:
+{
+  "merges": [
+    {
+      "name_a": "Protein Quality Control",
+      "name_b": "Protein Spatial Quality Control",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Protein Quality Control",
+      "name_b": "Spatial Protein Quality Control",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Response to chemical stress",
+      "name_b": "Response to physical stress",
+      "action": "KEEP_DISTINCT",
+      "canonical
+
+================================================================================
+TIMESTAMP: 2026-01-05 21:13:09
+RESPONSE LENGTH: 1078
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "858",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Oxidative Stress Response",
+          "reasoning": "The KEAP1-NFE2L2 (NRF2) axis is the primary cellular pathway for sensing and responding to oxidative stress by activating antioxidant genes."
+        }
+      ],
+      "primary_pathway": "Oxidative Stress Response"
+    },
+    {
+      "interaction_id": "859",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "DNA Double-Strand Break Repair",
+          "reasoning": "ATXN3 and RNF4 cooperate specifically in the signaling and repair of DNA double-strand breaks, a specific subset of the DNA damage response."
+        }
+      ],
+      "primary_pathway": "DNA Double-Strand Break Repair"
+    },
+    {
+      "interaction_id": "860",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Ubiquitin-Proteasome System",
+          "reasoning": "ATXN3 acts as a deubiquitinase to regulate the stability and
+
+================================================================================
+TIMESTAMP: 2026-01-05 21:35:02
+RESPONSE LENGTH: 466
+FULL RESPONSE:
+{
+  "merges": [
+    {
+      "name_a": "Endoplasmic Reticulum Homeostasis",
+      "name_b": "Endoplasmic Reticulum Proteostasis",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Endosomal Homeostasis",
+      "name_b": "Lysosomal Homeostasis",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Endosomal Homeostasis",
+      "name_b": "Peroxisomal Homeostasis",
+      "action": "KEEP
+
+================================================================================
+TIMESTAMP: 2026-01-05 21:35:03
+RESPONSE LENGTH: 459
+FULL RESPONSE:
+{
+  "merges": [
+    {
+      "name_a": "G1/S Transition Control",
+      "name_b": "G2/M Transition Control",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Gene Expression",
+      "name_b": "Regulation of gene expression",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Growth Control Signaling",
+      "name_b": "Growth Factor Signaling",
+      "action": "KEEP_DISTINCT
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:23:21
+RESPONSE LENGTH: 1070
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "867",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "ATG7 acts as an E1-like enzyme for the lipidation of LC3B, a process central to the maturation of the autophagosome membrane."
+        }
+      ],
+      "primary_pathway": "Autophagosome Maturation"
+    },
+    {
+      "interaction_id": "868",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "ATG3 acts as an E2-like enzyme for the conjugation of LC3B to phosphatidylethanolamine (PE), which is essential for autophagosome maturation."
+        }
+      ],
+      "primary_pathway": "Autophagosome Maturation"
+    },
+    {
+      "interaction_id": "869",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "ATG4B cleaves pro-LC3B to expose a C-terminal glycine, a necessary priming step for
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:24:30
+RESPONSE LENGTH: 1167
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "907",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "ER-phagy",
+          "reasoning": "ER-phagy is the most specific pathway for the selective autophagic degradation of the endoplasmic reticulum."
+        }
+      ],
+      "primary_pathway": "ER-phagy"
+    },
+    {
+      "interaction_id": "908",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Nuclear Proteostasis",
+          "reasoning": "Nucleophagy is a selective autophagy mechanism that maintains nuclear integrity by degrading nuclear components, falling under the specific category of Nuclear Proteostasis."
+        }
+      ],
+      "primary_pathway": "Nuclear Proteostasis"
+    },
+    {
+      "interaction_id": "909",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "The function specifically describes the regulation of the maturation stage of the autophagosome."
+        }
+      ],
+      "primary_pathway": "Autophagosome Maturation"
+    },
+    {
+      "interaction_id":
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:25:14
+RESPONSE LENGTH: 1076
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "867",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "ATG7 acts as the E1-like enzyme that initiates the LC3B lipidation cascade, a process essential for the expansion and maturation of the autophagosome."
+        }
+      ],
+      "primary_pathway": "Autophagosome Maturation"
+    },
+    {
+      "interaction_id": "868",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "ATG3 is the E2-like enzyme responsible for the covalent attachment of phosphatidylethanolamine to LC3B, a hallmark of autophagosome maturation."
+        }
+      ],
+      "primary_pathway": "Autophagosome Maturation"
+    },
+    {
+      "interaction_id": "869",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "ATG4B-mediated priming of pro-LC3B is the first step in the LC
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:26:17
+RESPONSE LENGTH: 1137
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "907",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "ER-phagy",
+          "reasoning": "FAM134B is a selective autophagy receptor specifically responsible for the degradation of the endoplasmic reticulum (ER-phagy) by binding to LC3B."
+        }
+      ],
+      "primary_pathway": "ER-phagy"
+    },
+    {
+      "interaction_id": "908",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Nuclear Proteostasis",
+          "reasoning": "Nucleophagy is a selective autophagy process that degrades nuclear components like the lamina to maintain nuclear integrity, which falls under the category of Nuclear Proteostasis."
+        }
+      ],
+      "primary_pathway": "Nuclear Proteostasis"
+    },
+    {
+      "interaction_id": "909",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "TBC1D25 (OATL1) is a RabGAP that specifically regulates the maturation stage of autophagosomes through its interaction with LC3B."
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:27:32
+RESPONSE LENGTH: 1180
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "872",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "FYCO1 is an adapter protein that mediates the microtubule-dependent transport of autophagosomes, a key step in the maturation and trafficking phase of autophagy."
+        }
+      ],
+      "primary_pathway": "Autophagosome Maturation"
+    },
+    {
+      "interaction_id": "873",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Cargo Selection",
+          "reasoning": "CALCOCO2 (NDP52) acts as an autophagy receptor that recognizes and targets specific cargo, such as ubiquitinated bacteria or organelles, to the autophagosome."
+        }
+      ],
+      "primary_pathway": "Cargo Selection"
+    },
+    {
+      "interaction_id": "874",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Mitochondrial Quality Control",
+          "reasoning": "BNIP3 is a specialized receptor that targets damaged mitochondria for degradation via mitophagy, which is a core process of mitochondrial quality control
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:28:19
+RESPONSE LENGTH: 1103
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "907",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "ER-phagy",
+          "reasoning": "FAM134B is a well-characterized selective autophagy receptor that specifically targets the endoplasmic reticulum for degradation, a process known as ER-phagy."
+        }
+      ],
+      "primary_pathway": "ER-phagy"
+    },
+    {
+      "interaction_id": "908",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagy-Lysosome Pathway",
+          "reasoning": "Nucleophagy is the selective degradation of nuclear components via the autophagy-lysosome system; 'Autophagy-Lysosome Pathway' is the most specific and appropriate category available in the database for this mechanism."
+        }
+      ],
+      "primary_pathway": "Autophagy-Lysosome Pathway"
+    },
+    {
+      "interaction_id": "909",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "TBC1D25 (also known as OATL1) is a
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:29:40
+RESPONSE LENGTH: 1206
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "908",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Nucleophagy",
+          "reasoning": "The function describes the autophagic degradation of nuclear components (nuclear lamina), which is specifically known as nucleophagy, a form of selective autophagy analogous to aggrephagy or ER-phagy."
+        }
+      ],
+      "primary_pathway": "Nucleophagy"
+    },
+    {
+      "interaction_id": "909",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagosome Maturation",
+          "reasoning": "The function specifically involves the regulation of the maturation stage of the autophagosome, which is a well-defined step in the autophagy pathway and is listed in the database."
+        }
+      ],
+      "primary_pathway": "Autophagosome Maturation"
+    },
+    {
+      "interaction_id": "910",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Autophagy-Dependent Cell Death",
+          "reasoning": "This function describes a specific form of regulated cell death that is mechanistically dependent on the autophagic machinery
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:31:40
+RESPONSE LENGTH: 1011
+FULL RESPONSE:
+{
+  "refinements": [
+    {
+      "interaction_id": "867",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Autophagy Initiation"
+        }
+      ],
+      "primary_pathway": "Autophagy Initiation"
+    },
+    {
+      "interaction_id": "868",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Autophagy Initiation"
+        }
+      ],
+      "primary_pathway": "Autophagy Initiation"
+    },
+    {
+      "interaction_id": "869",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Autophagy Initiation"
+        },
+        {
+          "function_index": 1,
+          "finalized_pathway": "Autophagosome Maturation"
+        },
+        {
+          "function_index": 2,
+          "finalized_pathway": "Autophagy Initiation"
+        }
+      ],
+      "primary_pathway": "Macroautophagy"
+    },
+    {
+      "interaction_id": "870",
+      "function_refinements":
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:32:20
+RESPONSE LENGTH: 993
+FULL RESPONSE:
+{
+  "refinements": [
+    {
+      "interaction_id": "878",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Autophagy Initiation"
+        }
+      ],
+      "primary_pathway": "Autophagy Initiation"
+    },
+    {
+      "interaction_id": "879",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Autophagy Initiation"
+        }
+      ],
+      "primary_pathway": "Autophagy Initiation"
+    },
+    {
+      "interaction_id": "880",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Autophagosome-Lysosome Fusion"
+        }
+      ],
+      "primary_pathway": "Autophagosome-Lysosome Fusion"
+    },
+    {
+      "interaction_id": "881",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Autophagosome-Lysosome Fusion"
+        }
+      ],
+      "primary_pathway": "Autophagosome-Lysosome
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:33:16
+RESPONSE LENGTH: 1001
+FULL RESPONSE:
+{
+  "refinements": [
+    {
+      "interaction_id": "867",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Autophagy Initiation"
+        }
+      ],
+      "primary_pathway": "Autophagy Initiation"
+    },
+    {
+      "interaction_id": "868",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Autophagy Initiation"
+        }
+      ],
+      "primary_pathway": "Autophagy Initiation"
+    },
+    {
+      "interaction_id": "869",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Autophagy Initiation"
+        },
+        {
+          "function_index": 1,
+          "finalized_pathway": "Autophagosome Maturation"
+        },
+        {
+          "function_index": 2,
+          "finalized_pathway": "Autophagy Initiation"
+        }
+      ],
+      "primary_pathway": "Macroautophagy"
+    },
+    {
+      "interaction_id": "870",
+      "function_ref
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:41:16
+RESPONSE LENGTH: 472
+FULL RESPONSE:
+{
+  "merges": [
+    {
+      "name_a": "Cellular Response to Stimuli",
+      "name_b": "Cellular response to external stimuli",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Cellular Signaling",
+      "name_b": "Intercellular Signaling",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Cellular Signaling",
+      "name_b": "Intracellular Signaling",
+      "action": "KEEP_DISTINCT",
+
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:41:23
+RESPONSE LENGTH: 459
+FULL RESPONSE:
+{
+  "merges": [
+    {
+      "name_a": "Extracellular Proteolysis",
+      "name_b": "Extracellular Proteostasis",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Extracellular Signal Transduction",
+      "name_b": "Signal Transduction",
+      "action": "MERGE",
+      "canonical_name": "Signal Transduction"
+    },
+    {
+      "name_a": "G1 Phase",
+      "name_b": "G2 Phase",
+      "action": "KEEP_DISTINCT",
+      
+
+================================================================================
+TIMESTAMP: 2026-01-11 22:41:23
+RESPONSE LENGTH: 479
+FULL RESPONSE:
+{
+  "merges": [
+    {
+      "name_a": "Mitochondrial Protein Quality Control",
+      "name_b": "Mitochondrial Quality Control",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Mitochondrial Protein Quality Control",
+      "name_b": "Protein Quality Control",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Mitochondrial protein folding",
+      "name_b": "Protein Folding",
+      "action": "
+
+================================================================================
+TIMESTAMP: 2026-01-18 14:08:28
+RESPONSE LENGTH: 1114
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "937",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "FOXO Signaling",
+          "reasoning": "FOXO4 is a transcription factor that directly regulates the expression of antioxidant enzymes like SOD2."
+        }
+      ],
+      "primary_pathway": "FOXO Signaling"
+    },
+    {
+      "interaction_id": "938",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Transcriptional Regulation",
+          "reasoning": "ATXN3 acts as a transcriptional repressor for the MMP2 gene."
+        }
+      ],
+      "primary_pathway": "Transcriptional Regulation"
+    },
+    {
+      "interaction_id": "939",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Transcriptional Regulation",
+          "reasoning": "HDAC3 is a histone deacetylase that mediates the repression of MMP2 gene transcription."
+        }
+      ],
+      "primary_pathway": "Transcriptional Regulation"
+    },
+    {
+      "interaction_id": "940",
+      "function_pathways": [
+        
+
+================================================================================
+TIMESTAMP: 2026-01-18 14:09:19
+RESPONSE LENGTH: 1041
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "957",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "RNA Metabolism",
+          "reasoning": "PUM1 is an RNA-binding protein that regulates the stability of ATXN1 mRNA; ATXN3 interacts with PUM1 to modulate this post-transcriptional control mechanism."
+        }
+      ],
+      "primary_pathway": "RNA Metabolism"
+    },
+    {
+      "interaction_id": "958",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Ubiquitin-Proteasome System",
+          "reasoning": "UBQLN2 acts as a shuttle protein that delivers ubiquitinated substrates, including ATXN3, to the proteasome for degradation."
+        }
+      ],
+      "primary_pathway": "Ubiquitin-Proteasome System"
+    },
+    {
+      "interaction_id": "959",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Nucleocytoplasmic Transport",
+          "reasoning": "Phosphorylation of ATXN3 by Casein Kinase 2 (CSNK2
+
+================================================================================
+TIMESTAMP: 2026-01-18 14:10:38
+RESPONSE LENGTH: 1097
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "957",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Post-transcriptional Regulation",
+          "reasoning": "PUM1 is a key RNA-binding protein that regulates the stability and translation of target mRNAs like ATXN1 by binding to their 3' UTRs."
+        }
+      ],
+      "primary_pathway": "Post-transcriptional Regulation"
+    },
+    {
+      "interaction_id": "958",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Ubiquitin-Proteasome System",
+          "reasoning": "UBQLN2 is a shuttle protein that delivers ubiquitinated substrates to the proteasome for degradation, a process central to ATXN3 protein clearance."
+        }
+      ],
+      "primary_pathway": "Ubiquitin-Proteasome System"
+    },
+    {
+      "interaction_id": "959",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Post-translational Modification",
+          "reasoning": "Phosphorylation by CSNK2A1 is a post-translational modification that
+
+================================================================================
+TIMESTAMP: 2026-01-18 14:12:37
+RESPONSE LENGTH: 1002
+FULL RESPONSE:
+{
+  "refinements": [
+    {
+      "interaction_id": "928",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Macroautophagy"
+        }
+      ],
+      "primary_pathway": "Macroautophagy"
+    },
+    {
+      "interaction_id": "929",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Transcriptional Regulation"
+        }
+      ],
+      "primary_pathway": "Transcriptional Regulation"
+    },
+    {
+      "interaction_id": "930",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Epigenetic Regulation"
+        }
+      ],
+      "primary_pathway": "Epigenetic Regulation"
+    },
+    {
+      "interaction_id": "931",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Epigenetic Regulation"
+        }
+      ],
+      "primary_pathway": "Epigenetic Regulation"
+    },
+    {
+      "interaction_
+
+================================================================================
+TIMESTAMP: 2026-01-18 14:31:39
+RESPONSE LENGTH: 496
+FULL RESPONSE:
+{
+  "merges": [
+    {
+      "name_a": "Cellular Macromolecule Metabolic Process",
+      "name_b": "Macromolecule Metabolic Process",
+      "action": "MERGE",
+      "canonical_name": "Macromolecule Metabolic Process"
+    },
+    {
+      "name_a": "Cellular Response to Stimuli",
+      "name_b": "Cellular response to external stimuli",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Cellular response to radiation",
+      "name_b": "Cellular response to
+
+================================================================================
+TIMESTAMP: 2026-01-22 22:34:52
+RESPONSE LENGTH: 1151
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "987",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Oxidative Stress Response",
+          "reasoning": "FOXO transcription factors are key regulators of antioxidant genes in response to cellular oxidative stress."
+        }
+      ],
+      "primary_pathway": "Oxidative Stress Response"
+    },
+    {
+      "interaction_id": "988",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Oxidative Stress Response",
+          "reasoning": "FOXO4 specifically regulates the expression of antioxidant enzymes like SOD2 and catalase."
+        }
+      ],
+      "primary_pathway": "Oxidative Stress Response"
+    },
+    {
+      "interaction_id": "989",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Oxidative Stress Response",
+          "reasoning": "FOXO factors often work in concert or regulate each other to manage the cellular response to oxidative damage."
+        }
+      ],
+      "primary_pathway": "Oxidative Stress Response"
+    },
+    {
+      "interaction_id": "990",
+
+================================================================================
+TIMESTAMP: 2026-01-22 22:35:42
+RESPONSE LENGTH: 1031
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "1007",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "SUMOylation",
+          "reasoning": "PIAS1 is a SUMO ligase that modifies ATXN3, a specific post-translational modification process."
+        }
+      ],
+      "primary_pathway": "SUMOylation"
+    },
+    {
+      "interaction_id": "1008",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Non-Homologous End Joining",
+          "reasoning": "Ku70 is a core component of the NHEJ machinery for repairing DNA double-strand breaks."
+        }
+      ],
+      "primary_pathway": "Non-Homologous End Joining"
+    },
+    {
+      "interaction_id": "1009",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Pre-mRNA Splicing",
+          "reasoning": "SFPQ is a splicing factor involved in the regulation of alternative splicing."
+        }
+      ],
+      "primary_pathway": "Pre-mRNA Splicing"
+    },
+    {
+
+================================================================================
+TIMESTAMP: 2026-01-22 22:36:31
+RESPONSE LENGTH: 1145
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "1027",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Selective Autophagy",
+          "reasoning": "NDP52 is a selective autophagy receptor that targets specific cargo like bacteria (xenophagy) and mitochondria (mitophagy) to the autophagosome."
+        }
+      ],
+      "primary_pathway": "Selective Autophagy"
+    },
+    {
+      "interaction_id": "1028",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Microtubule Dynamics",
+          "reasoning": "MAP1A is a microtubule-associated protein that regulates the stability and organization of the microtubule cytoskeleton."
+        }
+      ],
+      "primary_pathway": "Microtubule Dynamics"
+    },
+    {
+      "interaction_id": "1029",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Microtubule Dynamics",
+          "reasoning": "MAP1B is a microtubule-associated protein involved in microtubule stabilization and cytoskeletal organization."
+        }
+      ],
+      "primary_pathway": "Microtubule Dynamics"
+
+
+================================================================================
+TIMESTAMP: 2026-01-22 22:37:21
+RESPONSE LENGTH: 1066
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "1047",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Mitophagy",
+          "reasoning": "FUNDC1 is a well-characterized mitophagy receptor that recruits LC3B to damaged mitochondria."
+        }
+      ],
+      "primary_pathway": "Mitophagy"
+    },
+    {
+      "interaction_id": "1048",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Mitophagy",
+          "reasoning": "PHB2 acts as an inner mitochondrial membrane receptor for LC3B during mitophagy."
+        }
+      ],
+      "primary_pathway": "Mitophagy"
+    },
+    {
+      "interaction_id": "1049",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Macroautophagy",
+          "reasoning": "ATG5 is part of the core conjugation machinery required for LC3B lipidation during autophagosome formation."
+        }
+      ],
+      "primary_pathway": "Macroautophagy"
+    },
+    {
+      "interaction_id": "1050",
+      "function_pathways
+
+================================================================================
+TIMESTAMP: 2026-01-22 22:38:25
+RESPONSE LENGTH: 1177
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "987",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Oxidative Stress Response",
+          "reasoning": "ATXN3 interacts with FOXO transcription factors to promote the expression of antioxidant genes, a key component of the cellular response to oxidative stress."
+        }
+      ],
+      "primary_pathway": "Oxidative Stress Response"
+    },
+    {
+      "interaction_id": "988",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Oxidative Stress Response",
+          "reasoning": "ATXN3 modulates FOXO4 activity to regulate the transcription of genes involved in detoxifying reactive oxygen species."
+        }
+      ],
+      "primary_pathway": "Oxidative Stress Response"
+    },
+    {
+      "interaction_id": "989",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Oxidative Stress Response",
+          "reasoning": "FOXO transcription factors, including FOXO4, coordinately regulate the antioxidant gene expression program during oxidative stress."
+        }
+      ],
+      "primary_pathway":
+
+================================================================================
+TIMESTAMP: 2026-01-22 22:39:13
+RESPONSE LENGTH: 1163
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "997",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "ER-Associated Degradation",
+          "reasoning": "The function explicitly describes the ubiquitination and degradation of ATXN3 via the ERAD pathway, which is a specific protein quality control mechanism."
+        }
+      ],
+      "primary_pathway": "ER-Associated Degradation"
+    },
+    {
+      "interaction_id": "998",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Chaperone-Mediated Protein Folding",
+          "reasoning": "DNAJB1 is a Hsp40 co-chaperone that assists in protein folding and stress response, fitting the category of chaperone-mediated processes."
+        }
+      ],
+      "primary_pathway": "Chaperone-Mediated Protein Folding"
+    },
+    {
+      "interaction_id": "999",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Mitochondrial Transport",
+          "reasoning": "The function involves the movement of mitochondria along axons, which is a specific sub-type of intracellular transport."
+        
+
+================================================================================
+TIMESTAMP: 2026-01-22 22:41:57
+RESPONSE LENGTH: 1116
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "1057",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Macroautophagy",
+          "reasoning": "AMPK is a key energy sensor that initiates the macroautophagy process by phosphorylating downstream targets like ULK1."
+        }
+      ],
+      "primary_pathway": "Macroautophagy"
+    },
+    {
+      "interaction_id": "1058",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Macroautophagy",
+          "reasoning": "The AMPK-ULK1 interaction is the canonical trigger for the initiation of macroautophagy in response to nutrient stress."
+        }
+      ],
+      "primary_pathway": "Macroautophagy"
+    },
+    {
+      "interaction_id": "1059",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Secretory Autophagy",
+          "reasoning": "The interaction between GRASP55 and LC3B specifically mediates unconventional protein secretion via the autophagic machinery."
+        }
+      ],
+      "primary_pathway": "Secretory Autophagy"
+    },
+
+
+================================================================================
+TIMESTAMP: 2026-01-22 22:43:08
+RESPONSE LENGTH: 1130
+FULL RESPONSE:
+{
+  "assignments": [
+    {
+      "interaction_id": "992",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Epigenetic Regulation",
+          "reasoning": "PCAF is a histone acetyltransferase (HAT); ATXN3 modulates its activity to regulate the epigenetic state of chromatin."
+        }
+      ],
+      "primary_pathway": "Epigenetic Regulation"
+    },
+    {
+      "interaction_id": "993",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Transcriptional Regulation",
+          "reasoning": "NCoR is a nuclear receptor corepressor; ATXN3 interacts with it to modulate the repression of specific target genes."
+        }
+      ],
+      "primary_pathway": "Transcriptional Regulation"
+    },
+    {
+      "interaction_id": "994",
+      "function_pathways": [
+        {
+          "function_index": 0,
+          "pathway": "Epigenetic Regulation",
+          "reasoning": "HDAC3 is a histone deacetylase; ATXN3 interacts with it to facilitate histone deacetylation and gene silencing."
+        },
+        {
+          "function_index": 1,
+          "path
+
+================================================================================
+TIMESTAMP: 2026-01-30 03:42:00
+RESPONSE LENGTH: 1007
+FULL RESPONSE:
+{
+  "refinements": [
+    {
+      "interaction_id": "1194",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "DNA Damage Response"
+        }
+      ],
+      "primary_pathway": "DNA Damage Response"
+    },
+    {
+      "interaction_id": "1195",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "DNA Damage Response"
+        }
+      ],
+      "primary_pathway": "DNA Damage Response"
+    },
+    {
+      "interaction_id": "1196",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Oxidative Stress Response"
+        }
+      ],
+      "primary_pathway": "Oxidative Stress Response"
+    },
+    {
+      "interaction_id": "1197",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Transcriptional Regulation"
+        }
+      ],
+      "primary_pathway": "Transcriptional Regulation"
+    },
+    {
+      
+
+================================================================================
+TIMESTAMP: 2026-01-30 03:42:46
+RESPONSE LENGTH: 999
+FULL RESPONSE:
+{
+  "refinements": [
+    {
+      "interaction_id": "1194",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "DNA Damage Response"
+        }
+      ],
+      "primary_pathway": "DNA Damage Response"
+    },
+    {
+      "interaction_id": "1195",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "DNA Damage Response"
+        }
+      ],
+      "primary_pathway": "DNA Damage Response"
+    },
+    {
+      "interaction_id": "1196",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Oxidative Stress Response"
+        }
+      ],
+      "primary_pathway": "Oxidative Stress Response"
+    },
+    {
+      "interaction_id": "1197",
+      "function_refinements": [
+        {
+          "function_index": 0,
+          "finalized_pathway": "Transcriptional Regulation"
+        }
+      ],
+      "primary_pathway": "Transcriptional Regulation"
+    },
+    
+
+================================================================================
+TIMESTAMP: 2026-01-30 19:49:24
+RESPONSE LENGTH: 455
+FULL RESPONSE:
+{
+  "merges": [
+    {
+      "name_a": "Protein Trafficking and Secretion",
+      "name_b": "Protein Trafficking and Sorting",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Signaling by Notch",
+      "name_b": "Signaling by Wnt",
+      "action": "KEEP_DISTINCT",
+      "canonical_name": null
+    },
+    {
+      "name_a": "Translation",
+      "name_b": "Translational Regulation",
+      "action": "KEEP_DISTINCT

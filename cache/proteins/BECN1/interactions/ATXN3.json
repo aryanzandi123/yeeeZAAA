@@ -1,0 +1,106 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 interacts directly with Beclin-1 (BECN1), a key protein in the autophagy pathway.",
+  "functions": [
+    {
+      "function": "Autophagy",
+      "arrow": "activates",
+      "likely_direction": "main_to_primary",
+      "cellular_process": "ATXN3 interacts with Beclin-1 (BECN1), a key protein in the autophagy initiation complex. ATXN3 acts as a deubiquitinase for BECN1, removing ubiquitin chains and thereby protecting it from proteasomal degradation.",
+      "effect_description": "By stabilizing BECN1, ATXN3 promotes the formation of the PI3K class III complex, which is essential for the nucleation of the autophagosome. This enhances the overall autophagic flux, facilitating the clearance of cellular debris and aggregated proteins.",
+      "biological_consequence": [
+        "ATXN3 binds to and deubiquitinates BECN1 → BECN1 is stabilized and protected from proteasomal degradation → Formation of the PI3KC3-C1 complex is promoted → Autophagosome nucleation and formation are enhanced → Autophagic clearance of substrates is increased"
+      ],
+      "specific_effects": [
+        "ATXN3 removes ubiquitin chains from BECN1, leading to its stabilization and the stimulation of autophagy.",
+        "Depletion of ATXN3 results in a reduction in Beclin-1 levels and a decrease in autophagic flux.",
+        "The interaction between ATXN3 and BECN1 is necessary for ATXN3's role in promoting autophagy.",
+        "In Machado-Joseph disease, mutant ATXN3 still binds to BECN1 but facilitates its degradation, impairing autophagy."
+      ],
+      "evidence": [
+        {
+          "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+          "year": 2024,
+          "pmid": "39320846"
+        },
+        {
+          "paper_title": "Polyglutamine tracts regulate beclin 1-dependent autophagy",
+          "year": 2017,
+          "pmid": "28445460"
+        },
+        {
+          "paper_title": "Autophagy in Spinocerebellar Ataxia Type 3: From Pathogenesis to Therapeutics",
+          "year": 2023,
+          "pmid": "37108570"
+        },
+        {
+          "paper_title": "Overexpression of the autophagic beclin-1 protein clears mutant ataxin-3 and alleviates Machado-Joseph disease",
+          "year": 2012,
+          "pmid": "21478185"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "39320846",
+        "28445460",
+        "37108570",
+        "21478185"
+      ],
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "mechanism": "ATXN3 functions as a deubiquitinase (DUB) that directly interacts with Beclin-1 (BECN1), a core component of the autophagy initiation complex. Through its catalytic activity, ATXN3 removes ubiquitin chains from BECN1, thereby preventing its ubiquitination-mediated proteasomal degradation. This specific deubiquitination event is crucial for maintaining stable cellular levels of BECN1.",
+  "effect": "The stabilization of BECN1 by ATXN3 promotes the efficient assembly and activity of the PI3K class III complex (PI3KC3-C1), which is indispensable for the nucleation of the autophagosome. Consequently, this leads to a significant enhancement of overall autophagic flux, facilitating the robust clearance of cellular debris and aggregated proteins.",
+  "summary": "ATXN3 critically activates autophagy by deubiquitinating and stabilizing BECN1, thereby promoting autophagosome formation and enhancing autophagic flux. Notably, experimental findings demonstrate that depletion of ATXN3 results in reduced Beclin-1 levels and a substantial decrease in autophagic flux, underscoring its essential regulatory role.",
+  "evidence": [
+    {
+      "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+      "year": 2024
+    },
+    {
+      "paper_title": "Polyglutamine tracts regulate beclin 1-dependent autophagy",
+      "year": 2017
+    },
+    {
+      "paper_title": "Autophagy in Spinocerebellar Ataxia Type 3: From Pathogenesis to Therapeutics",
+      "year": 2023
+    },
+    {
+      "paper_title": "Overexpression of the autophagic beclin-1 protein clears mutant ataxin-3 and alleviates Machado-Joseph disease",
+      "year": 2012
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --activates--> BECN1:",
+  "protein_a": "BECN1",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.646178Z",
+  "last_updated": "2026-02-04T04:49:14.646178Z"
+}

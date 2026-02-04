@@ -1,0 +1,32 @@
+=================================================================
+            PATHWAY VERIFICATION REPORT
+            Generated: 2026-01-30 20:07:04
+=================================================================
+
+SUMMARY
+-----------------------------------------------------------------
+  Interactions verified:  45
+  Pathways verified:      235
+  Checks passed:          14
+  Checks failed:          0
+
+STATUS: [OK] PASS
+
+CHECKS
+-----------------------------------------------------------------
+  [OK] interactions_have_pathway
+  [OK] pathway_references_valid
+  [OK] interaction_data_consistency
+  [OK] all_roots_exist
+  [OK] no_duplicate_names
+  [OK] no_empty_names
+  [OK] usage_count_accuracy
+  [OK] no_cycles
+  [OK] single_parent
+  [OK] no_orphan_pathways
+  [OK] parent_exists
+  [OK] levels_correct
+  [OK] ancestor_ids_accurate
+  [OK] is_leaf_accurate
+
+=================================================================

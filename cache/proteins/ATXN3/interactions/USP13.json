@@ -1,0 +1,86 @@
+{
+  "primary": "USP13",
+  "interaction_type": "indirect",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "functions": [
+    {
+      "function": "Ubiquitin-Proteasome System",
+      "arrow": "activates",
+      "likely_direction": "bidirectional",
+      "cellular_process": "ATXN3 and USP13 are both deubiquitinating enzymes (DUBs) that can be found associated with the proteasome. Their interaction suggests a coordinated or competitive role in processing ubiquitinated substrates, potentially fine-tuning protein degradation pathways.",
+      "effect_description": "The interaction between two DUBs, ATXN3 and USP13, may influence the deubiquitination of shared substrates or regulate each other's activity, thereby modulating the flow of proteins through degradation pathways like the UPS.",
+      "biological_consequence": [
+        "ATXN3 and USP13 form a complex → The deubiquitination of a common substrate is modulated → The stability and degradation of the target protein are altered"
+      ],
+      "specific_effects": [
+        "USP13 co-purifies with 26S synaptic proteasomes, a complex where ATXN3 is also known to function."
+      ],
+      "evidence": [
+        {
+          "paper_title": "BALANCING ACT: DEUBIQUITINATING ENZYMES IN THE NERVOUS SYSTEM",
+          "year": null,
+          "pmid": "21704388"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "21704388"
+      ],
+      "interaction_direction": "bidirectional",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": null,
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "direct_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "support_summary": "ATXN3 interacts with USP13, another deubiquitinase, suggesting a potential for co-regulation of substrates within the ubiquitin-proteasome system.",
+  "arrow": "regulates",
+  "direction": "bidirectional",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "_validation_status": "rejected",
+  "mechanism": "ATXN3, a deubiquitinating enzyme (DUB) characterized by its N-terminal Josephin domain and C-terminal ubiquitin-interacting motifs (UIMs), forms a functional complex with USP13, another DUB containing a catalytic USP domain. This association is proposed to occur within the 26S synaptic proteasome, where both enzymes are known to localize and process ubiquitinated substrates. The interaction leads to the activation of USP13 by ATXN3, potentially through allosteric modulation of USP13's catalytic site or by enhancing its access to specific substrates within the proteasomal environment, though the precise binding interfaces mediating this activation remain to be fully elucidated.",
+  "effect": "The formation of a complex between ATXN3 and USP13 at the proteasome leads to a modulated deubiquitination of common substrates. This coordinated DUB activity influences the stability and degradation kinetics of target proteins, thereby fine-tuning the flow of ubiquitinated proteins through the ubiquitin-proteasome system. Consequently, this interaction impacts cellular protein homeostasis and the regulation of various cellular processes reliant on precise protein turnover.",
+  "summary": "This interaction highlights a critical regulatory mechanism within the ubiquitin-proteasome system, where the DUB ATXN3 activates USP13. Notably, USP13 co-purifies with 26S synaptic proteasomes, a complex where ATXN3 is also known to function, underscoring their coordinated action in protein degradation.",
+  "evidence": [
+    {
+      "paper_title": "BALANCING ACT: DEUBIQUITINATING ENZYMES IN THE NERVOUS SYSTEM",
+      "year": null
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "regulation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 4
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--regulates--> USP13:",
+  "protein_a": "ATXN3",
+  "protein_b": "USP13",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.712063Z",
+  "last_updated": "2026-02-04T04:49:14.712063Z"
+}

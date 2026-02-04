@@ -1,0 +1,99 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "indirect",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 directly binds to tubulin, a key component of microtubules, which is involved in the pathway of sorting aggregated proteins to aggresomes.",
+  "functions": [
+    {
+      "function": "Aggresome Formation",
+      "arrow": "activates",
+      "cellular_process": "ATXN3's role in aggresome formation is critically dependent on an intact microtubule network, which is formed by the polymerization of tubulin subunits like TUBA1A. ATXN3, in complex with polyubiquitinated substrates and the dynein motor, moves along these microtubule tracks to transport cargo to the microtubule-organizing center (MTOC).",
+      "effect_description": "The interaction is one of dependence rather than direct regulation of tubulin itself. The microtubule network provides the physical infrastructure for the ATXN3-dynein mediated transport of protein aggregates. Disruption of the microtubule network prevents the formation of a centralized aggresome, leading to the accumulation of smaller pre-aggresomal particles.",
+      "biological_consequence": [
+        "ATXN3 binds polyubiquitinated misfolded proteins → The ATXN3-substrate complex associates with the dynein motor → The dynein motor protein walks along microtubule tracks (composed of tubulin polymers) → The entire complex is transported to the MTOC → The cargo of misfolded proteins is deposited to form a single large aggresome."
+      ],
+      "specific_effects": [
+        "The formation of aggresomes is dependent on an intact microtubule network.",
+        "Disruption of microtubules with agents like nocodazole prevents the final coalescence of protein aggregates into a single aggresome, resulting in the accumulation of smaller pre-aggresome particles that colocalize with ATXN3."
+      ],
+      "evidence": [
+        {
+          "paper_title": "The polyglutamine neurodegenerative protein Ataxin 3 regulates aggresome formation",
+          "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+          "year": 2005,
+          "relevant_quote": "Endogenous AT3 colocalizes with aggresomes formed by CFTR Δ F508-GFP in COS 7 cells after proteasome inhibition with MG132 as well as preaggresome particles after nocodazole disruption of microtubules.",
+          "pmid": "15767577"
+        },
+        {
+          "paper_title": "Interactions of ataxin-3 with its molecular partners in the protein machinery that sorts protein aggregates to the aggresome",
+          "journal": "Journal of Huntington's Disease",
+          "year": 2015,
+          "relevant_quote": "Non-pathogenic ATXN3... directly interacts with many cytoskeletal proteins, proteasomal regulators, and autophagic proteins involved in aggresome formation, including tubulin, dynein, HDAC6, Parkin, CHIP, and p62.",
+          "pmid": "24685680"
+        }
+      ],
+      "pmids": [
+        "15767577",
+        "24685680"
+      ],
+      "interaction_effect": "activation",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": null,
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "direct_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "binds",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": "The interaction between ATXN3 and TUBA1A (a-tubulin) is contextual and indirect, rather than a direct binding event for a specific regulatory purpose. ATXN3's function in aggresome formation is dependent on an intact microtubule network, which is composed of tubulin polymers. ATXN3, along with the dynein motor complex, utilizes these microtubule tracks for the transport of misfolded proteins.",
+  "mechanism": "ATXN3 does not directly bind to the TUBA1A monomer or its polymeric form, microtubules. Instead, ATXN3 forms a complex with polyubiquitinated misfolded proteins and associates with the dynein motor protein. The dynein motor, acting as a microtubule-dependent motor, directly interacts with the microtubule tracks, which are polymers primarily composed of α-tubulin (TUBA1A) and β-tubulin heterodimers. This indirect interaction facilitates the ATP-dependent retrograde transport of the ATXN3-substrate-dynein complex towards the microtubule-organizing center (MTOC).",
+  "effect": "This microtubule-dependent transport is essential for the efficient trafficking of polyubiquitinated protein aggregates to the MTOC, where they coalesce into a single, centralized aggresome. Consequently, an intact microtubule network, formed by TUBA1A polymerization, provides the necessary physical infrastructure for this process. Disruption of this network abrogates the directed transport, leading to the accumulation of smaller, dispersed pre-aggresomal particles instead of a single large aggresome.",
+  "summary": "The utilization of TUBA1A-based microtubules by ATXN3 is fundamental for the cellular defense mechanism of aggresome formation, ensuring the proper sequestration of misfolded proteins. This dependency is critically demonstrated by experiments showing that microtubule disruption with agents like nocodazole prevents the final coalescence of protein aggregates into a single aggresome.",
+  "evidence": [
+    {
+      "paper_title": "The polyglutamine neurodegenerative protein Ataxin 3 regulates aggresome formation",
+      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+      "year": 2005,
+      "relevant_quote": "Endogenous AT3 colocalizes with aggresomes formed by CFTR Δ F508-GFP in COS 7 cells after proteasome inhibition with MG132 as well as preaggresome particles after nocodazole disruption of microtubules."
+    },
+    {
+      "paper_title": "Interactions of ataxin-3 with its molecular partners in the protein machinery that sorts protein aggregates to the aggresome",
+      "journal": "Journal of Huntington's Disease",
+      "year": 2015,
+      "relevant_quote": "Non-pathogenic ATXN3... directly interacts with many cytoskeletal proteins, proteasomal regulators, and autophagic proteins involved in aggresome formation, including tubulin, dynein, HDAC6, Parkin, CHIP, and p62."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "binding",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 2
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --binds--> TUBA1A:",
+  "protein_a": "TUBA1A",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.676922Z",
+  "last_updated": "2026-02-04T04:49:14.676922Z"
+}

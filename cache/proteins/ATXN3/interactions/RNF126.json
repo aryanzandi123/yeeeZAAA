@@ -1,0 +1,60 @@
+{
+  "primary": "RNF126",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "functions": [
+    {
+      "function": "Substrate Ubiquitination",
+      "arrow": "inhibits",
+      "likely_direction": "bidirectional",
+      "cellular_process": "The interaction between the deubiquitinase ATXN3 and the E3 ubiquitin ligase RNF126 represents a classic pairing that regulates the ubiquitination status of target proteins. RNF126 adds ubiquitin chains to substrates, while ATXN3 can remove or edit these chains.",
+      "effect_description": "This interplay provides a check-and-balance system for protein stability and degradation. The outcome for a shared substrate would depend on the relative activities of RNF126 and ATXN3, determining whether the substrate is targeted for degradation or stabilized.",
+      "biological_consequence": [
+        "RNF126 ubiquitinates a substrate → ATXN3 is recruited to the complex → ATXN3 deubiquitinates the substrate → The substrate's fate (degradation vs. stabilization) is determined"
+      ],
+      "specific_effects": [
+        "ATXN3 and RNF126 are opposing enzyme types within the ubiquitin-proteasome system, and their interaction suggests co-regulation of protein turnover."
+      ],
+      "evidence": [],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "inhibits",
+      "direction": "",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "inhibition"
+    }
+  ],
+  "support_summary": "ATXN3, a deubiquitinase, interacts with the E3 ubiquitin ligase RNF126, indicating a functional relationship in regulating protein ubiquitination and stability.",
+  "arrow": "binds",
+  "direction": "bidirectional",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "regulates"
+    ]
+  },
+  "_validation_status": "rejected",
+  "mechanism": "ATXN3, a deubiquitinase characterized by its N-terminal Josephin domain, forms a direct protein-protein complex with RNF126, an E3 ubiquitin ligase containing a C-terminal RING finger domain. While the precise binding interface and specific residues involved are not detailed in the provided data, this interaction likely positions ATXN3 to access ubiquitin chains added by RNF126. This co-localization allows ATXN3 to either deubiquitinate RNF126 itself, modulating its ligase activity, or to act on substrates actively being ubiquitinated by RNF126, potentially through ATXN3's ubiquitin-interacting motifs (UIMs). Such an association enables a direct counter-regulation of ubiquitination events, where ATXN3's catalytic activity directly opposes RNF126's ubiquitin transfer.",
+  "effect": "The interaction directly modulates the ubiquitination landscape of shared substrates. RNF126's E3 ligase activity leads to substrate ubiquitination, often marking proteins for proteasomal degradation or altering their localization. Conversely, ATXN3's deubiquitinase activity counteracts this by removing ubiquitin chains, thereby stabilizing substrates or altering their trafficking and signaling, ultimately dictating their cellular fate.",
+  "summary": "The interaction between the E3 ligase RNF126 and the deubiquitinase ATXN3 establishes a critical regulatory node within the ubiquitin-proteasome system, precisely controlling the ubiquitination status and subsequent fate of target proteins. This partnership exemplifies a sophisticated mechanism for fine-tuning protein stability and degradation pathways, as evidenced by their opposing enzymatic activities on shared substrates.",
+  "evidence": [],
+  "_llm_synthesized": true,
+  "interaction_effect": "binding",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 2
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--binds--> RNF126:",
+  "protein_a": "ATXN3",
+  "protein_b": "RNF126",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.714211Z",
+  "last_updated": "2026-02-04T04:49:14.714211Z"
+}

@@ -1,0 +1,50 @@
+=================================================================
+            PATHWAY VERIFICATION REPORT
+            Generated: 2026-01-11 23:03:29
+=================================================================
+
+SUMMARY
+-----------------------------------------------------------------
+  Interactions verified:  99
+  Pathways verified:      354
+  Checks passed:          13
+  Checks failed:          1
+
+STATUS: [FAIL] FAIL
+
+CHECKS
+-----------------------------------------------------------------
+  [OK] interactions_have_pathway
+  [OK] pathway_references_valid
+  [OK] interaction_data_consistency
+  [OK] all_roots_exist
+  [OK] no_duplicate_names
+  [OK] no_empty_names
+  [OK] usage_count_accuracy
+  [FAIL] no_cycles (5 issues)
+  [OK] single_parent
+  [OK] no_orphan_pathways
+  [OK] parent_exists
+  [OK] levels_correct (2 issues)
+  [OK] ancestor_ids_accurate
+  [OK] is_leaf_accurate
+
+ISSUES BY SEVERITY
+-----------------------------------------------------------------
+  [CRITICAL] 5 issues
+  [LOW] 2 issues
+
+BLOCKING ISSUES (must fix manually)
+-----------------------------------------------------------------
+  [!] Cycle detected: 4706 -> 4642 -> 4706
+  [!] Cycle detected: 4642 -> 4706 -> 4642
+  [!] Cycle detected: 4642 -> 4706 -> 4642
+  [!] Cycle detected: 4706 -> 4642 -> 4706
+  [!] Cycle detected: 4706 -> 4642 -> 4706
+
+WARNINGS (non-blocking)
+-----------------------------------------------------------------
+  [WARN] Pathway 'DNA Damage Response' level=0, should be 4 (parent 'Cellular Stress Response' is level 3)
+  [WARN] Pathway 'Cell Cycle' level=0, should be 2 (parent 'Cell Cycle Regulation' is level 1)
+
+=================================================================

@@ -1,0 +1,85 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 directly interacts with and stabilizes the transcription factor KLF4 through deubiquitination, a process implicated in cancer metastasis.",
+  "functions": [
+    {
+      "function": "KLF4 Stability",
+      "arrow": "activates",
+      "likely_direction": "main_to_primary",
+      "cellular_process": "ATXN3 functions as a deubiquitinase for the Krüppel-like factor 4 (KLF4) transcription factor. It directly binds to KLF4 and removes ubiquitin chains that target it for proteasomal degradation.",
+      "effect_description": "By deubiquitinating and stabilizing KLF4, ATXN3 increases its protein levels. In the context of breast cancer, this has been shown to promote cancer cell metastasis, and high expression of both proteins is associated with a poor prognosis.",
+      "biological_consequence": [
+        "ATXN3 binds to KLF4 → ATXN3 removes ubiquitin chains from KLF4 → KLF4 degradation is prevented and its protein levels increase → KLF4-mediated transcriptional programs are enhanced → Breast cancer cell metastasis is promoted"
+      ],
+      "specific_effects": [
+        "ATXN3 was identified as a deubiquitinating enzyme of KLF4.",
+        "ATXN3 binds to, deubiquitinates, and stabilizes the KLF4 protein.",
+        "ATXN3 promotes breast cancer metastasis by stabilizing KLF4."
+      ],
+      "evidence": [
+        {
+          "paper_title": "ATXN3 promotes breast cancer metastasis by deubiquitinating KLF4",
+          "year": 2019,
+          "pmid": "31563563"
+        },
+        {
+          "paper_title": "ATXN3 deubiquitinates YAP1 to promote tumor growth",
+          "year": 2022,
+          "pmid": "37818078"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "31563563",
+        "37818078"
+      ],
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "mechanism": "ATXN3, a deubiquitinase (DUB), directly binds to the Krüppel-like factor 4 (KLF4) transcription factor. Upon binding, ATXN3 enzymatically removes ubiquitin chains from KLF4. This deubiquitination event counteracts the ubiquitination process that typically marks KLF4 for proteasomal degradation.",
+  "effect": "The removal of ubiquitin chains by ATXN3 prevents KLF4 from undergoing proteasomal degradation, thereby increasing KLF4 protein stability and elevating its cellular protein levels. This stabilization of KLF4 enhances its transcriptional activity, leading to the upregulation of KLF4-mediated gene expression programs.",
+  "summary": "Biologically, the ATXN3-mediated stabilization of KLF4 is critical in promoting breast cancer cell metastasis. High expression of both ATXN3 and KLF4 is notably associated with a poor prognosis in breast cancer patients.",
+  "evidence": [
+    {
+      "paper_title": "ATXN3 promotes breast cancer metastasis by deubiquitinating KLF4",
+      "year": 2019
+    },
+    {
+      "paper_title": "ATXN3 deubiquitinates YAP1 to promote tumor growth",
+      "year": 2022
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --activates--> KLF4:",
+  "protein_a": "KLF4",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.679177Z",
+  "last_updated": "2026-02-04T04:49:14.679177Z"
+}

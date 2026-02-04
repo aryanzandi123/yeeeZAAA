@@ -1,0 +1,90 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "indirect",
+  "upstream_interactor": "YAP1",
+  "mediator_chain": [
+    "YAP1"
+  ],
+  "depth": 2,
+  "support_summary": "ATXN3 indirectly promotes the expression of Cysteine-rich angiogenic inducer 61 (CYR61) by directly deubiquitinating and stabilizing the transcription factor YAP1.",
+  "functions": [
+    {
+      "function": "CYR61 Gene Expression",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 indirectly enhances the expression of Cysteine-rich angiogenic inducer 61 (CYR61) through its direct interaction with and stabilization of the YAP1 protein. As a deubiquitinase, ATXN3 removes ubiquitin tags from YAP1, protecting it from proteasomal degradation. This leads to an accumulation of active YAP1, which then translocates to the nucleus and, in complex with TEAD transcription factors, binds to the promoter of the CYR61 gene to drive its transcription.",
+      "effect_description": "The stabilization of YAP1 by ATXN3 results in the upregulation of CYR61 transcription and subsequent protein synthesis. CYR61, a matricellular protein, is involved in promoting key aspects of tumorigenesis, including cancer cell adhesion, migration, and angiogenesis.",
+      "biological_consequence": [
+        "ATXN3 deubiquitinates and stabilizes YAP1 protein → Nuclear accumulation of YAP1 increases → YAP1/TEAD transcriptional complexes form → The complexes bind to the CYR61 promoter and activate gene transcription → CYR61 protein levels increase → Promotion of cancer cell adhesion, migration, and angiogenesis"
+      ],
+      "specific_effects": [
+        "ATXN3 suppression in cancer cells selectively inhibits the expression of YAP1 target genes, including CYR61.",
+        "Reconstitution of YAP1 in ATXN3-deleted cells rescues the diminished expression of CYR61.",
+        "ATXN3 interacts with the WW domains of YAP1 to protect it from ubiquitination-mediated degradation."
+      ],
+      "evidence": [
+        {
+          "paper_title": "ATXN3 deubiquitinates YAP1 to promote tumor growth",
+          "journal": "American Journal of Cancer Research",
+          "year": 2023,
+          "relevant_quote": "Interestingly, genetic ATXN3 suppression selectively inhibited the expression levels of YAP1 target genes including the connective tissue growth factor (Ctgf) and cysteine-rich angiogenic inducer 61 (Cyr61), both of which have important functions in cell adhesion, migration, proliferation and angiogenesis. Consequently, ATXN3 suppression resulted in reduced cancer cell growth and migration, which can also be largely rescued by YAP1 reconstitution. At the molecular level, ATNX3 interacts with the WW domains of YAP1 to protect YAP1 from ubiquitination-mediated degradation.",
+          "pmid": "37818078"
+        }
+      ],
+      "pmids": [
+        "37818078"
+      ],
+      "direct_arrow": "activates",
+      "interaction_effect": "activation",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": "YAP1",
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [
+          "YAP1"
+        ],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "ATXN3, acting as a deubiquitinase, directly interacts with the WW domains of the YAP1 protein. This interaction facilitates the removal of ubiquitin tags from YAP1, thereby protecting it from proteasomal degradation and leading to its accumulation. The stabilized and accumulated YAP1 then translocates to the nucleus, where it forms a transcriptional complex with TEAD transcription factors. This YAP1/TEAD complex subsequently binds to the promoter region of the CYR61 gene, directly activating its transcription.",
+  "effect": "The ATXN3-mediated stabilization of YAP1 results in a significant upregulation of CYR61 gene transcription and subsequent increase in CYR61 protein synthesis. This elevated expression of CYR61, a matricellular protein, promotes key aspects of tumorigenesis, including enhanced cancer cell adhesion, migration, and angiogenesis.",
+  "summary": "ATXN3 activates CYR61 expression by deubiquitinating and stabilizing the oncogenic transcription co-activator YAP1, thereby driving cancer progression. Reconstitution of YAP1 in ATXN3-deleted cells rescues the diminished expression of CYR61, highlighting the critical role of ATXN3 in this pathway.",
+  "evidence": [
+    {
+      "paper_title": "ATXN3 deubiquitinates YAP1 to promote tumor growth",
+      "journal": "American Journal of Cancer Research",
+      "year": 2023,
+      "relevant_quote": "Interestingly, genetic ATXN3 suppression selectively inhibited the expression levels of YAP1 target genes including the connective tissue growth factor (Ctgf) and cysteine-rich angiogenic inducer 61 (Cyr61), both of which have important functions in cell adhesion, migration, proliferation and angiogenesis. Consequently, ATXN3 suppression resulted in reduced cancer cell growth and migration, which can also be largely rescued by YAP1 reconstitution. At the molecular level, ATNX3 interacts with the WW domains of YAP1 to protect YAP1 from ubiquitination-mediated degradation."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "YAP1 --activates--> CYR61:",
+  "protein_a": "CYR61",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.732786Z",
+  "last_updated": "2026-02-04T04:49:14.732786Z"
+}

@@ -1,0 +1,85 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 interacts with GABARAP, another key autophagy protein, indicating its role in promoting the autophagic process.",
+  "functions": [
+    {
+      "function": "Autophagosome Formation",
+      "arrow": "activates",
+      "likely_direction": "bidirectional",
+      "cellular_process": "Similar to its interaction with LC3C, ATXN3 directly binds to GABARAP, another member of the Atg8 family, through LIR domains in its N-terminal Josephin domain. This interaction is part of ATXN3's function in the early stages of the autophagic pathway.",
+      "effect_description": "By interacting with GABARAP on early autophagosomes, ATXN3 plays a regulatory role in autophagic flux. This interaction helps to ensure the efficient progression of autophagy, which is critical for cellular homeostasis and survival during stress conditions like starvation.",
+      "biological_consequence": [
+        "ATXN3 binds to GABARAP on nascent autophagosomes → ATXN3 participates in the regulation of early autophagosome dynamics → Autophagic flux and degradation of substrates are promoted"
+      ],
+      "specific_effects": [
+        "ATXN3 directly interacts with GABARAP via its LIR domains.",
+        "The interaction with GABARAP occurs during the initial phases of autophagy.",
+        "This interaction is part of a broader function of ATXN3 in promoting the overall autophagy process."
+      ],
+      "evidence": [
+        {
+          "paper_title": "The Machado-Joseph disease deubiquitylase ataxin-3 interacts with LC3C/GABARAP and promotes autophagy",
+          "year": 2019,
+          "pmid": "31625269"
+        },
+        {
+          "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+          "year": 2024,
+          "pmid": "39320846"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "31625269",
+        "39320846"
+      ],
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "binds",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "mechanism": "ATXN3 directly binds to GABARAP, an Atg8 family member, through specific LIR domains located within its N-terminal Josephin domain. This direct molecular recognition facilitates the recruitment or stabilization of ATXN3 at nascent autophagosomes where GABARAP is localized. The interaction is analogous to ATXN3's established binding with other Atg8 proteins like LC3C, suggesting a conserved mechanism for autophagosome association and regulation.",
+  "effect": "This direct interaction between ATXN3 and GABARAP on early autophagosomes is crucial for regulating autophagic flux. By engaging GABARAP, ATXN3 promotes the efficient progression of autophagy, thereby ensuring the timely degradation of cellular substrates. This process is vital for maintaining cellular homeostasis and enhancing cell survival, particularly under conditions of cellular stress such as starvation.",
+  "summary": "ATXN3 directly activates GABARAP by binding via its LIR domains on nascent autophagosomes, thereby promoting the efficient progression of autophagy. This molecular interaction highlights ATXN3's critical role in regulating early autophagosome dynamics and overall autophagic flux.",
+  "evidence": [
+    {
+      "paper_title": "The Machado-Joseph disease deubiquitylase ataxin-3 interacts with LC3C/GABARAP and promotes autophagy",
+      "year": 2019
+    },
+    {
+      "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+      "year": 2024
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "binds",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --binds--> GABARAP:",
+  "protein_a": "GABARAP",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.650416Z",
+  "last_updated": "2026-02-04T04:49:14.650416Z"
+}

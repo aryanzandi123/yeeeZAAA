@@ -1,0 +1,84 @@
+{
+  "primary": "CASP7",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "Caspase-7 was identified as an interactor of a specific ATXN3 isoform (ataxin-3aS) and validated by co-immunoprecipitation.",
+  "functions": [
+    {
+      "function": "ATXN3 Proteolytic Cleavage",
+      "arrow": "activates",
+      "likely_direction": "primary_to_main",
+      "cellular_process": "Caspase-7, an executioner caspase, directly interacts with specific isoforms of ATXN3 (e.g., ataxin-3aS). This interaction leads to the proteolytic cleavage of ATXN3, a process implicated in the pathogenesis of Spinocerebellar Ataxia Type 3 (SCA3) by generating toxic, aggregation-prone protein fragments.",
+      "effect_description": "By cleaving ATXN3, Caspase-7 contributes to the formation of toxic protein fragments that can seed aggregation and promote neurodegeneration.",
+      "biological_consequence": [
+        "Caspase-7 interacts with ATXN3 → Caspase-7 cleaves ATXN3 → Toxic, aggregation-prone ATXN3 fragments are generated → Protein aggregation and cellular toxicity are increased → Neurodegeneration is promoted"
+      ],
+      "specific_effects": [
+        "A specific isoform, ataxin-3aS, was found to strongly interact with Caspase-7.",
+        "Caspase-dependent cleavage of mutated Ataxin-3 is associated with increased aggregation and cell death."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Physiological and pathophysiological characteristics of ataxin-3 isoforms",
+          "year": 2017,
+          "pmid": "30455355"
+        },
+        {
+          "paper_title": "CDK5 protects from caspase-induced Ataxin-3 cleavage and neurodegeneration",
+          "year": 2014,
+          "pmid": "24548080"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "30455355",
+        "24548080"
+      ],
+      "interaction_direction": "primary_to_main",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "regulates",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "mechanism": "Caspase-7, an executioner caspase, directly interacts with specific isoforms of ATXN3, notably ataxin-3aS. This direct protein-protein interaction is a prerequisite for Caspase-7's proteolytic activity towards ATXN3, leading to the precise cleavage of ATXN3. While specific binding domains or cleavage sites on ATXN3 are not explicitly detailed, this interaction-dependent proteolytic processing is a critical molecular event that initiates the downstream pathological cascade.",
+  "effect": "The Caspase-7-mediated proteolytic cleavage of ATXN3 generates toxic, aggregation-prone protein fragments. These fragments significantly increase intracellular protein aggregation and cellular toxicity, ultimately promoting neurodegeneration. Specifically, the cleavage of mutated Ataxin-3 has been directly linked to enhanced aggregation and increased cell death, exacerbating the pathological phenotype.",
+  "summary": "The direct interaction between Caspase-7 and ATXN3, particularly the ataxin-3aS isoform, results in the proteolytic cleavage of ATXN3, a pivotal event in Spinocerebellar Ataxia Type 3 (SCA3) pathogenesis. This cleavage produces neurotoxic fragments that drive protein aggregation and cell death, as demonstrated by studies on mutated Ataxin-3.",
+  "evidence": [
+    {
+      "paper_title": "Physiological and pathophysiological characteristics of ataxin-3 isoforms",
+      "year": 2017
+    },
+    {
+      "paper_title": "CDK5 protects from caspase-induced Ataxin-3 cleavage and neurodegeneration",
+      "year": 2014
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "regulates",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 4
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--regulates-- CASP7:",
+  "protein_a": "ATXN3",
+  "protein_b": "CASP7",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.644066Z",
+  "last_updated": "2026-02-04T04:49:14.644066Z"
+}

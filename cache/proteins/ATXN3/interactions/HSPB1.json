@@ -1,0 +1,90 @@
+{
+  "primary": "HSPB1",
+  "interaction_type": "indirect",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "functions": [
+    {
+      "function": "Cellular Stress Response",
+      "arrow": "activates",
+      "likely_direction": "bidirectional",
+      "cellular_process": "ATXN3 interacts with the molecular chaperone HSPB1 (Hsp27), a key component of the cellular stress response. This interaction is part of the cellular machinery that deals with misfolded and aggregated proteins, a process that is central to the pathology of polyglutamine diseases like SCA3.",
+      "effect_description": "The interaction between ATXN3 and HSPB1 likely modulates the chaperone-mediated handling of misfolded proteins, including mutant ATXN3 itself. This can influence protein aggregation, solubility, and clearance, thereby affecting cellular toxicity.",
+      "biological_consequence": [
+        "Cellular stress or misfolded protein accumulation → ATXN3 interacts with HSPB1 → Chaperone-mediated protein folding or degradation pathways are modulated → The fate of misfolded proteins is altered"
+      ],
+      "specific_effects": [
+        "Levels of both mutant ataxin-3 and Hsp27 are co-regulated in cellular models of SCA3 under stress conditions."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Physiological and pathophysiological characteristics of ataxin-3 isoforms",
+          "year": 2017,
+          "pmid": "30455355"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "30455355"
+      ],
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": null,
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "direct_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "support_summary": "ATXN3 interacts with the small heat shock protein HSPB1 (Hsp27), linking it to the cellular stress response and protein quality control machinery.",
+  "arrow": "regulates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "_validation_status": "rejected",
+  "mechanism": "ATXN3 forms a direct physical interaction with the molecular chaperone HSPB1 (Hsp27), integrating ATXN3 into the cellular chaperone network. While specific binding domains or residues mediating this interaction are not explicitly defined, this association positions ATXN3 to influence or be influenced by HSPB1's chaperone activity. This interaction is a fundamental aspect of the cellular machinery designed to manage misfolded and aggregated proteins, particularly relevant in the context of proteotoxic stress.",
+  "effect": "The interaction between ATXN3 and HSPB1 directly modulates the chaperone-mediated handling of misfolded proteins, including the aggregation-prone mutant ATXN3 itself. This modulation impacts protein solubility, aggregation kinetics, and subsequent cellular clearance pathways, thereby influencing overall cellular proteostasis. Consequently, this interaction significantly affects the cellular response to proteotoxic stress and the progression of protein aggregation-related pathologies.",
+  "summary": "The direct interaction between ATXN3 and HSPB1 is a critical component of the cellular stress response, particularly in the context of polyglutamine diseases like Spinocerebellar Ataxia Type 3 (SCA3). This is underscored by experimental findings demonstrating the co-regulation of both mutant ataxin-3 and Hsp27 levels in cellular models of SCA3 under conditions of proteotoxic stress.",
+  "evidence": [
+    {
+      "paper_title": "Effects of CA and Res on levels of mutant ataxin-3 and Hsp27, protein...",
+      "year": null
+    },
+    {
+      "paper_title": "Physiological and pathophysiological characteristics of ataxin-3 isoforms",
+      "year": 2017
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "regulation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --regulates--> HSPB1:",
+  "protein_a": "ATXN3",
+  "protein_b": "HSPB1",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.706843Z",
+  "last_updated": "2026-02-04T04:49:14.706843Z"
+}

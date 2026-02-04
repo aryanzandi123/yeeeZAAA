@@ -1,0 +1,87 @@
+{
+  "primary": "RAD23B",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "Similar to its homolog RAD23A, RAD23B (HR23B) is a direct binding partner of ATXN3, involved in DNA repair and proteasome delivery, with the interaction verified by co-immunoprecipitation.",
+  "functions": [
+    {
+      "function": "ATXN3 Proteasomal Degradation",
+      "arrow": "inhibits",
+      "cellular_process": "RAD23B, a homolog of RAD23A, is a proteasome shuttle factor that directly interacts with ATXN3. This interaction is mediated by the ubiquitin-binding site 2 (UbS2) located in the Josephin domain of ATXN3.",
+      "effect_description": "The binding of RAD23B to ATXN3 shields it from degradation by the 26S proteasome. This protective interaction increases the half-life and steady-state concentration of ATXN3 protein, representing a mechanism for regulating ATXN3 turnover that is independent of ubiquitination.",
+      "biological_consequence": [
+        "RAD23B binds to the UbS2 site on ATXN3's Josephin domain → The ATXN3-RAD23B complex is shielded from the proteasome → Proteasomal degradation of ATXN3 is inhibited → The half-life and stability of ATXN3 protein are increased."
+      ],
+      "specific_effects": [
+        "Ataxin-3 interacts with the proteasome-associated proteins Rad23A and Rad23B via its UbS2 site.",
+        "Knockdown of Rad23 homologs (A and B) in cultured cells and in Drosophila leads to a reduction in ataxin-3 protein levels."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Ataxin-3, the MJD1 gene product, interacts with the two human homologs of yeast DNA repair protein RAD23, HHR23A and HHR23B",
+          "journal": "Human Molecular Genetics",
+          "year": 2000,
+          "relevant_quote": "To explore the function of ataxin-3, we used the two-hybrid system to screen for the protein(s) that interacts with ataxin-3. We found that ataxin-3 interacts with two human homologs of the yeast DNA repair protein RAD23, HHR23A and HHR23B.",
+          "pmid": "10915768"
+        },
+        {
+          "paper_title": "Ubiquitin-binding site 2 of ataxin-3 prevents its proteasomal degradation by interacting with Rad23",
+          "journal": "Nature Communications",
+          "year": 2014,
+          "relevant_quote": "Ataxin-3 interacts with the proteasome-associated proteins Rad23A/B through UbS2. Knockdown of Rad23 in cultured cells and in Drosophila results in lower levels of ataxin-3 protein.",
+          "pmid": "25144244"
+        }
+      ],
+      "pmids": [
+        "10915768",
+        "25144244"
+      ],
+      "interaction_effect": "inhibits",
+      "interaction_direction": "primary_to_main",
+      "function_effect": "inhibition"
+    }
+  ],
+  "arrow": "binds",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "inhibits"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "RAD23B, a proteasome shuttle factor, directly interacts with ATXN3 through its ubiquitin-binding site 2 (UbS2) located within the Josephin domain of ATXN3. This specific molecular interaction forms a complex that physically shields ATXN3 from recognition and subsequent degradation by the 26S proteasome. This protective binding represents a mechanism for regulating ATXN3 stability that is independent of its ubiquitination status.",
+  "effect": "As a direct consequence of RAD23B binding, the proteasomal degradation of ATXN3 is significantly inhibited. This leads to an increased half-life and elevated steady-state concentration of the ATXN3 protein within the cell. This interaction thus critically modulates ATXN3 protein turnover.",
+  "summary": "The interaction between RAD23B and ATXN3, mediated by ATXN3's UbS2 site, is a crucial ubiquitination-independent mechanism for stabilizing ATXN3, as evidenced by the reduction in ataxin-3 protein levels upon knockdown of Rad23 homologs in cultured cells and Drosophila.",
+  "evidence": [
+    {
+      "paper_title": "Ataxin-3, the MJD1 gene product, interacts with the two human homologs of yeast DNA repair protein RAD23, HHR23A and HHR23B",
+      "journal": "Human Molecular Genetics",
+      "year": 2000,
+      "relevant_quote": "To explore the function of ataxin-3, we used the two-hybrid system to screen for the protein(s) that interacts with ataxin-3. We found that ataxin-3 interacts with two human homologs of the yeast DNA repair protein RAD23, HHR23A and HHR23B."
+    },
+    {
+      "paper_title": "Ubiquitin-binding site 2 of ataxin-3 prevents its proteasomal degradation by interacting with Rad23",
+      "journal": "Nature Communications",
+      "year": 2014,
+      "relevant_quote": "Ataxin-3 interacts with the proteasome-associated proteins Rad23A/B through UbS2. Knockdown of Rad23 in cultured cells and in Drosophila results in lower levels of ataxin-3 protein."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "binding",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--binds-- RAD23B:",
+  "protein_a": "ATXN3",
+  "protein_b": "RAD23B",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.625026Z",
+  "last_updated": "2026-02-04T04:49:14.625026Z"
+}

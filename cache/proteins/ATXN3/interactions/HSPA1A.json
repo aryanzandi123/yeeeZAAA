@@ -1,0 +1,84 @@
+{
+  "primary": "HSPA1A",
+  "interaction_type": "indirect",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "functions": [
+    {
+      "function": "Transcriptional Activation of HSPA1A (Hsp70)",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 positively regulates the transcription of the HSPA1A gene, which encodes the molecular chaperone Hsp70. This regulation is crucial for maintaining protein homeostasis (proteostasis) under both normal (basal) and stress conditions. The mechanism involves the stabilization of the master transcriptional regulator of the heat shock response, HSF1.",
+      "effect_description": "By increasing the stability of HSF1, ATXN3 ensures a robust transcriptional response of Hsp70 to cellular stressors like heat shock. This enhances the cell's capacity for protein folding, prevents the accumulation of misfolded or aggregated proteins, and promotes cell survival under proteotoxic stress.",
+      "biological_consequence": [
+        "ATXN3 stabilizes the Heat Shock Factor-1 (HSF1) protein → The turnover of HSF1 is reduced, leading to higher cellular HSF1 levels → HSF1 binds more effectively to the Heat Shock Element (HSE) in the HSPA1A (Hsp70) gene promoter → Basal and stress-induced transcription of HSPA1A is increased → Cellular chaperone capacity is enhanced, improving protein folding and stress resilience."
+      ],
+      "specific_effects": [
+        "Increases basal and stress-induced Hsp70 promoter activity.",
+        "Reduces the turnover rate of the HSF1 protein, leading to its stabilization and accumulation."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Basal and stress-induced Hsp70 are modulated by ataxin-3",
+          "journal": "Cell Stress & Chaperones",
+          "year": 2012,
+          "relevant_quote": "Basal levels of hsp70 were lower in ataxin-3 knockout (KO) mouse brain... Hsp70 protein and promoter activity were higher in WT compared to KO cells exposed to heat shock and azetidine-2-carboxylic acid... Heat shock factor-1 had decreased levels and increased turnover in ataxin-3 KO fibroblasts. Data in this study are consistent with ataxin-3 regulating basal level of hsp70 as well as modulating hsp70 in response to a subset of cellular stresses.",
+          "pmid": "22777893"
+        }
+      ],
+      "pmids": [
+        "22777893"
+      ],
+      "interaction_effect": "activation",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": null,
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "direct_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": "The input is fundamentally correct that ATXN3 activates HSPA1A expression. However, the detailed mechanism is indirect: ATXN3 stabilizes the key transcription factor for heat shock proteins, Heat Shock Factor-1 (HSF1), by reducing its turnover. This leads to increased HSF1 levels, which in turn drives the transcription of the HSPA1A gene.",
+  "mechanism": "ATXN3 activates HSPA1A transcription by specifically stabilizing the master transcriptional regulator, Heat Shock Factor-1 (HSF1). While the precise molecular mechanism by which ATXN3 reduces HSF1 turnover is not fully elucidated, this action leads to a significant increase in cellular HSF1 protein levels. The accumulated HSF1 then binds more effectively to the Heat Shock Element (HSE) consensus sequences located in the HSPA1A (Hsp70) gene promoter, thereby driving a robust increase in both basal and stress-induced transcription of HSPA1A.",
+  "effect": "The enhanced transcription of HSPA1A leads to elevated cellular concentrations of the Hsp70 molecular chaperone, which significantly augments the cell's overall chaperone capacity. This improved proteostasis machinery facilitates efficient protein folding, prevents the accumulation of misfolded or aggregated proteins, and consequently promotes cell survival under various proteotoxic stress conditions.",
+  "summary": "ATXN3 plays a crucial role in maintaining cellular proteostasis and enhancing stress resilience by upregulating HSPA1A expression through the stabilization of HSF1, as demonstrated by increased Hsp70 promoter activity and reduced HSF1 turnover.",
+  "evidence": [
+    {
+      "paper_title": "Basal and stress-induced Hsp70 are modulated by ataxin-3",
+      "journal": "Cell Stress & Chaperones",
+      "year": 2012,
+      "relevant_quote": "Basal levels of hsp70 were lower in ataxin-3 knockout (KO) mouse brain... Hsp70 protein and promoter activity were higher in WT compared to KO cells exposed to heat shock and azetidine-2-carboxylic acid... Heat shock factor-1 had decreased levels and increased turnover in ataxin-3 KO fibroblasts. Data in this study are consistent with ataxin-3 regulating basal level of hsp70 as well as modulating hsp70 in response to a subset of cellular stresses."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 2
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --activates--> HSPA1A:",
+  "protein_a": "ATXN3",
+  "protein_b": "HSPA1A",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.704748Z",
+  "last_updated": "2026-02-04T04:49:14.704748Z"
+}

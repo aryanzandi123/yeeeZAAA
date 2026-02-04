@@ -1,0 +1,88 @@
+{
+  "primary": "MTOR",
+  "interaction_type": "indirect",
+  "upstream_interactor": "RHEB",
+  "mediator_chain": [
+    "RHEB"
+  ],
+  "depth": 2,
+  "support_summary": "ATXN3 indirectly regulates mTORC1 signaling by directly deubiquitinating and modulating the activity of RHEB.",
+  "functions": [
+    {
+      "function": "mTORC1 Signaling",
+      "arrow": "inhibits",
+      "cellular_process": "ATXN3 indirectly inhibits the mTORC1 signaling pathway. It achieves this by directly deubiquitinating and promoting the degradation of the small GTPase RHEB, which is a potent upstream activator of the mTORC1 complex.",
+      "effect_description": "By reducing the levels of active RHEB, ATXN3 effectively dampens the kinase activity of mTORC1. This positions ATXN3 as a negative regulator of this central pathway that controls cell growth, proliferation, and metabolism.",
+      "biological_consequence": [
+        "ATXN3 deubiquitinates and destabilizes RHEB → Levels of active RHEB are reduced → mTORC1 kinase is not activated → Downstream signaling (e.g., phosphorylation of S6K and 4E-BP1) is suppressed → Cell growth and proliferation are inhibited"
+      ],
+      "specific_effects": [
+        "ATXN3 acts as a deubiquitinase for RHEB, promoting its degradation and thereby negatively regulating mTORC1 signaling."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Amino Acids Enhance Polyubiquitination of Rheb and Its Binding to mTORC1 by Blocking Lysosomal ATXN3 Deubiquitinase Activity",
+          "year": 2020,
+          "pmid": "33157014"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "inhibits",
+      "direction": "",
+      "pmids": [
+        "33157014"
+      ],
+      "direct_arrow": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "inhibition",
+      "arrow_context": {
+        "direct_from": "RHEB",
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "inhibits",
+        "mediator_chain": [
+          "RHEB"
+        ],
+        "is_indirect": true
+      },
+      "net_arrow": "inhibits",
+      "net_effect": "inhibition",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "inhibits",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "inhibits"
+    ]
+  },
+  "mechanism": "ATXN3, functioning as a deubiquitinase, directly targets the small GTPase RHEB, a potent upstream activator of the mTORC1 complex. Through its catalytic activity, ATXN3 removes ubiquitin moieties from RHEB, thereby marking it for proteasomal degradation. This deubiquitination and subsequent destabilization of RHEB leads to a significant reduction in its cellular protein levels. Consequently, the availability of active RHEB, which is essential for the recruitment and activation of mTORC1, is diminished. While the precise domains of ATXN3 involved in RHEB recognition and the specific ubiquitination sites on RHEB remain to be fully elucidated, this interaction is critical for regulating RHEB stability.",
+  "effect": "The ATXN3-mediated reduction in active RHEB levels directly dampens the intrinsic kinase activity of the mTORC1 complex. This suppression of mTORC1 signaling leads to decreased phosphorylation of its canonical downstream targets, such as ribosomal protein S6 kinase (S6K) and eukaryotic initiation factor 4E-binding protein 1 (4E-BP1). Consequently, cellular processes tightly regulated by mTORC1, including protein synthesis, cell growth, and proliferation, are profoundly inhibited.",
+  "summary": "ATXN3 functions as a negative regulator of the central mTORC1 signaling pathway by directly deubiquitinating and promoting the degradation of its potent activator, RHEB. This mechanism highlights ATXN3's critical role in modulating cell growth and metabolism through the mTORC1 pathway.",
+  "evidence": [
+    {
+      "paper_title": "Amino Acids Enhance Polyubiquitination of Rheb and Its Binding to mTORC1 by Blocking Lysosomal ATXN3 Deubiquitinase Activity",
+      "year": 2020
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "inhibition",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "RHEB --inhibits--> MTOR:",
+  "protein_a": "ATXN3",
+  "protein_b": "MTOR",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.666046Z",
+  "last_updated": "2026-02-04T04:49:14.666046Z"
+}

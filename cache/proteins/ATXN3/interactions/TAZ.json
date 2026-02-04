@@ -1,0 +1,75 @@
+{
+  "primary": "TAZ",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 directly interacts with and stabilizes TAZ, a YAP1 paralog and key effector of the Hippo pathway, promoting its oncogenic role in hepatocellular carcinoma.",
+  "functions": [
+    {
+      "function": "TAZ Stability",
+      "arrow": "activates",
+      "cellular_process": "ATXN3, a deubiquitinase, directly interacts with the transcriptional coactivator TAZ (WWTR1), an effector of the Hippo signaling pathway. The Josephin domain of ATXN3 binds to the C-terminal domain of TAZ and removes K48-linked polyubiquitin chains from TAZ, thereby preventing its proteasomal degradation.",
+      "effect_description": "By deubiquitinating TAZ, ATXN3 stabilizes the protein and increases its intracellular levels. This leads to enhanced TAZ-mediated transcriptional activity, promoting the expression of target genes involved in cell proliferation, migration, and invasion, particularly in the context of hepatocellular carcinoma (HCC).",
+      "biological_consequence": [
+        "ATXN3's Josephin domain binds to the C-terminal domain of TAZ → ATXN3 removes K48-linked polyubiquitin chains from TAZ → TAZ is shielded from proteasomal degradation, leading to its accumulation → Increased levels of TAZ co-activate transcription of target genes → Enhanced proliferation, migration, and invasion of hepatocellular carcinoma cells"
+      ],
+      "specific_effects": [
+        "Directly interacts with, stabilizes, and deubiquitinates TAZ in a manner dependent on its deubiquitylase activity.",
+        "Specifically inhibits K48-linked polyubiquitination of TAZ.",
+        "ATXN3 expression is positively correlated with TAZ levels in hepatocellular carcinoma.",
+        "Promotes the proliferation, migration, invasion, and tumorigenic potential of HCC cells through its regulation of TAZ."
+      ],
+      "evidence": [
+        {
+          "paper_title": "The deubiquitinating enzyme ATXN3 promotes hepatocellular carcinoma progression by stabilizing TAZ",
+          "journal": "Cancer Gene Therapy",
+          "year": 2024,
+          "relevant_quote": "ATXN3 could interact with, stabilize, and deubiquitylate TAZ in a deubiquitylase-dependent manner. Specifically, this interaction was primarily mediated by the C-terminal domain of TAZ and Josephin domain of ATXN3, thereby inhibiting the K48-linked ubiquitin chain on TAZ. Furthermore, we demonstrated that ATXN3 promoted the occurrence and development of HCC by regulating TAZ.",
+          "pmid": "39672915"
+        }
+      ],
+      "pmids": [
+        "39672915"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "ATXN3, a deubiquitinase, directly interacts with the transcriptional coactivator TAZ (WWTR1), an effector of the Hippo signaling pathway. The Josephin domain of ATXN3 specifically binds to the C-terminal domain of TAZ. This direct interaction facilitates ATXN3's deubiquitinase activity, enabling it to remove K48-linked polyubiquitin chains from TAZ. This targeted deubiquitination prevents TAZ from undergoing proteasomal degradation, thereby stabilizing the protein.",
+  "effect": "The ATXN3-mediated deubiquitination and stabilization of TAZ lead to a significant increase in its intracellular protein levels. This accumulation of TAZ subsequently enhances TAZ-mediated transcriptional activity, promoting the expression of target genes involved in cell proliferation, migration, and invasion.",
+  "summary": "The direct deubiquitination and stabilization of TAZ by ATXN3 represent a crucial regulatory mechanism that enhances TAZ's oncogenic functions. This interaction is particularly significant in hepatocellular carcinoma, where ATXN3 expression positively correlates with TAZ levels and promotes HCC cell proliferation, migration, and invasion.",
+  "evidence": [
+    {
+      "paper_title": "The deubiquitinating enzyme ATXN3 promotes hepatocellular carcinoma progression by stabilizing TAZ",
+      "journal": "Cancer Gene Therapy",
+      "year": 2024,
+      "relevant_quote": "ATXN3 could interact with, stabilize, and deubiquitylate TAZ in a deubiquitylase-dependent manner. Specifically, this interaction was primarily mediated by the C-terminal domain of TAZ and Josephin domain of ATXN3, thereby inhibiting the K48-linked ubiquitin chain on TAZ. Furthermore, we demonstrated that ATXN3 promoted the occurrence and development of HCC by regulating TAZ."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --activates--> TAZ:",
+  "protein_a": "ATXN3",
+  "protein_b": "TAZ",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.728104Z",
+  "last_updated": "2026-02-04T04:49:14.728104Z"
+}

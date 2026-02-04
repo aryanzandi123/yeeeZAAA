@@ -1,0 +1,75 @@
+{
+  "primary": "HTT",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "Huntingtin (HTT) forms a transcription-coupled DNA repair complex that includes ATXN3, indicating a direct interaction within this functional unit.",
+  "functions": [
+    {
+      "function": "Transcription-Coupled DNA Repair",
+      "arrow": "activates",
+      "likely_direction": "bidirectional",
+      "cellular_process": "Huntingtin (HTT) forms a transcription-coupled DNA repair (TCR) complex that includes ATXN3, along with RNA polymerase II, PNKP, and CREBBP. This complex is responsible for sensing and facilitating the repair of DNA damage that occurs during active gene transcription.",
+      "effect_description": "Within this complex, ATXN3 functions to deubiquitinate and stabilize other components, such as CREBBP, thereby supporting the overall integrity and function of the repair machinery. The interaction ensures that DNA lesions are efficiently repaired, maintaining genomic stability.",
+      "biological_consequence": [
+        "HTT, ATXN3, PNKP, and other factors form a TCR complex on actively transcribed genes → The complex detects DNA damage → ATXN3 stabilizes components of the complex → DNA damage is repaired, and transcription can proceed accurately"
+      ],
+      "specific_effects": [
+        "HTT forms a transcription-coupled DNA repair (TCR) complex with ATXN3, PNKP, and other proteins.",
+        "The functional integrity of this complex is impaired by mutant, polyQ-expanded HTT.",
+        "Impairment of the complex leads to decreased ATXN3 activity, facilitating the degradation of other repair factors like CBP."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Mutant huntingtin impairs PNKP and ATXN3, disrupting DNA repair and transcription",
+          "year": 2019,
+          "pmid": "30994454"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "30994454"
+      ],
+      "interaction_direction": "bidirectional",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "complex",
+  "direction": "bidirectional",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "mechanism": "ATXN3 activates the function of Huntingtin (HTT) within a multi-protein Transcription-Coupled DNA Repair (TCR) complex. This complex, comprising HTT, ATXN3, RNA polymerase II, PNKP, and CREBBP, assembles on actively transcribed genes to detect and repair DNA damage. Within this complex, ATXN3, a deubiquitinase, exerts its activating effect by deubiquitinating and stabilizing other essential components, such as CREBBP. This deubiquitination activity prevents the proteasomal degradation of these factors, thereby maintaining the structural integrity and functional capacity of the TCR machinery.",
+  "effect": "The ATXN3-mediated stabilization of TCR complex components ensures the efficient detection and repair of DNA lesions that occur during active gene transcription. This action is critical for maintaining genomic stability and allowing accurate transcriptional progression. Conversely, the presence of mutant, polyQ-expanded HTT impairs the functional integrity of this complex, leading to decreased ATXN3 activity and facilitating the degradation of other crucial repair factors like CBP.",
+  "summary": "ATXN3 activates the Huntingtin-containing Transcription-Coupled DNA Repair complex by stabilizing its components, thereby ensuring genomic stability during active transcription. This crucial function is compromised by mutant, polyQ-expanded HTT, which impairs complex integrity and ATXN3 activity, as evidenced by facilitated degradation of repair factors like CBP.",
+  "evidence": [
+    {
+      "paper_title": "Mutant huntingtin impairs PNKP and ATXN3, disrupting DNA repair and transcription",
+      "year": 2019
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "complex formation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--complex--> HTT:",
+  "protein_a": "ATXN3",
+  "protein_b": "HTT",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.657277Z",
+  "last_updated": "2026-02-04T04:49:14.657277Z"
+}

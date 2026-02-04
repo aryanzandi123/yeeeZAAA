@@ -1,0 +1,73 @@
+{
+  "primary": "UBR2",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "UBR2 was identified as a novel interaction partner of ATXN3 through mass spectrometry and co-immunoprecipitation, with the interaction suggesting a role in the ERAD pathway.",
+  "functions": [
+    {
+      "function": "Endoplasmic Reticulum-Associated Degradation (ERAD)",
+      "arrow": "regulates",
+      "cellular_process": "ATXN3 participates in the ERAD pathway, which removes misfolded proteins from the endoplasmic reticulum for proteasomal degradation. A specific isoform of ATXN3, ataxin-3c (the canonical isoform containing three ubiquitin-interacting motifs), shows a preferential interaction with a complex of proteins involved in the degradation of misfolded glycoproteins.",
+      "effect_description": "Quantitative mass spectrometry has shown that the ataxin-3c isoform interacts more strongly with the E3 ubiquitin ligase UBR2, as well as other ERAD components like HR23B and NGLY1, compared to other ATXN3 isoforms. This specific interaction profile suggests that ataxin-3c has a specialized role in processing misfolded glycoproteins targeted for degradation by the ERAD machinery. As a deubiquitinase, ATXN3 likely modulates the ubiquitination status of substrates or regulatory components within this pathway.",
+      "biological_consequence": [
+        "A misfolded glycoprotein is recognized in the ER lumen → The substrate is retro-translocated to the cytosol via the ERAD machinery → The ataxin-3c isoform, through its specific C-terminus, preferentially interacts with an ERAD complex containing UBR2, HR23B, and NGLY1 → ATXN3 modulates the ubiquitin chains on the substrate or complex components → The efficiency of substrate delivery to the proteasome is regulated."
+      ],
+      "specific_effects": [
+        "The ataxin-3c isoform exhibits stronger binding to UBR2 compared to other ATXN3 isoforms.",
+        "This interaction links ataxin-3c specifically to the ERAD pathway for glycosylated proteins."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Physiological and pathophysiological characteristics of ataxin-3 isoforms",
+          "journal": "The Journal of Biological Chemistry",
+          "year": 2017,
+          "relevant_quote": "Interestingly, four of six proteins interacting more strongly with ataxin-3c are associated with the ERAD pathway, either by directly being part of it (HR23B and NGLY1) or by interacting with ERAD proteins (UBR2 and HNRNPL), suggesting a role of isoform ataxin-3c within this pathway... Ataxin-3c shows a common interaction with HR23B and NGLY1 as well as UBR2 and HNRNPL, specifying its role in the ERAD pathway of glycosylated proteins.",
+          "pmid": "30455355"
+        }
+      ],
+      "pmids": [
+        "30455355"
+      ],
+      "interaction_effect": "regulates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "regulation"
+    }
+  ],
+  "arrow": "regulates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "The ataxin-3c isoform of ATXN3, characterized by its three ubiquitin-interacting motifs (UIMs) and a distinct C-terminus, directly binds to the E3 ubiquitin ligase UBR2. This preferential interaction occurs within a larger Endoplasmic Reticulum-Associated Degradation (ERAD) complex that also includes HR23B and NGLY1. The specific C-terminal region of ataxin-3c is crucial for mediating this association, positioning ATXN3 as a deubiquitinase to modulate the ubiquitination status of misfolded glycoprotein substrates or regulatory components of the ERAD machinery. ATXN3 likely utilizes its UIMs to engage with ubiquitin chains on these targets while simultaneously interacting with UBR2, thereby influencing the ubiquitination landscape.",
+  "effect": "This specific association between ataxin-3c and UBR2 directs ATXN3's deubiquitinase activity towards the processing of misfolded glycoproteins destined for ERAD. By precisely modulating the ubiquitination state of these substrates or associated ERAD components, ATXN3 regulates the efficiency of their retro-translocation from the endoplasmic reticulum and subsequent delivery to the proteasome for degradation.",
+  "summary": "The ataxin-3c isoform of ATXN3 exhibits a specialized role in the ERAD pathway for glycosylated proteins, demonstrated by its significantly stronger interaction with the E3 ubiquitin ligase UBR2 compared to other ATXN3 isoforms, as revealed by quantitative mass spectrometry. This specific binding links ataxin-3c directly to the machinery responsible for clearing misfolded glycoproteins.",
+  "evidence": [
+    {
+      "paper_title": "Physiological and pathophysiological characteristics of ataxin-3 isoforms",
+      "journal": "The Journal of Biological Chemistry",
+      "year": 2017,
+      "relevant_quote": "Interestingly, four of six proteins interacting more strongly with ataxin-3c are associated with the ERAD pathway, either by directly being part of it (HR23B and NGLY1) or by interacting with ERAD proteins (UBR2 and HNRNPL), suggesting a role of isoform ataxin-3c within this pathway... Ataxin-3c shows a common interaction with HR23B and NGLY1 as well as UBR2 and HNRNPL, specifying its role in the ERAD pathway of glycosylated proteins."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "regulation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 2
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --regulates--> UBR2:",
+  "protein_a": "ATXN3",
+  "protein_b": "UBR2",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.641584Z",
+  "last_updated": "2026-02-04T04:49:14.641584Z"
+}

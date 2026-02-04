@@ -1,0 +1,74 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "functions": [
+    {
+      "function": "Inhibition of ATXN3 Aggregation",
+      "arrow": "activates",
+      "cellular_process": "G3BP1 (Ras GTPase-activating protein-binding protein 1), a core nucleating protein for stress granules, interacts with polyglutamine-expanded ATXN3. This interaction modulates the aggregation and protein levels of mutant ATXN3, representing a key intersection between the cellular stress response and the pathology of spinocerebellar ataxia type 3.",
+      "effect_description": "Overexpression of G3BP1 reduces the aggregation of mutant ATXN3 and is associated with a decrease in its protein levels. Conversely, silencing G3BP1 in the brain increases the aggregation of expanded ATXN3. This suggests G3BP1 plays a protective role by mitigating the formation of toxic protein aggregates.",
+      "biological_consequence": [
+        "Cellular stress or G3BP1 overexpression increases G3BP1 levels → G3BP1 interacts with polyglutamine-expanded ATXN3 → The aggregation of mutant ATXN3 is reduced → Cellular toxicity associated with ATXN3 aggregates is alleviated → Neuronal preservation and improved motor performance in disease models."
+      ],
+      "specific_effects": [
+        "Overexpression of G3BP1 in cell models reduces the number of ATXN3 aggregates.",
+        "G3BP1 overexpression is associated with a decrease in the total protein levels of mutant ATXN3.",
+        "Silencing G3BP1 in the mouse brain leads to an increase in the aggregation of human expanded ATXN3."
+      ],
+      "evidence": [
+        {
+          "paper_title": "The stress granule protein G3BP1 alleviates spinocerebellar ataxia-associated deficits",
+          "journal": "Brain",
+          "year": 2022,
+          "relevant_quote": "Our results indicate that G3BP1 overexpression in cell models leads to a reduction of ATXN2 and ATXN3 aggregation, associated with a decrease in protein expression. This protective effect of G3BP1 against polyQ protein aggregation was reinforced by the fact that silencing G3bp1 in the mouse brain increases human expanded ATXN2 and ATXN3 aggregation.",
+          "pmid": "36511898"
+        }
+      ],
+      "pmids": [
+        "36511898"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "primary_to_main",
+      "function_effect": "activation"
+    }
+  ],
+  "support_summary": "ATXN3 interacts with G3BP1, a key nucleating factor for stress granules, which modulates the aggregation of polyglutamine-expanded ATXN3.",
+  "arrow": "binds",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "inhibits"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "G3BP1, a core nucleating protein for stress granules, directly interacts with polyglutamine-expanded ATXN3. This molecular association is crucial for modulating the aggregation and protein levels of mutant ATXN3. While specific binding domains or residues are not explicitly detailed, this interaction is hypothesized to either promote the clearance of misfolded ATXN3 or stabilize its soluble form, thereby preventing the formation of toxic aggregates. This represents a key intersection between the cellular stress response, where G3BP1 is central, and the pathology of spinocerebellar ataxia type 3.",
+  "effect": "The interaction of G3BP1 with polyglutamine-expanded ATXN3 leads to a significant reduction in the aggregation of mutant ATXN3, as evidenced by decreased aggregate numbers upon G3BP1 overexpression in cell models. Concurrently, G3BP1 overexpression is associated with a decrease in the total protein levels of mutant ATXN3, suggesting enhanced clearance or reduced stability of the pathogenic protein. Conversely, silencing G3BP1 in the mouse brain exacerbates ATXN3 aggregation, highlighting its critical role in mitigating proteotoxicity.",
+  "summary": "G3BP1 mitigates the formation of toxic protein aggregates in spinocerebellar ataxia type 3 by interacting with polyglutamine-expanded ATXN3. This protective action is notably demonstrated by the observation that silencing G3BP1 in the mouse brain significantly increases the aggregation of human expanded ATXN3.",
+  "evidence": [
+    {
+      "paper_title": "The stress granule protein G3BP1 alleviates spinocerebellar ataxia-associated deficits",
+      "journal": "Brain",
+      "year": 2022,
+      "relevant_quote": "Our results indicate that G3BP1 overexpression in cell models leads to a reduction of ATXN2 and ATXN3 aggregation, associated with a decrease in protein expression. This protective effect of G3BP1 against polyQ protein aggregation was reinforced by the fact that silencing G3bp1 in the mouse brain increases human expanded ATXN2 and ATXN3 aggregation."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "binding",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--binds-- G3BP1:",
+  "protein_a": "G3BP1",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.709272Z",
+  "last_updated": "2026-02-04T04:49:14.709272Z"
+}

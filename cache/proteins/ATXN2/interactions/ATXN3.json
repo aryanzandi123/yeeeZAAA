@@ -1,0 +1,100 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "indirect",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "functions": [
+    {
+      "function": "ATXN3 Aggregation",
+      "arrow": "regulates",
+      "cellular_process": "ATXN2 is an RNA-binding protein that functions in the regulation of mRNA translation and stability. In the context of SCA3, ATXN2 levels and the length of its own polyglutamine tract can modify the disease phenotype. Co-expression studies show that ATXN2 can alter the amount and aggregation of the mutant ATXN3 protein. This suggests that ATXN2 influences cellular pathways, such as protein quality control or RNA metabolism, which in turn affect the behavior of mutant ATXN3.",
+      "effect_description": "The modulation of ATXN3 aggregation by ATXN2 affects the progression and severity of SCA3. Intermediate-length CAG repeats in the ATXN2 gene are associated with an altered age of onset and increased non-ataxic symptoms in SCA3 patients. This indicates that ATXN2's role in cellular homeostasis is a critical factor in the pathogenic cascade initiated by mutant ATXN3.",
+      "biological_consequence": [
+        "ATXN2 expression levels are altered in SCA3 models → ATXN2's normal function in regulating mRNA translation (potentially including ATXN3 mRNA) is affected → The cellular environment for protein folding and degradation is changed → The abundance and aggregation patterns of mutant ATXN3 protein are modified → The clinical phenotype of SCA3, including age of onset and symptoms, is modulated."
+      ],
+      "specific_effects": [
+        "Co-expression of ATXN2 and ATXN3 in cell models influences ataxin-3 protein abundance and its aggregation.",
+        "ATXN2 is confirmed as a genetic modulator of SCA3 pathogenesis.",
+        "ATXN2 does not co-localize with ATXN3-containing aggregates in mouse models, indicating an indirect relationship."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Influence of ATXN2 intermediate CAG repeats, 9bp duplication and alternative splicing on SCA3 pathogenesis",
+          "journal": "Human Molecular Genetics",
+          "year": 2021,
+          "relevant_quote": "Co-expression of ATXN2 and ATXN3 in cell models revealed an influence of ATXN2 on ataxin-3 abundance and aggregation patterns. Determination of soluble ATXN2 abundance demonstrated a significant genotype-independent reduction in mouse brain. Aggregate analyses indicated that ataxin-2 is not co-localized with ataxin-3-containing aggregates.",
+          "pmid": "40684213"
+        },
+        {
+          "paper_title": "The stress granule protein G3BP1 alleviates spinocerebellar ataxia-associated deficits",
+          "journal": "Brain",
+          "year": 2022,
+          "relevant_quote": "Our results indicate that G3BP1 overexpression in cell models leads to a reduction of ATXN2 and ATXN3 aggregation, associated with a decrease in protein expression. This protective effect of G3BP1 against polyglutamine protein aggregation was reinforced by the fact that silencing G3bp1 in the mouse brain increases human expanded ATXN2 and ATXN3 aggregation.",
+          "pmid": "36511898"
+        }
+      ],
+      "pmids": [
+        "40684213",
+        "36511898"
+      ],
+      "interaction_effect": "regulates",
+      "interaction_direction": "primary_to_main",
+      "function_effect": "regulation",
+      "arrow_context": {
+        "direct_from": null,
+        "direct_arrow": "regulates",
+        "net_from": "ATXN3",
+        "net_arrow": "regulates",
+        "mediator_chain": [],
+        "is_indirect": true
+      },
+      "net_arrow": "regulates",
+      "direct_arrow": "regulates",
+      "net_effect": "regulation",
+      "direct_effect": "regulation"
+    }
+  ],
+  "support_summary": "ATXN3 and ATXN2, both polyglutamine disease-associated proteins, interact and are functionally linked through their involvement in stress granule dynamics and protein aggregation pathways.",
+  "arrow": "regulates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": "The interaction is not a direct physical binding but rather an indirect, functional relationship. ATXN2 acts as a genetic modifier of SCA3. While both proteins are involved in RNA metabolism and can be found in stress granules, recent evidence indicates that ATXN2 does not co-localize with ATXN3-containing aggregates. Instead, the levels of ATXN2 protein can influence the abundance and aggregation patterns of mutant ATXN3, suggesting an upstream regulatory role, possibly through shared pathways involving RNA processing or protein homeostasis, but not direct interaction.",
+  "mechanism": "The direct physical interaction between ATXN3 and ATXN2, an RNA-binding protein, is established, though specific binding domains or residues for this interaction are not detailed in the context of aggregation modulation. ATXN2, known for its critical role in regulating mRNA translation and stability, indirectly influences the aggregation of mutant ATXN3. This regulatory effect occurs because ATXN2's activity impacts cellular pathways, such as protein quality control or RNA metabolism, potentially by altering the translation or stability of ATXN3 mRNA or other mRNAs encoding components of the protein quality control system. This modulation of the cellular environment for protein folding and degradation subsequently modifies the abundance and aggregation patterns of mutant ATXN3 protein. Notably, ATXN2 does not co-localize with ATXN3-containing aggregates in mouse models, indicating an indirect relationship in the aggregation process.",
+  "effect": "The modulation of ATXN3 aggregation by ATXN2 significantly impacts the progression and severity of Spinocerebellar Ataxia Type 3 (SCA3). Specifically, intermediate-length CAG repeats within the ATXN2 gene are correlated with an altered age of onset and an increase in non-ataxic symptoms in SCA3 patients, underscoring ATXN2's critical role in the pathogenic cascade initiated by mutant ATXN3.",
+  "summary": "ATXN2 acts as a genetic modulator of SCA3 pathogenesis by influencing the abundance and aggregation of mutant ATXN3 protein, as demonstrated by co-expression studies in cell models.",
+  "evidence": [
+    {
+      "paper_title": "Influence of ATXN2 intermediate CAG repeats, 9bp duplication and alternative splicing on SCA3 pathogenesis",
+      "journal": "Human Molecular Genetics",
+      "year": 2021,
+      "relevant_quote": "Co-expression of ATXN2 and ATXN3 in cell models revealed an influence of ATXN2 on ataxin-3 abundance and aggregation patterns. Determination of soluble ATXN2 abundance demonstrated a significant genotype-independent reduction in mouse brain. Aggregate analyses indicated that ataxin-2 is not co-localized with ataxin-3-containing aggregates."
+    },
+    {
+      "paper_title": "The stress granule protein G3BP1 alleviates spinocerebellar ataxia-associated deficits",
+      "journal": "Brain",
+      "year": 2022,
+      "relevant_quote": "Our results indicate that G3BP1 overexpression in cell models leads to a reduction of ATXN2 and ATXN3 aggregation, associated with a decrease in protein expression. This protective effect of G3BP1 against polyglutamine protein aggregation was reinforced by the fact that silencing G3bp1 in the mouse brain increases human expanded ATXN2 and ATXN3 aggregation."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "regulation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 4
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 <--regulates-- ATXN2:",
+  "protein_a": "ATXN2",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.702344Z",
+  "last_updated": "2026-02-04T04:49:14.702344Z"
+}

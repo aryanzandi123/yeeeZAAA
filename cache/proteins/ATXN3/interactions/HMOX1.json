@@ -1,0 +1,86 @@
+{
+  "primary": "HMOX1",
+  "interaction_type": "indirect",
+  "upstream_interactor": "NFE2L2",
+  "mediator_chain": [
+    "NFE2L2"
+  ],
+  "depth": 2,
+  "functions": [
+    {
+      "function": "HMOX1 Gene Expression",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 indirectly activates the expression of Heme Oxygenase 1 (HMOX1), a critical antioxidant and anti-inflammatory enzyme. This regulation is mediated by ATXN3's direct deubiquitination and stabilization of the transcription factor NFE2L2/Nrf2.",
+      "effect_description": "The stabilization of Nrf2 by ATXN3 leads to increased transcriptional activation of the HMOX1 gene, which is a canonical Nrf2 target. This enhances the cellular defense against oxidative stress.",
+      "biological_consequence": [
+        "ATXN3 stabilizes Nrf2 → Nrf2 translocates to the nucleus and binds to the HMOX1 promoter → Transcription of HMOX1 is activated → HMOX1 protein levels increase → Cellular protection against oxidative stress is enhanced"
+      ],
+      "specific_effects": [
+        "The Nfe2l2/Hmox1 signaling pathway is involved in regulating the cellular response to oxidative stress."
+      ],
+      "evidence": [
+        {
+          "paper_title": "The mechanism of the Nfe2l2/Hmox1 signaling pathway in ferroptosis regulation in acute compartment syndrome",
+          "year": 2022,
+          "pmid": "36193742"
+        }
+      ],
+      "_context": {
+        "type": "direct",
+        "query_protein": null,
+        "chain": null
+      },
+      "interaction_effect": "activates",
+      "direction": "",
+      "pmids": [
+        "36193742"
+      ],
+      "direct_arrow": "activates",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": "NFE2L2",
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [
+          "NFE2L2"
+        ],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "mechanism": "ATXN3, a deubiquitinase, directly deubiquitinates the transcription factor NFE2L2 (Nrf2), thereby preventing its proteasomal degradation and increasing its stability. This stabilized Nrf2 subsequently translocates to the nucleus, where it binds to antioxidant response elements (AREs) located within the promoter region of target genes, including HMOX1. This binding event initiates and enhances the transcriptional activation of the HMOX1 gene.",
+  "effect": "The ATXN3-mediated stabilization and nuclear translocation of Nrf2 culminates in a significant increase in HMOX1 gene transcription and subsequent protein expression. This elevation in HMOX1 levels enhances the cell's capacity to metabolize heme and mitigate reactive oxygen species, thereby strengthening the overall cellular defense against oxidative stress.",
+  "summary": "This interaction underscores ATXN3's critical function as a regulator of the Nrf2/HMOX1 antioxidant pathway, directly impacting the cellular response to oxidative stress. ATXN3's deubiquitinase activity on Nrf2 serves as a pivotal mechanism for enhancing cellular protection against oxidative insults.",
+  "evidence": [
+    {
+      "paper_title": "The mechanism of the Nfe2l2/Hmox1 signaling pathway in ferroptosis regulation in acute compartment syndrome",
+      "year": 2022
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "NFE2L2 --activates--> HMOX1:",
+  "protein_a": "ATXN3",
+  "protein_b": "HMOX1",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.721071Z",
+  "last_updated": "2026-02-04T04:49:14.721071Z"
+}

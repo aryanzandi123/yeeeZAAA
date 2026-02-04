@@ -1,0 +1,59 @@
+=================================================================
+            PATHWAY VERIFICATION REPORT
+            Generated: 2026-01-06 08:28:31
+=================================================================
+
+SUMMARY
+-----------------------------------------------------------------
+  Interactions verified:  49
+  Pathways verified:      260
+  Checks passed:          13
+  Checks failed:          1
+
+STATUS: [CRITICAL] CRITICAL_FAIL
+
+CHECKS
+-----------------------------------------------------------------
+  [OK] interactions_have_pathway
+  [OK] pathway_references_valid
+  [OK] interaction_data_consistency
+  [OK] all_roots_exist
+  [OK] no_duplicate_names
+  [OK] no_empty_names
+  [OK] usage_count_accuracy (10 issues)
+  [FAIL] no_cycles (5 issues)
+  [OK] single_parent
+  [OK] no_orphan_pathways
+  [OK] parent_exists
+  [OK] levels_correct (2 issues)
+  [OK] ancestor_ids_accurate (5 issues)
+  [OK] is_leaf_accurate (10 issues)
+
+ISSUES BY SEVERITY
+-----------------------------------------------------------------
+  [LOW] 27 issues
+  [CRITICAL] 5 issues
+
+BLOCKING ISSUES (must fix manually)
+-----------------------------------------------------------------
+  [!] Cycle detected: 4640 -> 4678 -> 4640
+  [!] Cycle detected: 4640 -> 4678 -> 4640
+  [!] Cycle detected: 4640 -> 4678 -> 4640
+  [!] Cycle detected: 4640 -> 4678 -> 4640
+  [!] Cycle detected: 4640 -> 4678 -> 4640
+
+WARNINGS (non-blocking)
+-----------------------------------------------------------------
+  [WARN] Pathway 'Protein Quality Control' usage_count=0, actual=2
+  [WARN] Pathway 'DNA Damage Response' usage_count=0, actual=1
+  [WARN] Pathway 'Neuronal Function' usage_count=0, actual=1
+  [WARN] Pathway 'Transcriptional Regulation' usage_count=0, actual=7
+  [WARN] Pathway 'Hippo Signaling Pathway' usage_count=0, actual=1
+  [WARN] Pathway 'Aggresome Formation' usage_count=0, actual=3
+  [WARN] Pathway 'Mitophagy' usage_count=0, actual=2
+  [WARN] Pathway 'Mitochondrial Quality Control' usage_count=0, actual=2
+  [WARN] Pathway 'Mitochondrial Dynamics' usage_count=0, actual=4
+  [WARN] Pathway 'Aggrephagy' usage_count=0, actual=2
+  ... and 17 more
+
+=================================================================

@@ -1,0 +1,101 @@
+{
+  "primary": "ATXN3",
+  "interaction_type": "indirect",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 associates with the dynein motor protein to facilitate the retrograde transport of misfolded protein substrates to form aggresomes.",
+  "functions": [
+    {
+      "function": "Aggresome Formation",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 functions as an adaptor protein that links polyubiquitinated misfolded protein substrates to the dynein motor complex, of which DYNC1H1 is a core component. This entire complex facilitates the retrograde transport of these substrates along microtubules to the microtubule-organizing center (MTOC).",
+      "effect_description": "This ATXN3-mediated retrograde transport is a crucial step for the formation of aggresomes, which are perinuclear inclusion bodies that sequester aggregated proteins, particularly when the ubiquitin-proteasome system is overwhelmed. Both the deubiquitinase activity and the ubiquitin-interacting motifs (UIMs) of ATXN3 are essential for this process.",
+      "biological_consequence": [
+        "Accumulation and polyubiquitination of misfolded proteins → ATXN3 binds to the polyubiquitinated substrates via its UIMs → ATXN3, with its cargo, associates with the dynein motor complex (containing DYNC1H1) → The dynein motor complex transports the ATXN3-substrate complex along microtubules towards the MTOC → Misfolded proteins are collected and sequestered into a perinuclear aggresome."
+      ],
+      "specific_effects": [
+        "ATXN3 acts as an adaptor linking polyubiquitinated substrates to the dynein motor protein.",
+        "This interaction facilitates the retrograde transport of substrates for aggresome formation.",
+        "Depletion of ATXN3 via siRNA significantly reduces the formation of aggresomes.",
+        "Both the deubiquitinase activity and the ubiquitin interacting motifs of ATXN3 are required for its association with dynein and for efficient aggresome formation."
+      ],
+      "evidence": [
+        {
+          "paper_title": "The polyglutamine neurodegenerative protein Ataxin 3 regulates aggresome formation",
+          "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+          "year": 2005,
+          "relevant_quote": "Cellular studies show that endogenous AT3 colocalizes with aggresomes and preaggresome particles of the misfolded cystic fibrosis transmembrane regulator (CFTR) mutant CFTRΔF508 and associates with histone deacetylase 6 and dynein, proteins required for aggresome formation and transport of misfolded protein. Small interfering RNA knockdown of AT3 greatly reduces aggresomes formed by CFTRΔF508, demonstrating a critical role of AT3 in this process.",
+          "pmid": "15767577"
+        },
+        {
+          "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+          "journal": "Expert Reviews in Molecular Medicine",
+          "year": 2024,
+          "relevant_quote": "ATXN3 was furthermore proposed to act as an adaptor to link polyubiquitinated substrates to the dynein motor protein, thus facilitating the retrograde transportation of the substrates to the aggresomes, cellular perinuclear structures formed by the aggregation of misfolded proteins due to overwhelming protein degradation in the cell.",
+          "pmid": "39320846"
+        }
+      ],
+      "pmids": [
+        "15767577",
+        "39320846"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation",
+      "arrow_context": {
+        "direct_from": null,
+        "direct_arrow": "activates",
+        "net_from": "ATXN3",
+        "net_arrow": "activates",
+        "mediator_chain": [],
+        "is_indirect": true
+      },
+      "net_arrow": "activates",
+      "direct_arrow": "activates",
+      "net_effect": "activation",
+      "direct_effect": "activation"
+    }
+  ],
+  "arrow": "binds",
+  "direction": "primary_to_main",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "ATXN3 functions as an adaptor protein, linking polyubiquitinated misfolded protein substrates to the dynein motor complex, of which DYNC1H1 is a core component. Specifically, ATXN3 utilizes its Ubiquitin-Interacting Motifs (UIMs) to bind to the polyubiquitinated cargo. Subsequently, ATXN3, along with its bound substrates, associates with the dynein motor complex, thereby activating its transport function. Both the deubiquitinase activity and the UIMs of ATXN3 are critical for this association with dynein and for the subsequent efficient retrograde transport.",
+  "effect": "This ATXN3-mediated association with the dynein motor complex facilitates the retrograde transport of polyubiquitinated misfolded proteins along microtubules towards the microtubule-organizing center (MTOC). This directed transport is a crucial prerequisite for the formation of aggresomes, which are perinuclear inclusion bodies that sequester aggregated proteins, particularly under conditions of proteasomal overload.",
+  "summary": "The activation of DYNC1H1 by ATXN3 is biologically significant for cellular proteostasis, as it drives the formation of aggresomes to manage misfolded protein accumulation. This is evidenced by experimental findings showing that siRNA-mediated depletion of ATXN3 significantly reduces aggresome formation.",
+  "evidence": [
+    {
+      "paper_title": "The polyglutamine neurodegenerative protein Ataxin 3 regulates aggresome formation",
+      "journal": "Proceedings of the National Academy of Sciences of the United States of America",
+      "year": 2005,
+      "relevant_quote": "Cellular studies show that endogenous AT3 colocalizes with aggresomes and preaggresome particles of the misfolded cystic fibrosis transmembrane regulator (CFTR) mutant CFTRΔF508 and associates with histone deacetylase 6 and dynein, proteins required for aggresome formation and transport of misfolded protein. Small interfering RNA knockdown of AT3 greatly reduces aggresomes formed by CFTRΔF508, demonstrating a critical role of AT3 in this process."
+    },
+    {
+      "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+      "journal": "Expert Reviews in Molecular Medicine",
+      "year": 2024,
+      "relevant_quote": "ATXN3 was furthermore proposed to act as an adaptor to link polyubiquitinated substrates to the dynein motor protein, thus facilitating the retrograde transportation of the substrates to the aggresomes, cellular perinuclear structures formed by the aggregation of misfolded proteins due to overwhelming protein degradation in the cell."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "binding",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 3
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --binds--> DYNC1H1:",
+  "protein_a": "DYNC1H1",
+  "protein_b": "ATXN3",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.674288Z",
+  "last_updated": "2026-02-04T04:49:14.674288Z"
+}

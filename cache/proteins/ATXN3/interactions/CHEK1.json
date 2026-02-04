@@ -1,0 +1,90 @@
+{
+  "primary": "CHEK1",
+  "interaction_type": "direct",
+  "upstream_interactor": null,
+  "mediator_chain": [],
+  "depth": 1,
+  "support_summary": "ATXN3 directly interacts with and deubiquitinates the checkpoint kinase Chk1, promoting its stability and function in the DNA damage response.",
+  "functions": [
+    {
+      "function": "CHEK1 Stability",
+      "arrow": "activates",
+      "cellular_process": "ATXN3 directly interacts with and deubiquitinates the checkpoint kinase 1 (Chk1), a key effector in the DNA damage response (DDR). This deubiquitination by ATXN3 protects Chk1 from proteasomal degradation mediated by the DDB1/CUL4A and FBXO6/CUL1 E3 ligase complexes.",
+      "effect_description": "By stabilizing Chk1, ATXN3 ensures the maintenance of its steady-state levels, which is crucial for the proper functioning of the G2/M DNA damage checkpoint. This allows for cell cycle arrest to provide time for DNA repair, thus promoting genome integrity.",
+      "biological_consequence": [
+        "Under normal conditions or upon DNA damage → ATXN3 binds to Chk1 → ATXN3 deubiquitinates Chk1, antagonizing its polyubiquitination by E3 ligases → Chk1 protein is stabilized, and its half-life is increased → Chk1-mediated checkpoint signaling is maintained → Cell cycle progression is delayed, facilitating DNA repair and ensuring cell survival.",
+        "Under prolonged replicative stress → Chk1 is phosphorylated at Ser345 → Phosphorylated Chk1 dissociates from ATXN3 → Chk1 becomes accessible to E3 ligases for polyubiquitination and subsequent proteasomal degradation → Checkpoint signaling is terminated."
+      ],
+      "specific_effects": [
+        "ATXN3 directly interacts with Chk1 and protects it from DDB1/CUL4A- and FBXO6/CUL1-mediated polyubiquitination and degradation.",
+        "ATXN3 is essential for maintaining the steady-state levels of Chk1.",
+        "The deubiquitinase activity of ATXN3 is required for Chk1 stabilization.",
+        "Phosphorylation of Chk1 at Ser345 following prolonged replicative stress leads to its dissociation from ATXN3, allowing for its degradation and checkpoint termination."
+      ],
+      "evidence": [
+        {
+          "paper_title": "Ataxin-3 promotes genome integrity by stabilizing Chk1",
+          "journal": "Nucleic Acids Research",
+          "year": 2017,
+          "relevant_quote": "Under unperturbed conditions and upon DNA damage, ataxin-3 (ATX3) interacts with Chk1 and protects it from DDB1/CUL4A- and FBXO6/CUL1-mediated polyubiquitination and subsequent degradation, thereby promoting DNA repair and checkpoint signaling.",
+          "pmid": "28180282"
+        },
+        {
+          "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+          "journal": "Expert Reviews in Molecular Medicine",
+          "year": 2024,
+          "relevant_quote": "ATXN3 is one of the described ubiquitin hydrolases for Chk1, thereby essential for the maintenance of steady-state levels of Chk1, prolonging its half-life and checkpoint signalling. Moreover, under prolonged replicative stress, phosphorylation of Chk1 at Ser345 results in dissociation from ATXN3, allowing Chk1 proteasomal degradation and checkpoint termination.",
+          "pmid": "39320846"
+        }
+      ],
+      "pmids": [
+        "28180282",
+        "39320846"
+      ],
+      "interaction_effect": "activates",
+      "interaction_direction": "main_to_primary",
+      "function_effect": "activation"
+    }
+  ],
+  "arrow": "activates",
+  "direction": "main_to_primary",
+  "intent": "regulation",
+  "arrows": {
+    "main_to_primary": [
+      "activates"
+    ]
+  },
+  "is_valid": true,
+  "mechanism_correction": null,
+  "mechanism": "ATXN3, a deubiquitinase, directly interacts with CHEK1, where it specifically deubiquitinates the kinase. This enzymatic activity antagonizes the polyubiquitination of CHEK1 by E3 ligase complexes, including DDB1/CUL4A and FBXO6/CUL1, thereby preventing its proteasomal degradation. The deubiquitinase activity of ATXN3 is indispensable for this protective mechanism. However, under conditions of prolonged replicative stress, phosphorylation of CHEK1 at Ser345 induces its dissociation from ATXN3, rendering CHEK1 susceptible to ubiquitination and subsequent degradation.",
+  "effect": "The ATXN3-mediated stabilization of CHEK1 ensures the maintenance of its critical steady-state protein levels and sustained CHEK1-mediated checkpoint signaling. This sustained signaling is fundamental for the proper activation of the G2/M DNA damage checkpoint, leading to cell cycle arrest. Consequently, this cellular response provides a crucial window for DNA repair, thereby safeguarding genome integrity and promoting cell survival.",
+  "summary": "ATXN3 activates CHEK1 by directly deubiquitinating it, thereby protecting CHEK1 from DDB1/CUL4A- and FBXO6/CUL1-mediated proteasomal degradation. This critical stabilization of CHEK1 maintains its steady-state levels, which is essential for the proper functioning of the G2/M DNA damage checkpoint and the preservation of genome integrity.",
+  "evidence": [
+    {
+      "paper_title": "Ataxin-3 promotes genome integrity by stabilizing Chk1",
+      "journal": "Nucleic Acids Research",
+      "year": 2017,
+      "relevant_quote": "Under unperturbed conditions and upon DNA damage, ataxin-3 (ATX3) interacts with Chk1 and protects it from DDB1/CUL4A- and FBXO6/CUL1-mediated polyubiquitination and subsequent degradation, thereby promoting DNA repair and checkpoint signaling."
+    },
+    {
+      "paper_title": "ATXN3: a multifunctional protein involved in the polyglutamine disease spinocerebellar ataxia type 3",
+      "journal": "Expert Reviews in Molecular Medicine",
+      "year": 2024,
+      "relevant_quote": "ATXN3 is one of the described ubiquitin hydrolases for Chk1, thereby essential for the maintenance of steady-state levels of Chk1, prolonging its half-life and checkpoint signalling. Moreover, under prolonged replicative stress, phosphorylation of Chk1 at Ser345 results in dissociation from ATXN3, allowing Chk1 proteasomal degradation and checkpoint termination."
+    }
+  ],
+  "_llm_synthesized": true,
+  "interaction_effect": "activation",
+  "_validation_metadata": {
+    "validated": true,
+    "validator": "arrow_effect_validator",
+    "corrections_applied": 1
+  },
+  "_arrow_validated": true,
+  "arrow_notation": "ATXN3 --activates--> CHEK1:",
+  "protein_a": "ATXN3",
+  "protein_b": "CHEK1",
+  "discovered_in_query": "ATXN3",
+  "first_discovered": "2026-02-04T04:49:14.672077Z",
+  "last_updated": "2026-02-04T04:49:14.672077Z"
+}
