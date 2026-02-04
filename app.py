@@ -1462,7 +1462,7 @@ def get_visualization(protein):
                     import json
                     with open(cache_path, 'r', encoding='utf-8') as f:
                         cache_data = json.load(f)
-                    print(f"[DEBUG] Loaded {protein} from cache file", file=sys.stderr)
+                    print(f"[DEBUG] Loaded {protein} from cache file: {cache_path}", file=sys.stderr)
                     # Build response structure expected by visualizer
                     result = {
                         "snapshot_json": cache_data.get("snapshot_json", cache_data),
@@ -1483,6 +1483,21 @@ def get_visualization(protein):
         print(f"❌ Database visualization failed for {protein}: {e}", file=sys.stderr)
         import traceback
         traceback.print_exc(file=sys.stderr)
+        cache_path = CACHE_DIR / f"{protein.upper()}.json"
+        if cache_path.exists():
+            try:
+                import json
+                with open(cache_path, "r", encoding="utf-8") as f:
+                    cache_data = json.load(f)
+                print(f"[DEBUG] Loaded {protein} from cache file (fallback): {cache_path}", file=sys.stderr)
+                result = {"snapshot_json": cache_data.get("snapshot_json", cache_data), "ctx_json": cache_data.get("ctx_json")}
+                from visualizer import create_visualization_from_dict
+                html = create_visualization_from_dict(result)
+                from flask import make_response
+                response = make_response(html)
+                return response
+            except Exception as cache_err:
+                print(f"[DEBUG] Cache fallback failed in except block: {cache_err}", file=sys.stderr)
         return "Database query failed.", 500
 
 

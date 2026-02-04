@@ -1,0 +1,113 @@
+                "error": f"Protein '{protein}' not found in database",
+                "suggestion": "Run a query for this protein first"
+            }), 404
+
+        # Find all interactions involving this protein
+        interactions = Interaction.query.filter(
+            (Interaction.protein_a_id == protein_obj.id) |
+            (Interaction.protein_b_id == protein_obj.id)
+        ).all()
+
+        if not interactions:
+            return jsonify({
+                "error": f"No interactions found for protein '{protein}'",
+                "suggestion": "Run a query for this protein first"
+            }), 404
+
+        # Optionally clear existing pathway data
+        if clear_existing:
+            for ix in interactions:
+                if ix.data:
+                    d = dict(ix.data)
+                    d.pop('step2_proposal', None)
+                    d.pop('step3_finalized_pathway', None)
+                    ix.data = d
+            db.session.commit()
+
+            # Also clear PathwayInteraction records
+            for ix in interactions:
+                PathwayInteraction.query.filter_by(interaction_id=ix.id).delete()
+            db.session.commit()
+
+        # Run pathway pipeline
+        from scripts.pathway_v2.step1_init_roots import init_roots
+        from scripts.pathway_v2.step2_assign_initial_terms import assign_initial_terms
+        from scripts.pathway_v2.step3_refine_pathways import refine_pathways
+        from scripts.pathway_v2.step4_build_hierarchy_backwards import build_hierarchy
+        from scripts.pathway_v2.step5_discover_siblings import discover_siblings
+        from scripts.pathway_v2.step6_reorganize_pathways import reorganize_pathways
+        from scripts.pathway_v2.verify_pipeline import verify
+
+        # Count before
+        before_step2 = sum(1 for i in interactions if i.data and 'step2_proposal' in i.data)
+        before_step3 = sum(1 for i in interactions if i.data and 'step3_finalized_pathway' in i.data)
+        before_links = PathwayInteraction.query.filter(
+            PathwayInteraction.interaction_id.in_([i.id for i in interactions])
+        ).count()
+
+        # Run pipeline
+        init_roots()
+        assign_initial_terms()
+        refine_pathways()
+
+        if not skip_hierarchy:
+            build_hierarchy()
+            discover_siblings()
+            reorganize_pathways()
+
+        # Always run verification (with auto-fix for minor issues)
+        verification_result = verify()
+
+        # Reload interactions and count after
+        db.session.expire_all()
+        interactions = Interaction.query.filter(
+            (Interaction.protein_a_id == protein_obj.id) |
+            (Interaction.protein_b_id == protein_obj.id)
+        ).all()
+
+        after_step2 = sum(1 for i in interactions if i.data and 'step2_proposal' in i.data)
+        after_step3 = sum(1 for i in interactions if i.data and 'step3_finalized_pathway' in i.data)
+        after_links = PathwayInteraction.query.filter(
+            PathwayInteraction.interaction_id.in_([i.id for i in interactions])
+        ).count()
+
+        return jsonify({
+            "success": True,
+            "protein": protein.upper(),
+            "total_interactions": len(interactions),
+            "before": {
+                "step2_assigned": before_step2,
+                "step3_assigned": before_step3,
+                "pathway_links": before_links
+            },
+            "after": {
+                "step2_assigned": after_step2,
+                "step3_assigned": after_step3,
+                "pathway_links": after_links
+            },
+            "new_assignments": {
+                "step2": after_step2 - before_step2,
+                "step3": after_step3 - before_step3,
+                "pathway_links": after_links - before_links
+            },
+            "verification": verification_result
+        })
+
+    except ImportError as e:
+        return jsonify({
+            "error": f"Failed to import pathway scripts: {str(e)}"
+        }), 500
+    except Exception as e:
+        import traceback
+        traceback.print_exc()
+        return jsonify({
+            "error": f"Repair failed: {str(e)}"
+        }), 500
+
+
+if __name__ == '__main__':
+    # Use the port Render provides, or default to 5006 for local testing
+    import os
+    port = int(os.environ.get("PORT", 5006))
+
+    app.run(host='0.0.0.0', port=port, debug=False, threaded=True)

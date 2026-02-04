@@ -1,0 +1,300 @@
+    interactions_text = "\n".join(interactions_lines)
+
+    # Build complete prompt with pipeline-style excellence
+    full_prompt = f"""╔═══════════════════════════════════════════════════════════════╗
+║  PROTEIN INTERACTION NETWORK ANALYSIS ASSISTANT               ║
+║  Expert Molecular Biology Q&A System                          ║
+╚═══════════════════════════════════════════════════════════════╝
+
+ROLE & EXPERTISE:
+You are a senior molecular biologist and biochemist providing expert consultation
+on protein-protein interaction networks. Your audience consists of research scientists,
+graduate students, and clinicians who need ACCURATE, EVIDENCE-BASED answers about
+protein interactions, functional outcomes, and biological mechanisms.
+
+╔═══════════════════════════════════════════════════════════════╗
+║  CRITICAL OPERATIONAL RULES (ABSOLUTE OVERRIDE)              ║
+╚═══════════════════════════════════════════════════════════════╝
+
+STRICT EVIDENCE BOUNDARIES:
+- Answer ONLY using the interaction data provided below
+- NEVER extrapolate beyond the visible network context
+- If asked about proteins/interactions NOT in the data: explicitly state "Not in current view"
+- If data is ambiguous or incomplete: acknowledge uncertainty rather than speculate
+- NEVER invent PMIDs, paper citations, or experimental details
+
+ACCURACY > COMPLETENESS:
+- A precise partial answer beats a comprehensive guess
+- Distinguish between direct interactions and downstream consequences
+- Note when evidence is human vs model organism
+
+OUTPUT FORMATTING:
+- Use clear, professional scientific prose (NOT markdown)
+- NO asterisks, underscores, headers, bullets, or special formatting
+- Write as if explaining to a colleague at a lab meeting
+- Keep responses CONCISE (2-4 sentences) unless depth is explicitly requested
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+NETWORK DATA LEGEND
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{legend}
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+CURRENT NETWORK CONTEXT
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+{interactions_text}
+
+╔═══════════════════════════════════════════════════════════════╗
+║  EXPERT RESPONSE FRAMEWORK                                    ║
+╚═══════════════════════════════════════════════════════════════╝
+
+WHEN ANSWERING ABOUT INTERACTIONS:
+1. Identify the relevant interaction(s) from the data above
+2. State directionality clearly (X activates Y, Y inhibits X, bidirectional)
+3. Explain biological context only if present in the data
+
+WHEN ANSWERING ABOUT FUNCTIONS:
+1. Link function to the SPECIFIC interaction that drives it
+2. Distinguish between:
+   - Effect (EFF): What happens to the function immediately
+   - Biological consequences (BC): Downstream signaling cascades
+   - Specific effects (SE): Direct molecular outcomes
+3. Use arrow notation where appropriate (e.g., "TP53 stabilization leads to BAX upregulation")
+
+WHEN DISCUSSING BIOLOGICAL SIGNIFICANCE:
+1. Integrate information across multiple interactions when asked
+2. Connect interaction mechanisms to functional outcomes
+3. Explain cascades step-by-step when asked about pathways
+4. Relate to disease contexts only if present in the data
+5. Acknowledge gaps: "Function X is documented but mechanism details are not available"
+
+WHEN HANDLING AMBIGUOUS QUESTIONS:
+- If question is too broad: "Could you clarify which aspect/protein you're interested in?"
+- If query protein not in network: "That protein is not in the current network view"
+- If mechanism unclear from data: "The data shows interaction but mechanism is not specified"
+
+RESPONSE LENGTH CALIBRATION:
+- Brief query (e.g., "Does X interact with Y?"): 1-2 sentences
+- Mechanism query (e.g., "How does X regulate Y?"): 2-4 sentences with key details
+- Comprehensive query (e.g., "Explain X's role in pathway Z"): 4-6 sentences, integrate multiple functions
+- Explicit detail request (e.g., "Give me all the details"): Expand fully with all cascades and effects
+
+DOMAIN-SPECIFIC INTELLIGENCE:
+- Recognize common post-translational modifications (phosphorylation, ubiquitination, etc.)
+- Understand arrow semantics: activation vs inhibition vs binding
+- Distinguish between interaction directionality (who regulates whom)
+- Interpret biological consequences as signaling cascades
+- Translate abbreviated data (BC, SE, EFF) into prose seamlessly
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+EXAMPLES OF EXCELLENT RESPONSES:
+
+Q: "Does ATXN3 interact with VCP?"
+A: "Yes, ATXN3 directly interacts with VCP. ATXN3 binds VCP through its ubiquitin-binding domain, supported by Co-IP and pull-down assays in human cells."
+
+Q: "What functions does the ATXN3-VCP interaction regulate?"
+A: "The ATXN3-VCP interaction regulates protein quality control and autophagy. VCP binding enhances ATXN3's deubiquitinase activity, leading to substrate stabilization. This activates autophagy pathways through mTOR signaling modulation and promotes clearance of misfolded proteins via the ERAD pathway."
+
+Q: "Tell me about the biological consequences"
+A: "The interaction triggers multiple cascades. First, ATXN3 deubiquitinates VCP substrates, preventing their proteasomal degradation and stabilizing protein levels. This stabilization activates downstream autophagy machinery through BECN1 recruitment and LC3 lipidation. Additionally, VCP-ATXN3 complexes facilitate ER-associated degradation by extracting ubiquitinated proteins from the ER membrane, which maintains ER homeostasis under proteotoxic stress."
+
+Q: "Is there evidence for this in disease?"
+A: "The current network data does not include disease-specific contexts or patient studies. The interactions and functions shown are based on cell biology experiments in human cell lines."
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+You are now ready to answer questions. Provide accurate, evidence-based responses
+using ONLY the network data shown above. Maintain expert-level rigor."""
+
+    return full_prompt
+
+
+def _build_compact_state_from_request(state_data: dict) -> dict:
+    """
+    Extract and validate visible protein list from frontend request.
+
+    Args:
+        state_data: Raw state dict from frontend
+
+    Returns:
+        Dict with parent protein and list of visible proteins
+    """
+    if not isinstance(state_data, dict):
+        return {"parent": "", "visible_proteins": []}
+
+    parent = str(state_data.get("parent", "")).strip()
+    visible_proteins = state_data.get("visible_proteins", [])
+
+    # Validate and clean visible proteins list
+    clean_visible = []
+    if isinstance(visible_proteins, list):
+        for protein in visible_proteins:
+            if protein and isinstance(protein, str):
+                clean_protein = str(protein).strip()
+                if clean_protein and PROTEIN_RE.match(clean_protein):
+                    clean_visible.append(clean_protein)
+
+    return {
+        "parent": parent,
+        "visible_proteins": clean_visible
+    }
+
+
+def _call_chat_llm(messages: list, system_prompt: str, max_history: int = 10) -> str:
+    """
+    Call Gemini LLM for chat response using runner.py patterns.
+
+    Args:
+        messages: List of {role, content} message dicts
+        system_prompt: System instructions
+        max_history: Maximum message history to send (default 10, configurable)
+
+    Returns:
+        LLM response text
+
+    Raises:
+        RuntimeError: If API call fails
+    """
+    from google import genai as google_genai
+    from google.genai import types
+
+    api_key = os.getenv("GOOGLE_API_KEY")
+    if not api_key:
+        raise RuntimeError("GOOGLE_API_KEY not configured")
+
+    client = google_genai.Client(api_key=api_key)
+
+    # Trim message history to max_history (keep most recent)
+    # Always keep system context fresh
+    trimmed_messages = messages[-max_history:] if len(messages) > max_history else messages
+
+    # Build config with correct camelCase parameter names
+    # systemInstruction (singular, camelCase) can accept string directly
+    # Note: maxOutputTokens must be large enough to accommodate system prompt tokens + output
+    config = types.GenerateContentConfig(
+        systemInstruction=system_prompt,
+        maxOutputTokens=5096,  # Needs to be large for 40K+ char system prompts
+        temperature=0.2,  # Lower for factual, deterministic answers
+        topP=0.85,  # Focused sampling for consistent responses
+    )
+
+    # Convert messages to Gemini format
+    # Note: Gemini expects alternating user/model turns
+    gemini_contents = []
+    for msg in trimmed_messages:
+        role = "model" if msg.get("role") == "assistant" else "user"
+        content = msg.get("content", "")
+        if content.strip():
+            gemini_contents.append(types.Content(
+                role=role,
+                parts=[types.Part(text=content)]
+            ))
+
+    # Safety check: ensure we have at least one message
+    if not gemini_contents:
+        raise RuntimeError("No valid messages to send to LLM")
+
+    # Safety check: ensure last message is from user (Gemini requirement)
+    # The API expects the conversation to end with a user message
+    if gemini_contents[-1].role != "user":
+        raise RuntimeError("Last message must be from user (Gemini API requirement)")
+
+    # Retry logic matching runner.py pattern
+    max_retries = 3
+    base_delay = 1.5
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            response = client.models.generate_content(
+                model="gemini-2.5-pro",
+                contents=gemini_contents,
+                config=config,
+            )
+
+            # Extract text from response (matching runner.py pattern)
+            if hasattr(response, 'text'):
+                text = response.text
+                # Handle both None and string "None"
+                text_str = str(text).strip() if text else ''
+                if text_str and text_str != 'None':
+                    return text
+                else:
+                    # Check finish reason to provide better error message
+                    finish_reason = 'UNKNOWN'
+                    if hasattr(response, 'candidates') and response.candidates and len(response.candidates) > 0:
+                        if hasattr(response.candidates[0], 'finish_reason'):
+                            finish_reason = str(response.candidates[0].finish_reason)
+                    print(f"Warning: Empty response (finish_reason: {finish_reason})", file=sys.stderr)
+                    raise RuntimeError(f"LLM returned empty response (finish_reason: {finish_reason})")
+            elif hasattr(response, 'candidates') and response.candidates and len(response.candidates) > 0:
+                # Safely access first candidate
+                candidate = response.candidates[0]
+                if hasattr(candidate, 'content') and hasattr(candidate.content, 'parts'):
+                    parts = candidate.content.parts
+                    text = ''.join(part.text for part in parts if hasattr(part, 'text'))
+                    if text and text.strip():  # Ensure we got non-empty, non-whitespace text
+                        return text
+                    else:
+                        print(f"Warning: Extracted text is empty or whitespace: '{text}'", file=sys.stderr)
+                raise RuntimeError("No text found in LLM response candidates")
+            else:
+                raise RuntimeError("No text in LLM response")
+
+        except Exception as e:
+            print(f"Chat LLM attempt {attempt}/{max_retries} failed: {type(e).__name__}: {e}", file=sys.stderr)
+            delay = base_delay * (attempt ** 1.5)
+            if attempt < max_retries:
+                print(f"Retrying in {delay:.1f}s...", file=sys.stderr)
+                time.sleep(delay)
+            else:
+                raise RuntimeError(f"Chat LLM call failed after {max_retries} attempts: {e}")
+
+    raise RuntimeError("Unexpected error in chat LLM call")
+
+
+@app.post('/api/chat')
+def chat():
+    """
+    Handle chat messages with LLM assistance.
+
+    Request body:
+    {
+        "parent": "ATXN3",           // Root protein
+        "protein": "VCP",            // Optional: current focus protein
+        "messages": [...],           // Chat history [{role, content}]
+        "state": {...},              // Compact graph state
+        "max_history": 10            // Optional: max messages to send to LLM
+    }
+
+    Response:
+    {
+        "reply": "LLM response text"
+    }
+    or
+    {
+        "error": "Error message"
+    }
+    """
+    try:
+        data = request.get_json(silent=True)
+        if not data:
+            return jsonify({"error": "Invalid JSON request"}), 400
+
+        # Extract and validate required fields
+        parent = (data.get("parent") or "").strip()
+        if not parent or not PROTEIN_RE.match(parent):
+            return jsonify({"error": "Invalid or missing parent protein"}), 400
+
+        messages = data.get("messages")
+        if not isinstance(messages, list) or len(messages) == 0:
+            return jsonify({"error": "Invalid or empty messages list"}), 400
+
+        # Validate message structure
+        for msg in messages:
+            if not isinstance(msg, dict):
+                return jsonify({"error": "Invalid message format"}), 400
+            if "role" not in msg or "content" not in msg:
+                return jsonify({"error": "Message missing role or content"}), 400

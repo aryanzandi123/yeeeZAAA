@@ -1,0 +1,300 @@
+    NEW: Accepts visible_proteins to discover cross-links between new and visible proteins.
+
+    Body: {
+        "parent": "ATXN3",
+        "protein": "VCP",
+        "current_nodes": [...],
+        "visible_proteins": ["HDAC6", "ATXN3"],  # NEW: for cross-linking
+        "parent_edge": {...},
+        "max_keep": 12?
+    }
+
+    Returns: { "status": "queued"|"complete"|"needs_full", "job_id": "prune:ATXN3:VCP" }
+    """
+    data = request.get_json(silent=True) or {}
+    parent = (data.get("parent") or "").strip()
+    protein = (data.get("protein") or "").strip()
+    current_nodes = data.get("current_nodes") or []
+    visible_proteins = data.get("visible_proteins") or []  # NEW: for cross-linking
+    parent_edge = data.get("parent_edge") or {}
+    max_keep = int(data.get("max_keep") or HARD_MAX_KEEP_DEFAULT)
+    max_keep = min(max_keep, HARD_MAX_KEEP_DEFAULT)  # enforce hard maximum 12
+
+    if not parent or not PROTEIN_RE.match(parent):
+        return jsonify({"error":"Invalid parent"}), 400
+    if not protein or not PROTEIN_RE.match(protein):
+        return jsonify({"error":"Invalid protein"}), 400
+
+    # NEW: Try to build from PostgreSQL database first (with cross-linking support)
+    try:
+        from models import Protein
+        protein_in_db = Protein.query.filter_by(symbol=protein).first()
+        if protein_in_db and protein_in_db.total_interactions > 0:
+            # Define paths
+            full_path = os.path.join(CACHE_DIR, f"{protein}.json")
+            pruned_name = pruned_filename(parent, protein)
+            pruned_path = os.path.join(PRUNED_DIR, pruned_name)
+            job_id = make_prune_job_id(parent, protein)
+
+            # CHECK: If fresh pruned file already exists, return immediately (avoid re-pruning)
+            if os.path.exists(full_path) and is_pruned_fresh(Path(full_path), Path(pruned_path), hard_max_keep=max_keep):
+                with jobs_lock:
+                    jobs[job_id] = {"status": "complete"}
+                print(f"[PRUNE CACHE HIT] Using cached pruned data for {protein}", file=sys.stderr)
+                return jsonify({"status":"complete", "job_id": job_id}), 200
+
+            # Build expansion JSON with cross-linking support
+            expansion_data = build_expansion_json_from_db(protein, visible_proteins)
+            if expansion_data:
+                # Write to file for pruner to process (pruner requires file path input)
+                import json
+
+                # Write expansion data to full cache (for pruner to read)
+                with open(full_path, 'w', encoding='utf-8') as f:
+                    json.dump(expansion_data, f, indent=2, ensure_ascii=False)
+
+                # Run pruning job
+                api_key = _get_api_key()
+
+                def _run():
+                    try:
+                        run_prune_job(
+                            full_json_path=Path(full_path),
+                            pruned_json_path=Path(pruned_path),
+                            parent=parent,
+                            current_nodes=current_nodes,
+                            parent_edge=parent_edge,
+                            hard_max_keep=max_keep,
+                            api_key=api_key,
+                            use_llm=False,
+                        )
+                        with jobs_lock:
+                            jobs[job_id] = {"status": "complete"}
+                    except Exception as e:
+                        with jobs_lock:
+                            jobs[job_id] = {"status": "error", "error": str(e)}
+
+                with jobs_lock:
+                    jobs[job_id] = {"status": "processing", "text": "Pruning subgraph with cross-links..."}
+                t = threading.Thread(target=_run, daemon=True)
+                t.start()
+                return jsonify({"status":"queued", "job_id": job_id}), 202
+    except Exception as e:
+        print(f"[WARN]Database expansion failed, falling back to file cache: {e}", file=sys.stderr)
+
+    # Fallback to old file cache logic
+    full_path = os.path.join(CACHE_DIR, f"{protein}.json")
+    pruned_name = pruned_filename(parent, protein)
+    pruned_path = os.path.join(PRUNED_DIR, pruned_name)
+
+    # Ensure full cache exists
+    if not os.path.exists(full_path):
+        return jsonify({"status":"needs_full", "job_id": make_prune_job_id(parent, protein)}), 200
+
+    # If fresh pruned exists, return immediately
+    if is_pruned_fresh(Path(full_path), Path(pruned_path), hard_max_keep=max_keep):
+        with jobs_lock:
+            jobs[make_prune_job_id(parent, protein)] = {"status": "complete"}
+        return jsonify({"status":"complete", "job_id": make_prune_job_id(parent, protein)}), 200
+
+    job_id = make_prune_job_id(parent, protein)
+    api_key = _get_api_key()
+
+    def _run():
+        try:
+            run_prune_job(
+                full_json_path=Path(full_path),
+                pruned_json_path=Path(pruned_path),
+                parent=parent,
+                current_nodes=current_nodes,
+                parent_edge=parent_edge,
+                hard_max_keep=max_keep,
+                api_key=api_key,
+                use_llm=False,
+            )
+            with jobs_lock:
+                jobs[job_id] = {"status": "complete"}
+        except Exception as e:
+            with jobs_lock:
+                jobs[job_id] = {"status": "error", "error": str(e)}
+
+    with jobs_lock:
+        jobs[job_id] = {"status": "processing", "text": "Pruning subgraph..."}
+    t = threading.Thread(target=_run, daemon=True)
+    t.start()
+    return jsonify({"status":"queued", "job_id": job_id}), 202
+
+@app.get('/api/expand/status/<job_id>')
+def expand_status(job_id):
+    # If pruned file already exists, return complete
+    try:
+        parent, protein = parse_prune_job_id(job_id)
+        full_path = Path(os.path.join(CACHE_DIR, f"{protein}.json"))
+        pruned_path = Path(os.path.join(PRUNED_DIR, pruned_filename(parent, protein)))
+        if full_path.exists() and is_pruned_fresh(full_path, pruned_path, HARD_MAX_KEEP_DEFAULT):
+            return jsonify({"status":"complete"}), 200
+    except Exception:
+        pass
+    with jobs_lock:
+        st = jobs.get(job_id)
+    if not st:
+        return jsonify({"status":"unknown"}), 404
+    return jsonify(st), 200
+
+@app.get('/api/expand/results/<job_id>')
+def expand_results(job_id):
+    try:
+        parent, protein = parse_prune_job_id(job_id)
+    except Exception:
+        return jsonify({"error":"invalid job id"}), 400
+    fname = pruned_filename(parent, protein)
+    path = os.path.join(PRUNED_DIR, fname)
+    if not os.path.exists(path):
+        return jsonify({"error":"not found"}), 404
+    return send_from_directory(PRUNED_DIR, fname)
+
+
+@app.route('/api/cancel/<protein>', methods=['POST'])
+def cancel_job(protein):
+    """Cancel a running job by setting its cancellation event."""
+    if not protein:
+        return jsonify({"error": "Protein name is required"}), 400
+
+    with jobs_lock:
+        job = jobs.get(protein)
+        if not job:
+            return jsonify({"error": "Job not found"}), 404
+
+        if job.get("status") != "processing":
+            return jsonify({"error": "Job is not currently processing"}), 400
+
+        # Set the cancellation event
+        cancel_event = job.get("cancel_event")
+        if cancel_event:
+            cancel_event.set()
+            job["status"] = "cancelling"
+            job["progress"] = {"text": "Cancelling..."}
+            return jsonify({"status": "cancelling", "message": "Cancellation requested"}), 200
+        else:
+            return jsonify({"error": "Job does not support cancellation"}), 400
+
+
+# ---------------------------
+# CHAT ENDPOINT
+# ---------------------------
+
+def _read_cache_json(protein: str) -> dict:
+    """
+    Read and parse cache JSON for a protein.
+
+    Args:
+        protein: Protein symbol to read cache for
+
+    Returns:
+        Parsed JSON dict, or empty dict if file doesn't exist or is invalid
+    """
+    try:
+        json_path = os.path.join(CACHE_DIR, f"{protein}.json")
+        if not os.path.exists(json_path):
+            return {}
+
+        with open(json_path, 'r', encoding='utf-8') as f:
+            return json.load(f)
+    except (IOError, json.JSONDecodeError) as e:
+        # Log error but don't crash - return empty dict
+        print(f"Warning: Failed to read cache for {protein}: {e}", file=sys.stderr)
+        return {}
+
+
+def _normalize_arrow_value(arrow: str) -> str:
+    """Normalize arrow value to standard abbreviation."""
+    if not isinstance(arrow, str):
+        arrow = str(arrow) if arrow else ""
+    arrow_lower = arrow.lower().strip()
+    if "activ" in arrow_lower:
+        return "act"
+    elif "inhib" in arrow_lower:
+        return "inh"
+    elif "regul" in arrow_lower or "modulat" in arrow_lower:
+        return "reg"
+    elif "bind" in arrow_lower:
+        return "bind"
+    else:
+        return "unk"
+
+
+def _normalize_direction_value(direction: str) -> str:
+    """Normalize direction value to standard abbreviation."""
+    if not isinstance(direction, str):
+        direction = str(direction) if direction else ""
+    direction_lower = direction.lower().strip()
+    if "bidir" in direction_lower:
+        return "bidir"
+    elif "main_to_primary" in direction_lower:
+        return "m2p"
+    elif "primary_to_main" in direction_lower:
+        return "p2m"
+    else:
+        return "unk"
+
+
+def _extract_compact_functions(raw_functions: list) -> list:
+    """
+    Helper to extract compact function data from raw functions array.
+    Used by both new and old format processing.
+
+    Args:
+        raw_functions: Raw functions array from interaction data
+
+    Returns:
+        List of compact function dicts
+    """
+    functions = []
+    if not isinstance(raw_functions, list):
+        return functions
+
+    for fn in raw_functions[:5]:  # Limit to 5 functions per interaction
+        if not isinstance(fn, dict):
+            continue
+
+        # Safe confidence extraction
+        try:
+            fn_confidence = float(fn.get("confidence", 0.0))
+        except (ValueError, TypeError):
+            fn_confidence = 0.0
+
+        compact_fn = {
+            "name": str(fn.get("function", "Unknown")).strip(),
+            "arrow": _normalize_arrow_value(fn.get("arrow", "")),
+            "confidence": fn_confidence,
+            "pmids": [],
+            "effect": str(fn.get("effect_description", "")).strip(),
+            "biological_consequence": [],
+            "specific_effects": []
+        }
+
+        # Extract function PMIDs (limit to 5)
+        fn_pmids = fn.get("pmids", [])
+        if isinstance(fn_pmids, list):
+            compact_fn["pmids"] = [str(p) for p in fn_pmids[:5] if p]
+
+        # Extract biological consequence (arrow chain)
+        bio_cons = fn.get("biological_consequence", [])
+        if isinstance(bio_cons, list):
+            compact_fn["biological_consequence"] = [
+                str(b).strip() for b in bio_cons[:5] if b
+            ]
+
+        # Extract specific effects
+        spec_eff = fn.get("specific_effects", [])
+        if isinstance(spec_eff, list):
+            compact_fn["specific_effects"] = [
+                str(e).strip() for e in spec_eff[:3] if e
+            ]
+
+        functions.append(compact_fn)
+
+    return functions
+
+
+def _build_compact_rich_context(parent: str, visible_proteins: list) -> dict:

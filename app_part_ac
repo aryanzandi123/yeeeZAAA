@@ -1,0 +1,299 @@
+            interaction_data["pmids"] = []
+
+        # Auto-generate interaction_effect from arrow if not present
+        if not interaction_data.get("interaction_effect"):
+            interaction_data["interaction_effect"] = arrow_to_effect(interaction_data.get("arrow", "binds"))
+
+        # Auto-generate function_effect for each function if not present
+        for func in interaction_data.get("functions", []):
+            if not func.get("function_effect"):
+                func_arrow = func.get("arrow", "")
+                if func_arrow:
+                    func["function_effect"] = arrow_to_effect(func_arrow)
+
+            # For indirect interactions with arrow_context, ensure net_effect and direct_effect
+            if func.get("arrow_context"):
+                arrow_ctx = func["arrow_context"]
+                net_arrow = arrow_ctx.get("net_arrow", func.get("arrow", "regulates"))
+                direct_arrow = arrow_ctx.get("direct_arrow", net_arrow)
+
+                func["net_effect"] = arrow_to_effect(net_arrow)
+                func["direct_effect"] = arrow_to_effect(direct_arrow)
+
+        # CRITICAL FIX: For direct mediator links, use direct_arrow from arrow_context
+        # This ensures RHEB→MTOR shows "activates" (direct) instead of "inhibits" (net)
+        function_context = interaction_data.get("function_context")
+        if function_context == "direct":
+            # Check if any function has arrow_context with direct_arrow
+            for func in interaction_data.get("functions", []):
+                if func.get("arrow_context") and func["arrow_context"].get("direct_arrow"):
+                    correct_arrow = func["arrow_context"]["direct_arrow"]
+                    if interaction_data.get("arrow") != correct_arrow:
+                        # Override interaction-level arrow with direct arrow
+                        interaction_data["arrow"] = correct_arrow
+                        # Also update interaction_effect
+                        interaction_data["interaction_effect"] = arrow_to_effect(correct_arrow)
+                    break  # Only need first function with arrow_context
+
+        # Add differentiation flags for dual-track indirect/direct system
+        # This helps frontend visually distinguish NET effects vs DIRECT effects
+        if function_context == "net":
+            interaction_data["_net_effect"] = True  # Frontend marker for NET chain effects
+            interaction_data["_display_badge"] = "NET EFFECT"
+        elif function_context == "direct" and interaction_data.get("_inferred_from_chain"):
+            interaction_data["_direct_mediator_link"] = True  # Frontend marker for extracted direct links
+            interaction_data["_display_badge"] = "DIRECT LINK"
+
+        # V2 PATHWAY INJECTION (UPDATED)
+        # Inject pathways to functions that don't have one, but DON'T overwrite existing
+        v2_pathway = interaction.data.get('step3_finalized_pathway')
+
+        if interaction_data.get("functions"):
+            for func in interaction_data["functions"]:
+                current_pw = func.get("pathway")
+
+                # Already has a string pathway from Step 3 - keep it!
+                if isinstance(current_pw, str) and current_pw and current_pw != "Uncategorized":
+                    continue
+
+                # Already has a dict pathway - extract name
+                if isinstance(current_pw, dict) and current_pw.get("name"):
+                    func["pathway"] = current_pw["name"]  # Flatten to string
+                    continue
+
+                # No pathway - use interaction-level fallback
+                if v2_pathway:
+                    func["pathway"] = v2_pathway
+        else:
+            # If no functions exist, create a generic one so it shows up
+            if v2_pathway:
+                interaction_data["functions"] = [{
+                    "function": v2_pathway,
+                    "pathway": v2_pathway,
+                    "description": f"Interaction classified as {v2_pathway}",
+                    "evidence": [],
+                    "pmids": []
+                }]
+
+        # Expose step3_finalized_pathway for modal display
+        if v2_pathway:
+            interaction_data["step3_finalized_pathway"] = v2_pathway
+
+        # Add to interaction list
+        interaction_data["_db_id"] = interaction.id
+        interactions_list.append(interaction_data)
+
+    # Retrieve chain links for indirect interactions
+    # For indirect interactions like p62→KEAP1→NRF2, we need to also query for KEAP1→NRF2
+    chain_link_ids = set()  # Track which chain links we've already added
+    all_chain_links = [] # Keep track for pathway query
+
+    # BATCH: Collect all mediator symbols first, then query once
+    all_mediator_symbols = set()
+    for interaction in db_interactions:
+        if interaction.interaction_type == "indirect":
+            mediator_chain = interaction.mediator_chain
+            if mediator_chain and isinstance(mediator_chain, list):
+                all_mediator_symbols.update(mediator_chain)
+
+    # Single batch query for all mediator proteins
+    mediator_protein_map = {}
+    if all_mediator_symbols:
+        mediator_proteins_list = Protein.query.filter(Protein.symbol.in_(all_mediator_symbols)).all()
+        mediator_protein_map = {p.symbol: p for p in mediator_proteins_list}
+
+    for interaction in db_interactions:
+        if interaction.interaction_type == "indirect":
+            mediator_chain = interaction.mediator_chain
+            if mediator_chain and isinstance(mediator_chain, list):
+                # Get the target protein of the indirect interaction
+                if interaction.protein_a_id == main_protein.id:
+                    target_protein = interaction.protein_b
+                else:
+                    target_protein = interaction.protein_a
+
+                # For each mediator in the chain, query for mediator→target link
+                for mediator_symbol in mediator_chain:
+                    mediator_protein = mediator_protein_map.get(mediator_symbol)
+                    if not mediator_protein:
+                        continue
+
+                    # Query for chain link (mediator ↔ target)
+                    # Use canonical ordering: protein_a_id < protein_b_id
+                    if mediator_protein.id < target_protein.id:
+                        chain_link = db.session.query(Interaction).filter(
+                            Interaction.protein_a_id == mediator_protein.id,
+                            Interaction.protein_b_id == target_protein.id
+                        ).first()
+                    else:
+                        chain_link = db.session.query(Interaction).filter(
+                            Interaction.protein_a_id == target_protein.id,
+                            Interaction.protein_b_id == mediator_protein.id
+                        ).first()
+
+                    if chain_link and chain_link.id not in chain_link_ids:
+                        chain_link_ids.add(chain_link.id)
+                        all_chain_links.append(chain_link)
+
+                        # Add this chain link to interactor_proteins for shared link detection
+                        if chain_link.protein_a not in interactor_proteins:
+                            interactor_proteins.append(chain_link.protein_a)
+                        if chain_link.protein_b not in interactor_proteins:
+                            interactor_proteins.append(chain_link.protein_b)
+
+                        # Add both proteins to protein set
+                        protein_set.add(chain_link.protein_a.symbol)
+                        protein_set.add(chain_link.protein_b.symbol)
+
+                        # Build interaction data for chain link
+                        chain_data = chain_link.data.copy()
+                        chain_data["_db_id"] = chain_link.id
+
+                        # Determine source/target (mediator → target)
+                        # Chain links are always mediator as source, target as target
+                        chain_data["source"] = mediator_symbol
+                        chain_data["target"] = target_protein.symbol
+
+                        # Set type and interaction_type
+                        chain_interaction_type = chain_link.interaction_type or "direct"
+                        chain_data["type"] = chain_interaction_type
+                        chain_data["interaction_type"] = chain_interaction_type
+                        chain_data["direction"] = chain_link.direction if chain_link.direction else "bidirectional"
+
+                        # Ensure required fields
+                        if chain_data.get("confidence") is None:
+                            chain_data["confidence"] = 0.5
+                        if chain_data.get("arrow") is None:
+                            chain_data["arrow"] = chain_link.arrow or "binds"
+                        if chain_data.get("functions") is None:
+                            chain_data["functions"] = []
+                        if chain_data.get("evidence") is None:
+                            chain_data["evidence"] = []
+                        if chain_data.get("pmids") is None:
+                            chain_data["pmids"] = []
+
+                        # Auto-generate effect labels for chain links
+                        if not chain_data.get("interaction_effect"):
+                            chain_data["interaction_effect"] = arrow_to_effect(chain_data.get("arrow", "binds"))
+
+                        for func in chain_data.get("functions", []):
+                            if not func.get("function_effect"):
+                                func_arrow = func.get("arrow", "")
+                                if func_arrow:
+                                    func["function_effect"] = arrow_to_effect(func_arrow)
+
+                        # CRITICAL FIX: For direct chain links, use direct_arrow from arrow_context
+                        chain_function_context = chain_data.get("function_context") or chain_link.function_context
+                        if chain_function_context == "direct":
+                            # Check if any function has arrow_context with direct_arrow
+                            for func in chain_data.get("functions", []):
+                                if func.get("arrow_context") and func["arrow_context"].get("direct_arrow"):
+                                    correct_arrow = func["arrow_context"]["direct_arrow"]
+                                    if chain_data.get("arrow") != correct_arrow:
+                                        # Override chain link arrow with direct arrow
+                                        chain_data["arrow"] = correct_arrow
+                                        # Also update interaction_effect
+                                        chain_data["interaction_effect"] = arrow_to_effect(correct_arrow)
+                                    break  # Only need first function with arrow_context
+
+                        # Add differentiation flags for chain links (same as direct interactions)
+                        if chain_function_context == "direct" and chain_data.get("_inferred_from_chain"):
+                            chain_data["_direct_mediator_link"] = True
+                            chain_data["_display_badge"] = "DIRECT LINK"
+
+                        interactions_list.append(chain_data)
+
+    # Query for shared interactions BETWEEN interactors
+    # This reveals triangular relationships: HDAC6 → VCP, HDAC6 → ATXN3, VCP ↔ ATXN3
+    all_shared_links = []
+    if len(interactor_proteins) > 1:
+        # Get IDs of all interactor proteins
+        interactor_ids = [p.id for p in interactor_proteins]
+
+        # Query interactions where BOTH proteins are in the interactor list
+        # This finds interactions BETWEEN the interactors (not involving main protein)
+        # EXCLUDE interactions involving main protein (prevents duplicate display of direct interactions)
+        # INCLUDE extracted mediator links (e.g., RHEB→MTOR from ATXN3→RHEB→MTOR chain)
+        shared_interactions = db.session.query(Interaction).filter(
+            Interaction.protein_a_id.in_(interactor_ids),
+            Interaction.protein_b_id.in_(interactor_ids),
+            ~((Interaction.protein_a_id == main_protein.id) | (Interaction.protein_b_id == main_protein.id))  # Only exclude if main protein is involved
+        ).all()
+
+        # Build set of proteins involved in indirect chains for THIS query
+        # (e.g., if KEAP1→NRF2 is indirect chain in p62 query, exclude KEAP1-NRF2 shared link)
+        indirect_chain_pairs = set()
+        for interaction in db_interactions:
+            inter_data = interaction.data
+            if inter_data.get('interaction_type') == 'indirect':
+                upstream = inter_data.get('upstream_interactor')
+                if upstream:
+                    # Get partner protein
+                    if interaction.protein_a_id == main_protein.id:
+                        target = interaction.protein_b.symbol
+                    else:
+                        target = interaction.protein_a.symbol
+                    # Add both orderings (KEAP1-NRF2 and NRF2-KEAP1)
+                    indirect_chain_pairs.add((upstream, target))
+                    indirect_chain_pairs.add((target, upstream))
+
+        # Add shared interactions with FULL JSONB data (including functions)
+        for shared_ix in shared_interactions:
+            # Skip if this interaction is part of an indirect chain in THIS query
+            protein_a_sym = shared_ix.protein_a.symbol
+            protein_b_sym = shared_ix.protein_b.symbol
+            if (protein_a_sym, protein_b_sym) in indirect_chain_pairs or (protein_b_sym, protein_a_sym) in indirect_chain_pairs:
+                continue  # Don't add to shared links
+
+            all_shared_links.append(shared_ix)
+            # Get both proteins involved in this shared link
+            protein_a = shared_ix.protein_a
+            protein_b = shared_ix.protein_b
+
+            # Add both proteins to protein set
+            protein_set.add(protein_a.symbol)
+            protein_set.add(protein_b.symbol)
+
+            # Extract FULL JSONB data (including functions, evidence, PMIDs)
+            # NOTE: User confirmed they WANT functions for shared links
+            shared_data = shared_ix.data.copy()
+            shared_data["_db_id"] = shared_ix.id
+
+            # Add explicit source/target/type fields
+            shared_data["source"] = protein_a.symbol
+            shared_data["target"] = protein_b.symbol
+            shared_data["type"] = "shared"  # For backward compatibility (frontend expects "type" field)
+            shared_data["_is_shared_link"] = True  # Frontend marker for styling
+            shared_data["interaction_type"] = shared_ix.interaction_type or "direct"
+            if shared_ix.upstream_interactor:
+                shared_data["upstream_interactor"] = shared_ix.upstream_interactor
+            # Use DB direction if present, otherwise default to bidirectional
+            shared_data["direction"] = shared_ix.direction if shared_ix.direction else "bidirectional"
+
+            # Ensure required fields have defaults
+            if shared_data.get("confidence") is None:
+                shared_data["confidence"] = 0.5
+            if shared_data.get("arrow") is None:
+                shared_data["arrow"] = shared_ix.arrow or "binds"
+            if shared_data.get("functions") is None:
+                shared_data["functions"] = []
+            if shared_data.get("evidence") is None:
+                shared_data["evidence"] = []
+            if shared_data.get("pmids") is None:
+                shared_data["pmids"] = []
+            if shared_data.get("intent") is None:
+                shared_data["intent"] = "binding"
+
+            # Auto-generate effect labels for shared links
+            if not shared_data.get("interaction_effect"):
+                shared_data["interaction_effect"] = arrow_to_effect(shared_data.get("arrow", "binds"))
+
+            for func in shared_data.get("functions", []):
+                if not func.get("function_effect"):
+                    func_arrow = func.get("arrow", "")
+                    if func_arrow:
+                        func["function_effect"] = arrow_to_effect(func_arrow)
+
+            # V2 PATHWAY INJECTION FOR SHARED LINKS (UPDATED)
+            # Same logic as main interactions - preserve function-level pathways
+            v2_pathway = shared_ix.data.get('step3_finalized_pathway')
